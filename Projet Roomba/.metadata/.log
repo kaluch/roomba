@@ -1,0 +1,58 @@
+
+!ENTRY org.eclipse.core.resources 4 568 2011-03-04 11:45:13.359
+!MESSAGE Could not write workspace metadata '/nfs/home/eleves/rob/souchet/ProjRumba/server/Projet Roomba/.metadata/.plugins/org.eclipse.core.resources/.snap'.
+!STACK 0
+java.io.FileNotFoundException: /nfs/home/eleves/rob/souchet/ProjRumba/server/Projet Roomba/.metadata/.plugins/org.eclipse.core.resources/.snap (Aucun fichier ou dossier de ce type)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:177)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:102)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.snapTree(SaveManager.java:1273)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1045)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2011-03-04 11:46:07.368
+!MESSAGE Could not write metadata for '/'.
+!STACK 0
+java.io.FileNotFoundException: /nfs/home/eleves/rob/souchet/ProjRumba/server/Projet Roomba/.metadata/.plugins/org.eclipse.core.resources/.root/.markers.snap (Aucun fichier ou dossier de ce type)
+	at java.io.FileOutputStream.openAppend(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:177)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:102)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:43)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:39)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1512)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1049)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:991)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:44)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.ui.ide 4 4 2011-03-04 11:50:40.726
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 4 1 2011-03-04 11:50:40.763
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 4 568 2011-03-04 11:50:40.763
+!MESSAGE Could not write workspace metadata '/nfs/home/eleves/rob/souchet/ProjRumba/server/Projet Roomba/.metadata/.plugins/org.eclipse.core.resources/.root/1.tree'.
+!STACK 0
+java.io.FileNotFoundException: /nfs/home/eleves/rob/souchet/ProjRumba/server/Projet Roomba/.metadata/.plugins/org.eclipse.core.resources/.root/1.tree (Aucun fichier ou dossier de ce type)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:179)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:131)
+	at org.eclipse.core.internal.localstore.SafeFileOutputStream.<init>(SafeFileOutputStream.java:46)
+	at org.eclipse.core.internal.resources.SaveManager.saveTree(SaveManager.java:1176)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1016)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:1831)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor$5.run(IDEWorkbenchAdvisor.java:453)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
+!SESSION 2011-03-04 11:50:43.540 -----------------------------------------------
+eclipse.buildId=M20100211-1343
+java.version=1.6.0_19
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=fr_FR
+Command-line arguments:  -os linux -ws gtk -arch x86 -data /nfs/home/eleves/rob/souchet/ProjRumba/server/Projet Roomba
+
+!ENTRY org.eclipse.core.resources 2 10035 2011-03-04 11:50:45.086
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
