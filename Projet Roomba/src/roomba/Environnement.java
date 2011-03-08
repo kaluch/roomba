@@ -12,6 +12,25 @@ public class Environnement {
 	//METHODES
 	
 	//Constructeurs
+	Environnement()
+	{
+		AreneCarree arena = new AreneCarree();
+		
+	}
+	//
 	
-	//Accesseurs
+	public void ajouterObstacle(Obstacle obs)
+	{
+		obstacles.add(obs);
+	}
+	
+	public void ajouterTache(Tache dirt)
+	{
+		taches.add(dirt);
+	}
+	
+	public void nettoyerTache(Tache dirt)
+	{
+		taches.remove(dirt);
+	}
 }
