@@ -6,7 +6,7 @@ public class Roomba extends Robot {
 	public Roomba(double diametre) {
 			super();
 			setDiametre(diametre);
-			posture = new Posture(getDiametre()/2,getDiametre()/2,0);
+			posture = new PostureRobot(getDiametre()/2,getDiametre()/2,0);
 			this.roues.add(new Roue(new Vecteur2D(0,diametre/2)));
 			this.roues.add(new Roue(new Vecteur2D(diametre,diametre/2)));
 			this.capteurs.add(new CapteurContactObstacle(new Vecteur2D(diametre/2,0)));
