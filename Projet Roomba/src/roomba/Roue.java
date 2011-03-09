@@ -1,23 +1,25 @@
 package roomba;
 
-public class Roue {
+public class Roue  {
 
-	protected Posture posture;
-	protected double vitesse;
+	protected Vecteur vitesse;
 	
-	public Posture getPosture() {		return posture;	}
-	public void setPosture(Posture posture) {		this.posture = posture;	}
-	public double getVitesse() {		return vitesse;	}
-	public void setVitesse(double vitesse) {
-		if(Math.abs(vitesse) > 1)
-		this.vitesse = (vitesse>0)? 1 : -1;}
+	public Vecteur getVitesse() {		return vitesse;	}
+	public void setVitesse(Vecteur vitesse) throws ExceptionVitesseMax {
+		if(vitesse.norme() > 1)
+		throw new ExceptionVitesseMax();
+		this.vitesse = vitesse;
+		}
 	
 	Roue(){
-		posture = new Posture();
-		vitesse = 0;
+		vitesse = new Vecteur2D();
 	}
-	Roue(Posture posture){
-		this.posture = posture;
+	Roue(Vecteur vitesse){
+		this.vitesse = vitesse;
 	}
+	public String toString(){
+		return vitesse.toString();
+	}
+	
 	
 }

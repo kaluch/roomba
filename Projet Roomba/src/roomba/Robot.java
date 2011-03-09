@@ -6,6 +6,7 @@ public abstract class Robot {
 	
 	protected ArrayList<Roue> roues;
 	protected ArrayList<Capteur> capteurs;
+	protected ArrayList<Double> positionRelCapteurs;
 	protected Posture posture;
 	protected ArrayList<Comportement> comportements;
 	
@@ -15,13 +16,16 @@ public abstract class Robot {
 	public void setPosture(Posture posture) {		this.posture = posture;	}
 	public ArrayList<Capteur> getCapteurs() {		return capteurs;	}
 	public ArrayList<Comportement> getComportements() {		return comportements;	}
-	
+	abstract public void move(double to);
+	abstract public String toString();
 	Robot(){
 		roues = new ArrayList<Roue>();
 		capteurs = new ArrayList<Capteur>();
-		posture = new Posture();	
-		comportements = new ArrayList<Comportement>();		
+		positionRelCapteurs = new ArrayList<Double>();
+		posture = new Posture(0,0,0);	
+		comportements = new ArrayList<Comportement>();	
 	}
+	
 	
 
 }

@@ -1,10 +1,7 @@
 package roomba;
 
 public class Posture implements Cloneable{
-	/**
-	 * Represente une position x,y + un angle
-	 */
-	  private double x, y, theta;
+	private double x, y, theta;
 	  /**
 	   * Constructeur
 	   */
@@ -18,13 +15,6 @@ public class Posture implements Cloneable{
 	  public double getY() { return y; }
 	  public double getTheta() { return theta; }
 	  public Object clone() { return new Posture(x, y, theta); }
-	  
-	  public Posture()
-	  {
-		  this.x = 0;
-		  this.y = 0;
-		  this.theta=90;
-	  }
 	  /**
 	   * rotation autour de la coordonnee (0, 0)
 	   */
