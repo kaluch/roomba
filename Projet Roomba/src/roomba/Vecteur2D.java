@@ -9,10 +9,16 @@ public class Vecteur2D extends Vecteur{
 		x=0;
 		y=0;
 	}
+	
 	Vecteur2D(double x,double y){
 		this.x = x;
 		this.y = y;
 	}
+	public Vecteur2D(Vecteur2D position) {
+		x = position.getX();
+		y = position.getY();
+	}
+
 	public double norme(){
 		return Math.sqrt(Math.pow(x, 2)+Math.pow(y, 2));
 	}
@@ -25,5 +31,8 @@ public class Vecteur2D extends Vecteur{
 	}
 	public double angle() {
 		return Math.atan2(y,x);		
+	}
+	Vecteur2D plus(Vecteur2D vecteur) {
+		return new Vecteur2D(x+vecteur.getX(),y+vecteur.getY());
 	}
 }

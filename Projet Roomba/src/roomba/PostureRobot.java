@@ -54,22 +54,4 @@ public class PostureRobot extends Posture {
 	    return this;
 	  }
 	  
-	  public static void main(String args[])
-	  {
-	    Posture p =  new Posture(0, 0, 0);
-	    for (int j = 0; j < 4; ++j)
-	      {
-		for (int i = 0; i < 10; ++i)
-		  {
-		    System.out.println(p);
-		    p.move(5.34, 0, 34);
-		  }
-		for (int i = 0; i < 10; ++i)
-		  {
-		    System.out.println(p);
-		    p.move(5, 5, 34);
-		  }
-	      }
-	  }
-
 }

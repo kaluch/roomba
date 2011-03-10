@@ -43,6 +43,6 @@ public class Posture implements Cloneable{
 	      a += 2 * Math.PI;
 	    return a;
 	  }  
-
+	  public Vecteur2D getPosition(){ return new Vecteur2D(x,y);	};
 
 }

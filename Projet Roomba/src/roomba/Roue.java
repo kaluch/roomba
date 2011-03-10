@@ -2,23 +2,23 @@ package roomba;
 
 public class Roue  {
 
-	protected Vecteur vitesse;
+	protected double vitesse;
 	
-	public Vecteur getVitesse() {		return vitesse;	}
-	public void setVitesse(Vecteur vitesse) throws ExceptionVitesseMax {
-		if(vitesse.norme() > 1)
+	public double getVitesse() {		return vitesse;	}
+	public void setVitesse(double vitesse) throws ExceptionVitesseMax {
+		if(vitesse > 1)
 		throw new ExceptionVitesseMax();
 		this.vitesse = vitesse;
 		}
 	
 	Roue(){
-		vitesse = new Vecteur2D();
+		vitesse = 0;
 	}
-	Roue(Vecteur vitesse){
+	Roue(double vitesse){
 		this.vitesse = vitesse;
 	}
 	public String toString(){
-		return vitesse.toString();
+		return String.valueOf(vitesse);
 	}
 	
 	

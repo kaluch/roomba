@@ -3,14 +3,14 @@ package roomba;
 public class IdiotVillage extends Comportement {
 
 	@Override
-	public Vecteur vitesseRoue1() {
-		return new Vecteur2D(0,0.1);
+	public double vitesseRoue1() {
+		return 0.1;
 	}
 
 	@Override
-	public Vecteur vitesseRoue2() {
+	public double vitesseRoue2() {
 		// TODO Auto-generated method stub
-		return new Vecteur2D(0,0);
+		return 0;
 	}
 
 }

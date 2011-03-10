@@ -2,8 +2,8 @@ package roomba;
 
 public abstract class Comportement {
 	
-	abstract public Vecteur vitesseRoue1();
-	abstract public Vecteur vitesseRoue2();
+	abstract public double vitesseRoue1();
+	abstract public double vitesseRoue2();
 	
 
 }
