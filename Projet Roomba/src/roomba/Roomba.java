@@ -11,12 +11,11 @@ public class Roomba extends Robot {
 			this.roues.add(new Roue());
 			this.roues.add(new Roue());
 			
-			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(-3*Math.PI/8),diametre/2*Math.sin(-3*Math.PI/8))),diametre/2*Math.PI/8,diametre));
-			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(-Math.PI/8),diametre/2*Math.sin(-Math.PI/8))),diametre/2*Math.PI/8,diametre));
-			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(Math.PI/8),diametre/2*Math.sin(Math.PI/8))),diametre/2*Math.PI/8,diametre));
-			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(3*Math.PI/8),diametre/2*Math.sin(3*Math.PI/8))),diametre/2*Math.PI/8,diametre));
+			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(0),diametre/2*Math.sin(0))),diametre/2*Math.PI/6,diametre));
+			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(-Math.PI/3),diametre/2*Math.sin(-Math.PI/3))),diametre/2*Math.PI/6,diametre));
+			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(Math.PI/3),diametre/2*Math.sin(Math.PI/3))),diametre/2*Math.PI/6,diametre));
 	
-			this.capteurs.add(new CapteurContactTache(new Vecteur2D(posture.getPosition())));
+			this.capteurs.add(new CapteurContactTache(new Vecteur2D(posture.getPosition()),0.5));
 			for(int i=0;i<capteurs.size();++i)
 				this.positionRelCapteurs.add(positionRel(capteurs.get(i).getPosition()));
 // Constructeur a finir ?

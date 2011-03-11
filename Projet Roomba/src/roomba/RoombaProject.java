@@ -1,5 +1,7 @@
 package roomba;
 
+import javax.swing.JFrame;
+
 public class RoombaProject {
 
 	/**
@@ -8,11 +10,11 @@ public class RoombaProject {
 	public static void main(String[] args) {
 
 			Roomba roomba0 = new Roomba(0.2);
+			//*
 			Roomba roomba1 = new Roomba(0.2);
 			Roomba roomba2 = new Roomba(0.2);
 			Roomba roomba3 = new Roomba(0.2);
 			Roomba roomba4 = new Roomba(0.2);
-			Roomba roomba5 = new Roomba(0.2);
 
 			double prec = 0;
 			double temps_f = 12.6;
@@ -85,19 +87,32 @@ public class RoombaProject {
 				
 			}
 			System.out.println("];");
-			System.out.print(" V= [");
-			prec = 0;
-			i++;
-			System.out.println(roomba5.getCapteurs().get(i).getPosition().toString());
-			for(double temps = 0+delta;temps<temps_f;temps+=delta){
-				
-				roomba5.calculVitesseRoue(new IdiotVillage());
-				roomba5.move(temps-prec);
-				System.out.println(roomba5.getCapteurs().get(i).getPosition().toString());
-				prec = temps;
-				
-			}
-			System.out.println("];");
+			//*/
+			/*
+			JFrame ma_fenetre = new JFrame("Cercle rouge");
+		    Move m = new Move();
+		    ma_fenetre.setContentPane(m);
+		    //    ma_fenetre.pack();
+		    ma_fenetre.show();
+		    int x = 0;
+		    boolean sens = true;
+
+		    while (true)
+		      {
+			m.moveRobot(x, 0);
+			if (sens)
+			  x += 1;
+			else
+			  x -= 1;
+			if (x == 0 || x == 100)
+			  sens = !sens;
+			// attend 0.01 sec
+			try  { Thread.sleep(10); }
+			catch (Exception e) {}
+			// redessine (appelle entre autres paint())
+			m.repaint();
+		      }
+		      //*/
 
 	}
 				

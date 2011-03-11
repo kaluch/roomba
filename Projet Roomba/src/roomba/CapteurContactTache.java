@@ -1,15 +1,17 @@
 package roomba;
 
 public class CapteurContactTache extends CapteurContact {
-
-	CapteurContactTache(Vecteur position) {
+	
+	protected double diametre;
+	CapteurContactTache(Vecteur position, double diametre) {
 		super(position);
+		this.diametre = diametre;
 	}
 
 	@Override
 	public void miseAjour(Environnement environ) {
-		// TODO parcour taches
-		
+			for (Tache x : environ.getTaches() )
+				contact = x.collision((Vecteur2D) position);
 	}
 
 	

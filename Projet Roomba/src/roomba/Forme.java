@@ -42,5 +42,6 @@ public class Forme {
 	public int getNbDeCote() {
 		return nbDeCote;
 	}
+
 	
 }

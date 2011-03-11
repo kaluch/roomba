@@ -11,6 +11,11 @@ public class Environnement {
 	
 	//METHODES
 	
+	public Arene getArene() {		return arene;	}
+	public void setArene(Arene arene) {		this.arene = arene;	}
+	public ArrayList<Obstacle> getObstacles() {		return obstacles;	}
+	public ArrayList<Tache> getTaches() {		return taches;	}
+
 	//Constructeurs
 	Environnement()
 	{

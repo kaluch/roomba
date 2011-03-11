@@ -23,8 +23,8 @@ public class CapteurContactObstacle extends CapteurContact {
 
 	@Override
 	public void miseAjour(Environnement environ) {
-		// TODO parcour obstacles
-		
+			for (Obstacle x : environ.getObstacles() )
+				contact = x.collision((Vecteur2D) position);
 	}
 	
 
