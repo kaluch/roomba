@@ -6,40 +6,41 @@ public class Roomba extends Robot {
 	public Roomba(double diametre) {
 			super();
 			setDiametre(diametre);
-			posture = new PostureRobot(getDiametre()/2,getDiametre()/2,0);
+			posture = new PostureRobot(0,0,0);
 			
 			this.roues.add(new Roue());
 			this.roues.add(new Roue());
 			
-			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(Math.PI/4),diametre/2*Math.sin(Math.PI/4))),diametre/2*Math.PI/4,diametre/2));
-			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(3*Math.PI/4),diametre/2*Math.sin(3*Math.PI/4))),diametre/2*Math.PI/4,diametre/2));
-			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(5*Math.PI/4),diametre/2*Math.sin(5*Math.PI/4))),diametre/2*Math.PI/4,diametre/2));
-			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(7*Math.PI/4),diametre/2*Math.sin(7*Math.PI/4))),diametre/2*Math.PI/4,diametre/2));
+			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(-3*Math.PI/8),diametre/2*Math.sin(-3*Math.PI/8))),diametre/2*Math.PI/8,diametre));
+			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(-Math.PI/8),diametre/2*Math.sin(-Math.PI/8))),diametre/2*Math.PI/8,diametre));
+			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(Math.PI/8),diametre/2*Math.sin(Math.PI/8))),diametre/2*Math.PI/8,diametre));
+			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(3*Math.PI/8),diametre/2*Math.sin(3*Math.PI/8))),diametre/2*Math.PI/8,diametre));
 	
 			this.capteurs.add(new CapteurContactTache(new Vecteur2D(posture.getPosition())));
 			for(int i=0;i<capteurs.size();++i)
 				this.positionRelCapteurs.add(positionRel(capteurs.get(i).getPosition()));
-// Constructeur � finir
+// Constructeur a finir ?
 		
 	}
 	private Double positionRel(Vecteur vecteur) {
-		Vecteur temp = new Vecteur2D(diametre/2,0);
-		return new Double(temp.angle()-vecteur.angle());
+		return new Double(vecteur.angle());
 	}
 	public double getDiametre() {		return diametre;	}
 	public void setDiametre(double diametre) {		this.diametre = diametre;	}
 	public void move(double to){
 		posture.move(roues.get(0).getVitesse()*to , roues.get(1).getVitesse()*to, diametre);
 		for(int i=0;i<capteurs.size();++i)
-			capteurs.get(i).setPosition(positionCapteur(positionRelCapteurs.get(i)));
+			capteurs.get(i).setPosition(positionCapteur(positionRelCapteurs.get(i),capteurs.get(i)));
 	}
-	private Vecteur positionCapteur(Double alpha) {
-			
-		return new Vecteur2D(posture.getX()+(diametre/2)*Math.cos(alpha+posture.getTheta()),posture.getY()+(diametre/2)*Math.sin(alpha+posture.getTheta()));
+	private Vecteur positionCapteur(Double alpha, Capteur capteur) {
+			if(capteur instanceof CapteurContactObstacle )
+		return new Vecteur2D(posture.getX()+(((CapteurContactObstacle)capteur).getDiametre()/2)*Math.cos(alpha+posture.getTheta()),posture.getY()+(((CapteurContactObstacle)capteur).getDiametre()/2)*Math.sin(alpha+posture.getTheta()));
+			else
+				return new Vecteur2D(posture.getPosition());
 	}
 	public void calculVitesseRoue(Comportement comportement){
-		setVitesseRoue1(comportement.vitesseRoue1());
-		setVitesseRoue2(comportement.vitesseRoue2());
+		setVitesseRoue1(comportement.vitesseRoueR());
+		setVitesseRoue2(comportement.vitesseRoueL());
 		
 	}
 	public String toString(){ return String.valueOf(posture.getX())+" "+String.valueOf(posture.getY())+" "+String.valueOf(posture.getTheta()) ;
