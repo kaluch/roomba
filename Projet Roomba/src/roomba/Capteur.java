@@ -1,5 +1,6 @@
 package roomba;
 
+
 public abstract class Capteur {
 
 	protected Vecteur position;

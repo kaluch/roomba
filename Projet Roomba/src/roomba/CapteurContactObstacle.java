@@ -1,5 +1,6 @@
 package roomba;
 
+
 public class CapteurContactObstacle extends CapteurContact {
 	
 	protected double perimetre;

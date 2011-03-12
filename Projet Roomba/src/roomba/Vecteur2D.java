@@ -1,5 +1,6 @@
 package roomba;
 
+
 public class Vecteur2D extends Vecteur{
 
 	protected double x;

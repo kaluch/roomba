@@ -1,5 +1,6 @@
 package roomba;
 
+
 public class Roomba extends Robot {
 
 	protected double diametre;

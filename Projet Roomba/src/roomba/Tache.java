@@ -1,5 +1,6 @@
 package roomba;
 
+
 public class Tache extends Forme{
 
 	Tache(int nbCote) {

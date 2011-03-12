@@ -1,5 +1,6 @@
 package roomba;
 
+
 abstract class CapteurContact extends Capteur {
 
 protected boolean contact;

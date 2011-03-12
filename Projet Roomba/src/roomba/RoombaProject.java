@@ -1,6 +1,7 @@
 package roomba;
 
-import javax.swing.JFrame;
+
+
 
 public class RoombaProject {
 
@@ -87,13 +88,14 @@ public class RoombaProject {
 				
 			}
 			System.out.println("];");
-			//*/
-			/*
-			JFrame ma_fenetre = new JFrame("Cercle rouge");
+                        RoombaX ma_fenetre = new RoombaX("test roomba");
+                        
+                        
+                
 		    Move m = new Move();
 		    ma_fenetre.setContentPane(m);
 		    //    ma_fenetre.pack();
-		    ma_fenetre.show();
+		    ma_fenetre.setVisible(true);
 		    int x = 0;
 		    boolean sens = true;
 

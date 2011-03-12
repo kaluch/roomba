@@ -1,5 +1,6 @@
 package roomba;
 
+
 public class CapteurContactTache extends CapteurContact {
 	
 	protected double diametre;

@@ -1,5 +1,6 @@
 package roomba;
 
+
 public class Roue  {
 
 	protected double vitesse;

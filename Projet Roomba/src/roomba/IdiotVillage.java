@@ -1,5 +1,6 @@
 package roomba;
 
+
 public class IdiotVillage extends Comportement {
 
 	@Override

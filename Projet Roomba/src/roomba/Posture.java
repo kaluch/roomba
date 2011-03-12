@@ -1,5 +1,6 @@
 package roomba;
 
+
 public class Posture implements Cloneable{
 	protected double x, y, theta;
 	  /**

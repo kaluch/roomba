@@ -1,5 +1,6 @@
 package roomba;
 
+
 public class CapteurDistance extends Capteur {
 
 	protected double distance;
