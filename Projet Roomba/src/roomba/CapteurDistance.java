@@ -42,14 +42,15 @@ public class CapteurDistance extends Capteur {
 		int y = getPosyPix()+pan.getHeight()/2+diametre/2-rayon;
 		g2.setColor(Color.GRAY);
 		g2.fillOval(x,y, 2*rayon,2*rayon);
-		g2.drawLine(x,y,(int)( x+1000*Math.cos(alpha)),(int)(y+1000*Math.sin(alpha)));
+		g2.drawLine(x+rayon,y+rayon,(int)( x+1000*Math.cos(alpha)),(int)(y+1000*Math.sin(alpha)));
 	}
 	protected void setPosition(Polair posRel,Posture origine){
 		super.setPosition(posRel, origine);
-		setAlpha(alphaRel + alpha);
+		setAlpha(alphaRel + origine.getTheta());
 		
 	}
 	protected void setPosRel(Vecteur origine){
+		super.setPosRel(origine);
 		alphaRel = alpha - ((Vecteur2D) origine).angle();
 	}
 	public double getDistance() {		return distance;	}
