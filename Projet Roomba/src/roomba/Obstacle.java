@@ -7,8 +7,8 @@ public abstract class Obstacle extends Forme{
 		super();
 	}*/
 	
-	Obstacle(int nbCote) {
-		super(nbCote);
+	Obstacle(int nbCote,double x, double y, double theta) {
+		super(nbCote,x,y,theta);
 	}
 	abstract boolean collision(Vecteur2D Vect);
 

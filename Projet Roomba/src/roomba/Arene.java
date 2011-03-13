@@ -10,6 +10,6 @@ public abstract class Arene extends Forme {
 	 */
 	
 	Arene(int nbCote) {
-		super(nbCote);
+		super(nbCote,0,0,0);
 	}
 }

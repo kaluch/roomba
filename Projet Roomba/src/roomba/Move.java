@@ -52,7 +52,7 @@ public static void main (String [] args)
     int x = 0;
     boolean sens = true;
 
-    while (true)
+  /*  while (true)
       {
 	m.moveRobot(x, 0);
 	if (sens)
@@ -66,6 +66,6 @@ public static void main (String [] args)
 	catch (Exception e) {}
 	// redessine (appelle entre autres paint())
 	m.repaint();
-      }
+      }*/
   }
 }

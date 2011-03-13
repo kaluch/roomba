@@ -17,11 +17,12 @@ public class Forme {
 	 * METHODES
 	 */
 	//Constructor
-	Forme(int nbCote)
+	Forme(int nbCote,double x, double y, double theta)
 	{
 		nbDeCote = nbCote;
-		for(int i = 0;i<nbCote;i++)
-			dimensions.add(new Integer(1));
+		this.posture = new Posture(x,y,theta);
+		for(int i = 0;i<nbCote;++i)
+			;//dimensions.add(new Integer(1));  bug <- NULL POINTER EXCEPTION
 	}
 
 	public ArrayList<Integer> getDimensions() {

@@ -1,13 +1,24 @@
 package roomba;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+
+import javax.swing.JPanel;
+
 
 public class CapteurDistance extends Capteur {
 
 	protected double distance;
 	protected double alpha;
+	protected double alphaRel;
 	
 	CapteurDistance(Vecteur position,double alpha){
 		super(position);
+		distance = 10000;
+		this.alpha = alpha;
+	}
+	CapteurDistance(Vecteur position,double alpha,int facteurEchelle){
+		super(position,facteurEchelle);
 		distance = 10000;
 		this.alpha = alpha;
 	}
@@ -24,5 +35,26 @@ public class CapteurDistance extends Capteur {
 	public String toString(){
 		return position.toString()+ " " +String.valueOf(distance);
 	}
+	@Override
+	void paint(Graphics2D g2, JPanel pan, int diametre) {
+		int rayon = 2;	
+		int x = getPosxPix()+pan.getWidth()/2+diametre/2-rayon;
+		int y = getPosyPix()+pan.getHeight()/2+diametre/2-rayon;
+		g2.setColor(Color.GRAY);
+		g2.fillOval(x,y, 2*rayon,2*rayon);
+		g2.drawLine(x,y,(int)( x+1000*Math.cos(alpha)),(int)(y+1000*Math.sin(alpha)));
+	}
+	protected void setPosition(Polair posRel,Posture origine){
+		super.setPosition(posRel, origine);
+		setAlpha(alphaRel + alpha);
+		
+	}
+	protected void setPosRel(Vecteur origine){
+		alphaRel = alpha - ((Vecteur2D) origine).angle();
+	}
+	public double getDistance() {		return distance;	}
+	public void setDistance(double distance) {		this.distance = distance;	}
+	public double getAlpha() {		return alpha;	}
+	public void setAlpha(double alpha) {		this.alpha = alpha;	}
 
 }

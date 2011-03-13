@@ -5,7 +5,7 @@
  */
 package roomba;
 
-
+import java.awt.Color;
 
 /**
  *
@@ -19,7 +19,14 @@ public class RoombaX extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/** Creates new form RoombaX */
-    public RoombaX() {
+    public RoombaX() { 
+        this.setTitle("Roomba !");
+        // 400 px de large et 500 px de haut
+        this.setSize(400, 500);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(RoombaX.EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.setBackground(Color.WHITE);
         initComponents();
     }
     public RoombaX(String string) {

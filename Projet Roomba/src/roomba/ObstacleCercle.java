@@ -14,8 +14,8 @@ public class ObstacleCercle extends Obstacle {
 	/**
 	 * @param nbCote
 	 */
-	public ObstacleCercle(double rayon) {
-		super(1);
+	public ObstacleCercle(double rayon,double x, double y) {
+		super(1,x,y,0);
 		this.rayon = rayon;
 	}
 	

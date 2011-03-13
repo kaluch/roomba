@@ -3,8 +3,8 @@ package roomba;
 
 public class Tache extends Forme{
 
-	Tache(int nbCote) {
-		super(nbCote);
+	Tache(int nbCote,double x, double y,double theta) {
+		super(nbCote,x,y,theta);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -10,6 +10,11 @@ protected boolean contact;
 		contact = false;
 	}
 	
+	CapteurContact(Vecteur position,int facteurEchelle){
+		super(position,facteurEchelle);
+		contact = false;
+	}
+	
 	@Override
 	public double lecture() {
 		return (contact)? 1 :0;
