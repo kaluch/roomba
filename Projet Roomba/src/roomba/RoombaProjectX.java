@@ -7,12 +7,12 @@ import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class RoombaProjectX extends JFrame {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @param args
@@ -64,7 +64,6 @@ public class RoombaProjectX extends JFrame {
 		 */
 		
 		
-		private static final long serialVersionUID = 1L;
 		RoombaPanel(){
 			super();
 			
@@ -88,7 +87,8 @@ public class RoombaProjectX extends JFrame {
 		    g2.drawLine(x+d/2,y+d/2,x+d/2+(int)(d/2 *Math.cos(roomba.posture.getTheta())),y+d/2+(int)(d/2 *Math.sin(roomba.posture.getTheta())));
 		}
 		private void paintEnvironnement(Graphics2D g2){
-			
+			g2.setColor(Color.GRAY);
+		    //environ.getArene().paint(g2);
 		}
 		private void paintCapteurs(Graphics2D g2){
 			for(Capteur x : roomba.getCapteurs())
@@ -101,4 +101,5 @@ public class RoombaProjectX extends JFrame {
 			
 		}
 	}
+	
 }
