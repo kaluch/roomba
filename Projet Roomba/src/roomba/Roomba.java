@@ -24,6 +24,7 @@ public class Roomba extends Robot {
 			this.capteurs.add(new CapteurContactTache(new Vecteur2D(posture.getPosition()),0.5));
 			for(Capteur x : capteurs)
 				x.setPosRel(posture.getPosition());
+			
 // Constructeur a finir ?
 		
 	}

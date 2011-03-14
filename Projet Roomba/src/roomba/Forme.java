@@ -1,7 +1,6 @@
 package roomba;
 
 
-import java.util.ArrayList;
 
 public class Forme {
 
@@ -10,27 +9,22 @@ public class Forme {
 	 */
 	
 	protected int nbDeCote;
-	protected ArrayList<Integer> dimensions;
+	protected int dimension;
 	protected Posture posture;
 	
 	/*
 	 * METHODES
 	 */
 	//Constructor
-	Forme(int nbCote,double x, double y, double theta)
+	Forme(int nbCote,double x, double y, double theta, int dim)
 	{
 		nbDeCote = nbCote;
 		this.posture = new Posture(x,y,theta);
-		for(int i = 0;i<nbCote;++i)
-			;//dimensions.add(new Integer(1));  bug <- NULL POINTER EXCEPTION
+		dimension = dim; 
 	}
 
-	public ArrayList<Integer> getDimensions() {
-		return dimensions;
-	}
-
-	public void setDimensions(int dim, int index) {
-		this.dimensions.set(index, dim);
+	public int getDimension() {
+		return dimension;
 	}
 
 	public Posture getPosture() {
