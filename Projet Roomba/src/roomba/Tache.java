@@ -2,11 +2,12 @@ package roomba;
 
 import java.awt.Graphics2D;
 import java.awt.Color;
-public class Tache extends Forme{
+public class Tache{
 
-	Tache(double x, double y,int dim) {
-		super(4,x,y,0,dim);
-		// TODO Auto-generated constructor stub
+	Forme forme;
+	
+	Tache(Forme forme){
+		this.forme = forme;
 	}
 
 	public boolean collision(Vecteur2D position) {
@@ -14,10 +15,12 @@ public class Tache extends Forme{
 		return false;
 	}
 	
-	public void paint(Graphics2D g2){
+	public void paint(Graphics2D g2,int facteurEchelle){
 		g2.setColor(Color.DARK_GRAY);
-		g2.fillRect((int)(this.getPosture().getX()-this.dimension),(int) (this.getPosture().getY()-this.dimension),(int) dimension*2, (int)dimension*2);
+		forme.paint(g2,facteurEchelle);
+		//g2.fillRect((int)(this.getPosture().getX()-this.dimension),(int) (this.getPosture().getY()-this.dimension),(int) dimension*2, (int)dimension*2);
 	}
+	
 	
 
 }

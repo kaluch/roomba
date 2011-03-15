@@ -18,35 +18,15 @@ public class Environnement {
 	public ArrayList<Tache> getTaches() {		return taches;	}
 
 	//Constructeurs
-	public Environnement()
+	public Environnement(Arene arene)
 	{
-		
-		arene = new AreneCarree();
+		this.arene = arene;
 		obstacles = new ArrayList<Obstacle>();
-		taches = new ArrayList<Tache>();
-		
-		obstacles.add(new ObstacleCercle(0,0,10));
-		obstacles.add(new ObstacleCercle(200,280,30));
-		
-		obstacles.add(new ObstacleCarre(50,400,0,20));
-		
-		taches.add(new Tache(300,300,15));
-		
+		taches = new ArrayList<Tache>();		
 	}
 	//
 	
-	public void ajouterObstacle(Obstacle obs)
-	{
-		obstacles.add(obs);
-	}
-	
-	public void ajouterTache(Tache dirt)
-	{
-		taches.add(dirt);
-	}
-	
-	public void nettoyerTache(Tache dirt)
-	{
-		taches.remove(dirt);
-	}
+	public void ajouterObstacle(Obstacle obs)	{		obstacles.add(obs);	}
+		public void ajouterTache(Tache dirt)	{		taches.add(dirt);	}
+		public void nettoyerTache(Tache dirt)	{		taches.remove(dirt);	}
 }

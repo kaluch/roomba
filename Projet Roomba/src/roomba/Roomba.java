@@ -4,24 +4,23 @@ package roomba;
 public class Roomba extends Robot {
 
 	protected double diametre;
-	private int facteurEchelle;
-	public Roomba(double diametre) {
+public Roomba(double diametre) {
 			super();
 			setDiametre(diametre);
-			facteurEchelle = 150;
 			posture = new PostureRobot(0,0,0);
 			
 			this.roues.add(new Roue());
 			this.roues.add(new Roue());
 			
-			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(0),diametre/2*Math.sin(0))),diametre/2*Math.PI/6,diametre));
-			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(-Math.PI/3),diametre/2*Math.sin(-Math.PI/3))),diametre/2*Math.PI/6,diametre));
-			this.capteurs.add(new CapteurContactObstacle(posture.getPosition().plus(new Vecteur2D(diametre/2*Math.cos(Math.PI/3),diametre/2*Math.sin(Math.PI/3))),diametre/2*Math.PI/6,diametre));
+			this.capteurs.add(new CapteurContactObstacle(new Cercle(diametre/2*Math.cos(0)+posture.getPosition().getX(),diametre/2*Math.sin(0)+posture.getPosition().getY(),0,0.2),diametre/2*Math.PI/6,diametre));
+			this.capteurs.add(new CapteurContactObstacle(new Cercle(diametre/2*Math.cos(Math.PI/3)+posture.getPosition().getX(),diametre/2*Math.sin(Math.PI/3)+posture.getPosition().getY(),0,0.2),diametre/2*Math.PI/6,diametre));
+			this.capteurs.add(new CapteurContactObstacle(new Cercle(diametre/2*Math.cos(-Math.PI/3)+posture.getPosition().getX(),diametre/2*Math.sin(-Math.PI/3)+posture.getPosition().getY(),0,0.2),diametre/2*Math.PI/6,diametre));
 			
-			this.capteurs.add(new CapteurDistance(new Vecteur2D(diametre/2*Math.cos(-Math.PI/6),diametre/2*Math.sin(-Math.PI/6)),0));
-			this.capteurs.add(new CapteurDistance(new Vecteur2D(diametre/2*Math.cos(Math.PI/6),diametre/2*Math.sin(Math.PI/6)),0));
 			
-			this.capteurs.add(new CapteurContactTache(new Vecteur2D(posture.getPosition()),0.5));
+			//this.capteurs.add(new CapteurDistance(new Vecteur2D(diametre/2*Math.cos(-Math.PI/6),diametre/2*Math.sin(-Math.PI/6)),0));
+			//this.capteurs.add(new CapteurDistance(new Vecteur2D(diametre/2*Math.cos(Math.PI/6),diametre/2*Math.sin(Math.PI/6)),0));
+			
+		//	this.capteurs.add(new CapteurContactTache(new Vecteur2D(posture.getPosition()),0.5));
 			for(Capteur x : capteurs)
 				x.setPosRel(posture.getPosition());
 			
@@ -61,8 +60,8 @@ public class Roomba extends Robot {
 			e.printStackTrace();
 		}
 	}
-	public int getDiametrePix(){ return (int) (facteurEchelle * diametre) ; }
-	public int getPosxPix(){ return (int) (posture.getX() * facteurEchelle) ; }
-	public int getPosyPix(){ return (int) (posture.getY() * facteurEchelle) ; }
+	public int getDiametrePix(int facteurEchelle){ return (int) (facteurEchelle * diametre) ; }
+	public int getPosxPix(int facteurEchelle){ return (int) (posture.getX() * facteurEchelle) ; }
+	public int getPosyPix(int facteurEchelle){ return (int) (posture.getY() * facteurEchelle) ; }
 	
 }

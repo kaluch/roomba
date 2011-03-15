@@ -44,6 +44,9 @@ public class Posture implements Cloneable{
 	      a += 2 * Math.PI;
 	    return a;
 	  }  
-	  public Vecteur2D getPosition(){ return new Vecteur2D(x,y);	};
+	  public Vecteur2D getPosition(){ return new Vecteur2D(x,y);	}
+	public void setX(double x) {		this.x = x;	}
+	public void setY(double y) {		this.y = y;	}
+	public void setTheta(double theta) {		this.theta = theta;	};
 
 }

@@ -12,16 +12,12 @@ public class CapteurDistance extends Capteur {
 	protected double alpha;
 	protected double alphaRel;
 	
-	CapteurDistance(Vecteur position,double alpha){
-		super(position);
+	CapteurDistance(Forme forme,double alpha){
+		super(forme);
 		distance = 10000;
 		this.alpha = alpha;
 	}
-	CapteurDistance(Vecteur position,double alpha,int facteurEchelle){
-		super(position,facteurEchelle);
-		distance = 10000;
-		this.alpha = alpha;
-	}
+
 	@Override
 	public void miseAjour(Environnement environ) {
 		// TODO parcourir environ
@@ -33,17 +29,17 @@ public class CapteurDistance extends Capteur {
 		return distance;
 	}
 	public String toString(){
-		return position.toString()+ " " +String.valueOf(distance);
+		return forme.toString()+ " " +String.valueOf(distance);
 	}
-	@Override
-	void paint(Graphics2D g2, JPanel pan, int diametre) {
+	/*@Override
+	void paint(Graphics2D g2, JPanel pan, int diametre,int facteurEchelle) {
 		int rayon = 2;	
-		int x = getPosxPix()+pan.getWidth()/2+diametre/2-rayon;
-		int y = getPosyPix()+pan.getHeight()/2+diametre/2-rayon;
+		int x = getPosxPix(facteurEchelle)+pan.getWidth()/2+diametre/2-rayon;
+		int y = getPosyPix(facteurEchelle)+pan.getHeight()/2+diametre/2-rayon;
 		g2.setColor(Color.GRAY);
 		g2.fillOval(x,y, 2*rayon,2*rayon);
 		g2.drawLine(x+rayon,y+rayon,(int)( x+1000*Math.cos(alpha)),(int)(y+1000*Math.sin(alpha)));
-	}
+	}*/
 	protected void setPosition(Polair posRel,Posture origine){
 		super.setPosition(posRel, origine);
 		setAlpha(alphaRel + origine.getTheta());

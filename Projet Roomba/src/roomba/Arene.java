@@ -1,15 +1,22 @@
 package roomba;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 
-public abstract class Arene extends Forme {
 
+public  class Arene{
+
+	protected Forme forme;
 	
+	Arene(Forme forme){
+		this.forme = forme;
+	}
+
+	public Forme getForme() {		return forme;	}
+	public void setForme(Forme forme) {		this.forme = forme;	}
 	
-	/*
-	 * ATTRIBUTS
-	 */
-	
-	Arene(int nbCote) {
-		super(nbCote,0,0,0,4);
+	public void draw(Graphics2D g2,int facteurEchelle){
+		g2.setColor(Color.BLACK);
+		forme.draw(g2,facteurEchelle);
 	}
 }

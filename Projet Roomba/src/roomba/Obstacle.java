@@ -1,20 +1,23 @@
 package roomba;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
-import javax.swing.JPanel;
 
-public abstract class Obstacle extends Forme{
+public  class Obstacle{
 
-	/*Obstacle() {
-		super();
-	}*/
+	protected Forme forme;
 	
-	Obstacle(int nbCote,double x, double y, double theta,int dim) {
-		super(nbCote,x,y,theta,dim);
+	
+	Obstacle(Forme forme) {
+		this.forme = forme;
 	}
-	abstract boolean collision(Vecteur2D Vect);
-	abstract void paint(Graphics2D g2);
+	
+
+	public void paint(Graphics2D g2,int facteurEchelle){
+		g2.setColor(Color.red);
+		forme.paint(g2,facteurEchelle);
+	}
 
 
 }

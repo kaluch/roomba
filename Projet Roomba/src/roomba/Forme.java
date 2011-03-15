@@ -1,43 +1,40 @@
 package roomba;
 
+import java.awt.Graphics2D;
 
 
-public class Forme {
+
+abstract public class Forme {
 
 	/*
 	 * ATTRIBUTS
 	 */
 	
-	protected int nbDeCote;
-	protected int dimension;
 	protected Posture posture;
 	
 	/*
 	 * METHODES
 	 */
 	//Constructor
-	Forme(int nbCote,double x, double y, double theta, int dim)
+	Forme(double x, double y, double theta)
 	{
-		nbDeCote = nbCote;
 		this.posture = new Posture(x,y,theta);
-		dimension = dim; 
 	}
-
-	public int getDimension() {
-		return dimension;
-	}
-
-	public Posture getPosture() {
-		return posture;
-	}
-
-	public void setPosture(Posture posture) {
+	Forme(Posture posture){
 		this.posture = posture;
 	}
+	
+	
 
-	public int getNbDeCote() {
-		return nbDeCote;
-	}
+
+
+	public Posture getPosture() {		return posture;	}
+	public void setPosture(Posture posture) {		this.posture = posture;	}
+	abstract void paint(Graphics2D g2, int facteurEchelle);
+	abstract void draw(Graphics2D g2, int facteurEchelle);
+	protected int getxPix(int facteurEchelle){ return (int)( posture.getX() * facteurEchelle); }
+	protected int getyPix(int facteurEchelle){ return (int)( posture.getY() * facteurEchelle); }
+
 
 	
 }
