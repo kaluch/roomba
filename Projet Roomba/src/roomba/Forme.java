@@ -30,10 +30,11 @@ abstract public class Forme {
 
 	public Posture getPosture() {		return posture;	}
 	public void setPosture(Posture posture) {		this.posture = posture;	}
-	abstract void paint(Graphics2D g2, int facteurEchelle);
-	abstract void draw(Graphics2D g2, int facteurEchelle);
+	abstract void paint(Graphics2D g2, int facteurEchelle,int centrex,int centrey);
+	abstract void draw(Graphics2D g2, int facteurEchelle,int centrex,int centrey);
 	protected int getxPix(int facteurEchelle){ return (int)( posture.getX() * facteurEchelle); }
 	protected int getyPix(int facteurEchelle){ return (int)( posture.getY() * facteurEchelle); }
+
 
 
 	

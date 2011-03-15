@@ -17,14 +17,14 @@ public class Cercle extends Forme {
 	public double getDiametre() {		return diametre;	}
 	public void setDiametre(double diametre) {		this.diametre = diametre;	}
 	@Override
-	void paint(Graphics2D g2,int facteurEchelle) {
+	void paint(Graphics2D g2,int facteurEchelle,int centrex,int centrey) {
 		double rayon = diametre/2;
-		g2.fillOval(getxPix(facteurEchelle)-(int)(rayon*facteurEchelle),getyPix(facteurEchelle)-(int)(rayon*facteurEchelle),(int)(facteurEchelle*rayon),(int) (facteurEchelle*rayon));		
+		g2.fillOval(centrex+getxPix(facteurEchelle)-(int)(rayon*facteurEchelle),centrey+getyPix(facteurEchelle)-(int)(rayon*facteurEchelle),(int)(facteurEchelle*rayon*2),(int) (facteurEchelle*rayon*2));		
 	}
 	@Override
-	void draw(Graphics2D g2, int facteurEchelle) {
+	void draw(Graphics2D g2, int facteurEchelle,int centrex,int centrey) {
 		double rayon = diametre/2;
-		g2.drawOval(getxPix(facteurEchelle)-(int)(rayon*facteurEchelle),getyPix(facteurEchelle)-(int)(rayon*facteurEchelle),(int)(facteurEchelle*rayon),(int) (facteurEchelle*rayon));				
+		g2.drawOval(centrex+getxPix(facteurEchelle)-(int)(rayon*facteurEchelle),centrey+getyPix(facteurEchelle)-(int)(rayon*facteurEchelle),(int)(facteurEchelle*rayon*2),(int) (facteurEchelle*rayon*2));				
 	}
 	public boolean collisionInterne(Carre carre){
 		double xm = (getPosture().getX() <= carre.getPosture().getX())?carre.getPosture().getX() : (getPosture().getX() <= carre.getPosture().getX()+carre.getCote())?getPosture().getX() : carre.getPosture().getX()+carre.getCote();

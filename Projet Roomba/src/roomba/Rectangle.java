@@ -19,13 +19,13 @@ public class Rectangle extends Forme {
 	
 	
 	@Override
-	void paint(Graphics2D g2, int facteurEchelle) {
-		g2.fillRect(getxPix(facteurEchelle)-(int)(largeur*facteurEchelle/2),getyPix(facteurEchelle)-(int)(hauteur*facteurEchelle/2),(int)(facteurEchelle*largeur),(int) (facteurEchelle*hauteur));
+	void paint(Graphics2D g2, int facteurEchelle,int centrex,int centrey) {
+		g2.fillRect(centrex+getxPix(facteurEchelle)-(int)(largeur*facteurEchelle/2),centrey+getyPix(facteurEchelle)-(int)(hauteur*facteurEchelle/2),(int)(facteurEchelle*largeur),(int) (facteurEchelle*hauteur));
 		
 	}
 	@Override
-	void draw(Graphics2D g2, int facteurEchelle) {
-		g2.drawRect(getxPix(facteurEchelle)-(int)(largeur*facteurEchelle/2),getyPix(facteurEchelle)-(int)(hauteur*facteurEchelle/2),(int)(facteurEchelle*largeur),(int) (facteurEchelle*hauteur));
+	void draw(Graphics2D g2, int facteurEchelle,int centrex,int centrey) {
+		g2.drawRect(centrex+getxPix(facteurEchelle)-(int)(largeur*facteurEchelle/2),centrey+getyPix(facteurEchelle)-(int)(hauteur*facteurEchelle/2),(int)(facteurEchelle*largeur),(int) (facteurEchelle*hauteur));
 		
 	}
 	public double getLargeur() {		return largeur;	}

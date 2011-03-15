@@ -15,12 +15,12 @@ public class Carre extends Forme {
 		this.cote = cote;
 	}
 	@Override
-	void paint(Graphics2D g2,int facteurEchelle) {
-		g2.fillRect(getxPix(facteurEchelle)-(int)(cote*facteurEchelle/2),getyPix(facteurEchelle)-(int)(cote*facteurEchelle/2),(int)(facteurEchelle*cote),(int) (facteurEchelle*cote));
+	void paint(Graphics2D g2,int facteurEchelle,int centrex,int centrey) {
+		g2.fillRect(centrex+getxPix(facteurEchelle)-(int)(cote*facteurEchelle/2),centrey+getyPix(facteurEchelle)-(int)(cote*facteurEchelle/2),(int)(facteurEchelle*cote),(int) (facteurEchelle*cote));
 	}
 	@Override
-	void draw(Graphics2D g2, int facteurEchelle) {
-		g2.drawRect(getxPix(facteurEchelle)-(int)(cote*facteurEchelle/2),getyPix(facteurEchelle)-(int)(cote*facteurEchelle/2),(int)(facteurEchelle*cote),(int) (facteurEchelle*cote));
+	void draw(Graphics2D g2, int facteurEchelle,int centrex,int centrey) {
+		g2.drawRect(centrex+getxPix(facteurEchelle)-(int)(cote*facteurEchelle/2),centrey+getyPix(facteurEchelle)-(int)(cote*facteurEchelle/2),(int)(facteurEchelle*cote),(int) (facteurEchelle*cote));
 		
 	}
 	

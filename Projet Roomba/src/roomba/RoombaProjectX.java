@@ -61,8 +61,8 @@ public class RoombaProjectX extends JFrame {
 	public static void main(String[] args) {
 		
 		Roomba roomba = new Roomba(0.34);
-		Environnement environ = new Environnement(new Arene(new Carre(2,2,0,4)));
-		environ.ajouterObstacle(new Obstacle(new Carre(0.100,0.100,0,0.100)));
+		Environnement environ = new Environnement(new Arene(new Carre(0,0,0,4)));
+		environ.ajouterObstacle(new Obstacle(new Carre(0,0,0,01)));
 		RoombaProjectX fen = new RoombaProjectX("Roomba Simulation",environ,roomba);
 		fen.setVisible(true);
 		while(true){
@@ -80,11 +80,14 @@ public class RoombaProjectX extends JFrame {
 		/**
 		 * 
 		 */
-		
+		protected int centrex;
+		protected int centrey;
 		
 		RoombaPanel(){
 			super();
 			this.setSize(facteurEchelle*4,facteurEchelle*4);
+			centrex = facteurEchelle*2;
+			centrey = facteurEchelle*2;			
 			this.setDoubleBuffered(true);
 			this.setLocation(10, 10);
 			this.setMaximumSize(new Dimension(facteurEchelle*4,facteurEchelle*4));
@@ -95,29 +98,29 @@ public class RoombaProjectX extends JFrame {
 		    paintEnvironnement(g2,facteurEchelle);
 		    paintObstacles(g2,facteurEchelle);
 		    paintTaches(g2,facteurEchelle);
-		    paintRoomba(g2,facteurEchelle);
 		    paintCapteurs(g2,facteurEchelle);
+		    paintRoomba(g2,facteurEchelle);
 			g2.dispose();
 			
 		}
 		private void paintRoomba(Graphics2D g2, int facteurEchelle){
-			int x = pan.getWidth()/2+roomba.getPosxPix(facteurEchelle);
-			int y = pan.getHeight()/2+roomba.getPosyPix(facteurEchelle);
+			int x = centrex+roomba.getPosxPix(facteurEchelle);
+			int y = centrey+roomba.getPosyPix(facteurEchelle);
 			int d = roomba.getDiametrePix(facteurEchelle);
 			g2.setColor(Color.gray);
-		    g2.fillOval(x, y,d,d);
+			roomba.getForme().paint(g2,facteurEchelle,centrex,centrey);
+		   // g2.fillOval(x, y,d,d);
 		    g2.setColor(Color.BLACK);
-		    g2.drawLine(x+d/2,y+d/2,x+d/2+(int)(d/2 *Math.cos(roomba.posture.getTheta())),y+d/2+(int)(d/2 *Math.sin(roomba.posture.getTheta())));
+		    g2.drawLine(x,y,x+(int)(d/2 *Math.cos(roomba.posture.getTheta())),y+(int)(d/2 *Math.sin(roomba.posture.getTheta())));
 		}
 		private void paintEnvironnement(Graphics2D g2, int facteurEchelle){
 			g2.setColor(Color.GRAY);
-			environ.getArene().draw(g2,facteurEchelle);
+			environ.getArene().draw(g2,facteurEchelle,centrex,centrey);
 		}
 		private void paintCapteurs(Graphics2D g2, int facteurEchelle){
 			g2.setColor(Color.GREEN);
 			for(Capteur x : roomba.getCapteurs())
-				//x.getForme().paint(g2,pan,roomba.getDiametrePix(facteurEchelle),facteurEchelle);
-				x.getForme().draw(g2,facteurEchelle);
+				x.draw(g2,facteurEchelle,centrex,centrey);
 
 		}
 		private void refresh(Graphics2D g2){
@@ -127,13 +130,13 @@ public class RoombaProjectX extends JFrame {
 		}
 		
 		private void paintObstacles(Graphics2D g2,int facteurEchelle){
-			for(Obstacle i : environ.getObstacles())
-				i.paint(g2,facteurEchelle);
+			for(Obstacle x : environ.getObstacles())
+				x.paint(g2,facteurEchelle,centrex,centrey);
 		}
 		
 		private void paintTaches(Graphics2D g2,int facteurEchelle){
 			for(Tache i : environ.getTaches())
-				i.paint(g2,facteurEchelle);
+				i.paint(g2,facteurEchelle,centrex,centrey);
 		}
 	}
 	

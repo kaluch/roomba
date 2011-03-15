@@ -31,15 +31,11 @@ public class CapteurDistance extends Capteur {
 	public String toString(){
 		return forme.toString()+ " " +String.valueOf(distance);
 	}
-	/*@Override
-	void paint(Graphics2D g2, JPanel pan, int diametre,int facteurEchelle) {
-		int rayon = 2;	
-		int x = getPosxPix(facteurEchelle)+pan.getWidth()/2+diametre/2-rayon;
-		int y = getPosyPix(facteurEchelle)+pan.getHeight()/2+diametre/2-rayon;
-		g2.setColor(Color.GRAY);
-		g2.fillOval(x,y, 2*rayon,2*rayon);
-		g2.drawLine(x+rayon,y+rayon,(int)( x+1000*Math.cos(alpha)),(int)(y+1000*Math.sin(alpha)));
-	}*/
+	@Override
+	public void draw(Graphics2D g2, int facteurEchelle, int centrex, int centrey) {
+		g2.setColor(Color.RED); 
+		forme.draw(g2, facteurEchelle, centrex, centrey);
+	}
 	protected void setPosition(Polair posRel,Posture origine){
 		super.setPosition(posRel, origine);
 		setAlpha(alphaRel + origine.getTheta());

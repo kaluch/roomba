@@ -5,16 +5,16 @@ public class Roomba extends Robot {
 
 	protected double diametre;
 public Roomba(double diametre) {
-			super();
+			super(new Cercle(0,0,0,diametre));
 			setDiametre(diametre);
 			posture = new PostureRobot(0,0,0);
 			
 			this.roues.add(new Roue());
 			this.roues.add(new Roue());
 			
-			this.capteurs.add(new CapteurContactObstacle(new Cercle(diametre/2*Math.cos(0)+posture.getPosition().getX(),diametre/2*Math.sin(0)+posture.getPosition().getY(),0,0.2),diametre/2*Math.PI/6,diametre));
-			this.capteurs.add(new CapteurContactObstacle(new Cercle(diametre/2*Math.cos(Math.PI/3)+posture.getPosition().getX(),diametre/2*Math.sin(Math.PI/3)+posture.getPosition().getY(),0,0.2),diametre/2*Math.PI/6,diametre));
-			this.capteurs.add(new CapteurContactObstacle(new Cercle(diametre/2*Math.cos(-Math.PI/3)+posture.getPosition().getX(),diametre/2*Math.sin(-Math.PI/3)+posture.getPosition().getY(),0,0.2),diametre/2*Math.PI/6,diametre));
+			this.capteurs.add(new CapteurContactObstacle(new Cercle(diametre/4*Math.cos(0)+posture.getPosition().getX(),diametre/4*Math.sin(0)+posture.getPosition().getY(),0,0.2),diametre/2*Math.PI/6,diametre));
+			this.capteurs.add(new CapteurContactObstacle(new Cercle(diametre/4*Math.cos(Math.PI/3)+posture.getPosition().getX(),diametre/4*Math.sin(Math.PI/3)+posture.getPosition().getY(),0,0.2),diametre/2*Math.PI/6,diametre));
+			this.capteurs.add(new CapteurContactObstacle(new Cercle(diametre/4*Math.cos(-Math.PI/3)+posture.getPosition().getX(),diametre/4*Math.sin(-Math.PI/3)+posture.getPosition().getY(),0,0.2),diametre/2*Math.PI/6,diametre));
 			
 			
 			//this.capteurs.add(new CapteurDistance(new Vecteur2D(diametre/2*Math.cos(-Math.PI/6),diametre/2*Math.sin(-Math.PI/6)),0));
@@ -32,6 +32,7 @@ public Roomba(double diametre) {
 	public void setDiametre(double diametre) {		this.diametre = diametre;	}
 	public void move(double to){
 		posture.move(roues.get(0).getVitesse()*to , roues.get(1).getVitesse()*to, diametre);
+		forme.setPosture(posture);
 		for(Capteur x : capteurs)
 			x.setPosition(x.getPosRel(),posture);
 	}

@@ -15,8 +15,8 @@ public  class Arene{
 	public Forme getForme() {		return forme;	}
 	public void setForme(Forme forme) {		this.forme = forme;	}
 	
-	public void draw(Graphics2D g2,int facteurEchelle){
+	public void draw(Graphics2D g2,int facteurEchelle, int centrex, int centrey){
 		g2.setColor(Color.BLACK);
-		forme.draw(g2,facteurEchelle);
+		forme.draw(g2,facteurEchelle,centrex,centrey);
 	}
 }

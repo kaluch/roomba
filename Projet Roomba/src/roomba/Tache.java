@@ -15,9 +15,9 @@ public class Tache{
 		return false;
 	}
 	
-	public void paint(Graphics2D g2,int facteurEchelle){
+	public void paint(Graphics2D g2,int facteurEchelle,int centrex,int centrey){
 		g2.setColor(Color.DARK_GRAY);
-		forme.paint(g2,facteurEchelle);
+		forme.paint(g2,facteurEchelle,centrex,centrey);
 		//g2.fillRect((int)(this.getPosture().getX()-this.dimension),(int) (this.getPosture().getY()-this.dimension),(int) dimension*2, (int)dimension*2);
 	}
 	

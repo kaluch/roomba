@@ -2,7 +2,6 @@ package roomba;
 
 import java.awt.Graphics2D;
 
-import javax.swing.JPanel;
 
 
 public abstract class Capteur {
@@ -26,12 +25,12 @@ public abstract class Capteur {
 	public void setPosRel(Polair posRel) {		this.posRel = posRel;	}
 	public void setForme(Forme forme) { this.forme = forme;	}
 	public Forme getForme() {	return forme;	}
-	//abstract void paint(Graphics2D g2, JPanel pan,int diametre,int facteurEchelle);
 	protected int getPosxPix(int facteurEchelle){ return (int)(((Vecteur2D)forme.getPosture().getPosition()).getX()*facteurEchelle); }
 	protected int getPosyPix(int facteurEchelle){ return (int)(((Vecteur2D)forme.getPosture().getPosition()).getY()*facteurEchelle); }
 	protected void setPosition(Polair posRel,Posture origine){
-		((Vecteur2D) forme.getPosture().getPosition()).setX(origine.getX() + posRel.getRho()*Math.cos(posRel.getTheta()+origine.getTheta()));
-		((Vecteur2D) forme.getPosture().getPosition()).setY(origine.getY() + posRel.getRho()*Math.sin(posRel.getTheta()+origine.getTheta()));
-	System.out.println(origine.getY() + posRel.getRho()*Math.sin(posRel.getTheta()+origine.getTheta()));
+		 forme.getPosture().setX(origine.getX() + posRel.getRho()*Math.cos(posRel.getTheta()+origine.getTheta()));
+		 forme.getPosture().setY(origine.getY() + posRel.getRho()*Math.sin(posRel.getTheta()+origine.getTheta()));
 	}
+	abstract public void draw(Graphics2D g2, int facteurEchelle, int centrex, int centrey);
+	
 }

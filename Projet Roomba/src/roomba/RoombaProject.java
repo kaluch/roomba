@@ -38,12 +38,12 @@ public class RoombaProject {
 			System.out.print("X = [");
 			prec = 0;
 			i++;
-			System.out.println(roomba1.getCapteurs().get(i).getPosition().toString());
+			//System.out.println(roomba1.getCapteurs().get(i).getForme().toString());
 			for(double temps = 0+delta;temps<temps_f;temps+=delta){
 				
 				roomba1.calculVitesseRoue(new IdiotVillage());
 				roomba1.move(temps-prec);
-				System.out.println(roomba1.getCapteurs().get(i).getPosition().toString());
+		//		System.out.println(roomba1.getCapteurs().get(i).getPosition().toString());
 				prec = temps;
 				
 			}
@@ -52,12 +52,12 @@ public class RoombaProject {
 			System.out.print("Y = [");
 			prec = 0;
 			i++;
-			System.out.println(roomba2.getCapteurs().get(i).getPosition().toString());
+			//System.out.println(roomba2.getCapteurs().get(i).getPosition().toString());
 			for(double temps = 0+delta;temps<temps_f;temps+=delta){
 				
 				roomba2.calculVitesseRoue(new IdiotVillage());
 				roomba2.move(temps-prec);
-				System.out.println(roomba2.getCapteurs().get(i).getPosition().toString());
+		//		System.out.println(roomba2.getCapteurs().get(i).getPosition().toString());
 				prec = temps;
 				
 			}
@@ -65,12 +65,12 @@ public class RoombaProject {
 			System.out.print("Z = [");
 			prec = 0;
 			i++;
-			System.out.println(roomba3.getCapteurs().get(i).getPosition().toString());
+		//	System.out.println(roomba3.getCapteurs().get(i).getPosition().toString());
 			for(double temps = 0+delta;temps<temps_f;temps+=delta){
 				
 				roomba3.calculVitesseRoue(new IdiotVillage());
 				roomba3.move(temps-prec);
-				System.out.println(roomba3.getCapteurs().get(i).getPosition().toString());
+			//	System.out.println(roomba3.getCapteurs().get(i).getPosition().toString());
 				prec = temps;
 				
 			}
@@ -78,12 +78,12 @@ public class RoombaProject {
 			System.out.print(" W= [");
 			prec = 0;
 			i++;
-			System.out.println(roomba4.getCapteurs().get(i).getPosition().toString());
+		//	System.out.println(roomba4.getCapteurs().get(i).getPosition().toString());
 			for(double temps = 0+delta;temps<temps_f;temps+=delta){
 				
 				roomba4.calculVitesseRoue(new IdiotVillage());
 				roomba4.move(temps-prec);
-				System.out.println(roomba4.getCapteurs().get(i).getPosition().toString());
+		//		System.out.println(roomba4.getCapteurs().get(i).getPosition().toString());
 				prec = temps;
 				
 			}

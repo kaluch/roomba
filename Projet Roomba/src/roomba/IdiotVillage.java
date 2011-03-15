@@ -5,7 +5,7 @@ public class IdiotVillage extends Comportement {
 
 	@Override
 	public double vitesseRoueR() {
-		return 0.1;
+		return 0;
 	}
 
 	@Override
