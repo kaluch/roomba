@@ -18,9 +18,19 @@ public class Environnement {
 	public ArrayList<Tache> getTaches() {		return taches;	}
 
 	//Constructeurs
-	Environnement()
+	public Environnement()
 	{
-		AreneCarree arena = new AreneCarree();
+		
+		arene = new AreneCarree();
+		obstacles = new ArrayList<Obstacle>();
+		taches = new ArrayList<Tache>();
+		
+		obstacles.add(new ObstacleCercle(0,0,10));
+		obstacles.add(new ObstacleCercle(200,280,30));
+		
+		obstacles.add(new ObstacleCarre(50,400,0,20));
+		
+		taches.add(new Tache(300,300,15));
 		
 	}
 	//

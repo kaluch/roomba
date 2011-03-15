@@ -45,7 +45,8 @@ public class RoombaProjectX extends JFrame {
 	public static void main(String[] args) {
 		
 		Roomba roomba = new Roomba(0.34);
-		RoombaProjectX fen = new RoombaProjectX("Roomba Simulation",new Environnement(),roomba);
+		Environnement environ = new Environnement();
+		RoombaProjectX fen = new RoombaProjectX("Roomba Simulation",environ,roomba);
 		fen.setVisible(true);
 		while(true){
 			roomba.calculVitesseRoue(new IdiotVillage());
@@ -74,6 +75,8 @@ public class RoombaProjectX extends JFrame {
 		    paintEnvironnement(g2);
 		    paintRoomba(g2);
 		    paintCapteurs(g2);
+		    paintObstacles(g2);
+		    paintTaches(g2);
 			g2.dispose();
 			
 		}
@@ -81,14 +84,18 @@ public class RoombaProjectX extends JFrame {
 			int x = pan.getWidth()/2+roomba.getPosxPix();
 			int y = pan.getHeight()/2+roomba.getPosyPix();
 			int d = roomba.getDiametrePix();
-			g2.setColor(Color.red);
+			g2.setColor(Color.gray);
 		    g2.fillOval(x, y,d,d);
 		    g2.setColor(Color.BLACK);
 		    g2.drawLine(x+d/2,y+d/2,x+d/2+(int)(d/2 *Math.cos(roomba.posture.getTheta())),y+d/2+(int)(d/2 *Math.sin(roomba.posture.getTheta())));
 		}
 		private void paintEnvironnement(Graphics2D g2){
+<<<<<<< HEAD:Projet Roomba/src/roomba/RoombaProjectX.java
 			g2.setColor(Color.GRAY);
 		    //environ.getArene().paint(g2);
+=======
+			paintArene(g2);
+>>>>>>> a1ecc6acfea3b9d6e97d889b9cc120277bba1037:Projet Roomba/src/roomba/RoombaProjectX.java
 		}
 		private void paintCapteurs(Graphics2D g2){
 			for(Capteur x : roomba.getCapteurs())
@@ -99,6 +106,21 @@ public class RoombaProjectX extends JFrame {
 			g2.setColor(Color.WHITE);
 			g2.fillRect(0,0,pan.getWidth(),pan.getHeight());
 			
+		}
+		private void paintArene(Graphics2D g2){
+			g2.setColor(Color.BLACK);
+		//	g2.fillRect(0,0,environ,pan.getHeight());
+			
+		}
+		
+		private void paintObstacles(Graphics2D g2){
+			for(Obstacle i : environ.getObstacles())
+				i.paint(g2);
+		}
+		
+		private void paintTaches(Graphics2D g2){
+			for(Tache i : environ.getTaches())
+				i.paint(g2);
 		}
 	}
 	
