@@ -60,16 +60,18 @@ public class RoombaProjectX extends JFrame {
 	}
 	public static void main(String[] args) {
 		
-		Roomba roomba = new Roomba(0.34);
-		Environnement environ = new Environnement(new Arene(new Carre(0,0,0,4)));
-		environ.ajouterObstacle(new Obstacle(new Carre(0,0,0,01)));
+		Roomba roomba = new Roomba(0.34,new EvitObstacles());
+		Environnement environ = new Environnement(new Arene(new Cercle(0,0,0,3.8)));
+		//environ.ajouterObstacle(new Obstacle(new Cercle(1.5,0,0,1)));
+		//environ.ajouterObstacle(new Obstacle(new Cercle(1,1.5,0,1)));
+		environ.ajouterObstacle(new Obstacle(new Cercle(1,0.5,0,1)));
+		
 		RoombaProjectX fen = new RoombaProjectX("Roomba Simulation",environ,roomba);
 		fen.setVisible(true);
 		while(true){
-			roomba.calculVitesseRoue(new IdiotVillage());
-			roomba.move(0.1);
+			roomba.move(0.01,environ);
 			// attend 0.1 sec
-			try  { Thread.sleep(100); }
+			try  { Thread.sleep(10); }
 			catch (Exception e) {}
 		fen.repaint();
 		}

@@ -4,7 +4,7 @@ package roomba;
 public class Roomba extends Robot {
 
 	protected double diametre;
-public Roomba(double diametre) {
+public Roomba(double diametre,Comportement comportement) {
 			super(new Cercle(0,0,0,diametre));
 			setDiametre(diametre);
 			posture = new PostureRobot(0,0,0);
@@ -15,7 +15,7 @@ public Roomba(double diametre) {
 			this.capteurs.add(new CapteurContactObstacle(new Cercle(diametre/4*Math.cos(0)+posture.getPosition().getX(),diametre/4*Math.sin(0)+posture.getPosition().getY(),0,0.2),diametre/2*Math.PI/6,diametre));
 			this.capteurs.add(new CapteurContactObstacle(new Cercle(diametre/4*Math.cos(Math.PI/3)+posture.getPosition().getX(),diametre/4*Math.sin(Math.PI/3)+posture.getPosition().getY(),0,0.2),diametre/2*Math.PI/6,diametre));
 			this.capteurs.add(new CapteurContactObstacle(new Cercle(diametre/4*Math.cos(-Math.PI/3)+posture.getPosition().getX(),diametre/4*Math.sin(-Math.PI/3)+posture.getPosition().getY(),0,0.2),diametre/2*Math.PI/6,diametre));
-			
+			this.comportement = comportement;
 			
 			//this.capteurs.add(new CapteurDistance(new Vecteur2D(diametre/2*Math.cos(-Math.PI/6),diametre/2*Math.sin(-Math.PI/6)),0));
 			//this.capteurs.add(new CapteurDistance(new Vecteur2D(diametre/2*Math.cos(Math.PI/6),diametre/2*Math.sin(Math.PI/6)),0));
@@ -30,7 +30,12 @@ public Roomba(double diametre) {
 	
 	public double getDiametre() {		return diametre;	}
 	public void setDiametre(double diametre) {		this.diametre = diametre;	}
-	public void move(double to){
+	public void move(double to,Environnement environ){
+		for (Capteur x : capteurs){
+			x.miseAjour(environ);
+			System.out.println(x.toString());}
+		comportement.calcul(capteurs);
+		this.calculVitesseRoue(comportement);
 		posture.move(roues.get(0).getVitesse()*to , roues.get(1).getVitesse()*to, diametre);
 		forme.setPosture(posture);
 		for(Capteur x : capteurs)
@@ -39,7 +44,6 @@ public Roomba(double diametre) {
 	public void calculVitesseRoue(Comportement comportement){
 		setVitesseRoue1(comportement.vitesseRoueR());
 		setVitesseRoue2(comportement.vitesseRoueL());
-		
 	}
 	public String toString(){ return String.valueOf(posture.getX())+" "+String.valueOf(posture.getY())+" "+String.valueOf(posture.getTheta()) ;
 	}

@@ -3,7 +3,6 @@ package roomba;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import javax.swing.JPanel;
 
 
 public class CapteurDistance extends Capteur {

@@ -1,8 +1,13 @@
 package roomba;
 
+import java.util.ArrayList;
+
 
 public class IdiotVillage extends Comportement {
 
+	IdiotVillage(){
+		super();
+	}
 	@Override
 	public double vitesseRoueR() {
 		return 0;
@@ -10,8 +15,9 @@ public class IdiotVillage extends Comportement {
 
 	@Override
 	public double vitesseRoueL() {
-		// TODO Auto-generated method stub
-		return 0.3;
+		return 0.1;
 	}
+	@Override
+	void calcul(ArrayList<Capteur> capteurs) {	}
 
 }

@@ -30,7 +30,7 @@ public class CapteurContactObstacle extends CapteurContact {
 	@Override
 	public void miseAjour(Environnement environ) {
 			for (Obstacle x : environ.getObstacles() )
-				;//contact = forme.collisionExterne(x.getForme());
+				contact = forme.collisionExterne(x.getForme())|| environ.getArene().getForme().collisionInterne(x.getForme());
 	}
 
 	@Override

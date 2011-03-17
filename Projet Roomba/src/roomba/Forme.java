@@ -34,7 +34,8 @@ abstract public class Forme {
 	abstract void draw(Graphics2D g2, int facteurEchelle,int centrex,int centrey);
 	protected int getxPix(int facteurEchelle){ return (int)( posture.getX() * facteurEchelle); }
 	protected int getyPix(int facteurEchelle){ return (int)( posture.getY() * facteurEchelle); }
-
+	abstract public boolean collisionExterne(Forme forme);
+	abstract public boolean collisionInterne(Forme forme);
 
 
 	

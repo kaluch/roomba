@@ -41,31 +41,5 @@ class Move extends JPanel
     prev_y = y;
   }
 
-  @SuppressWarnings("deprecation")
-public static void main (String [] args) 
-  {
-    JFrame ma_fenetre = new JFrame("Cercle rouge");
-    Move m = new Move();
-    ma_fenetre.setContentPane(m);
-    //    ma_fenetre.pack();
-    ma_fenetre.show();
-    int x = 0;
-    boolean sens = true;
-
-  /*  while (true)
-      {
-	m.moveRobot(x, 0);
-	if (sens)
-	  x += 1;
-	else
-	  x -= 1;
-	if (x == 0 || x == 100)
-	  sens = !sens;
-	// attend 0.01 sec
-	try  { Thread.sleep(10); }
-	catch (Exception e) {}
-	// redessine (appelle entre autres paint())
-	m.repaint();
-      }*/
-  }
+ 
 }

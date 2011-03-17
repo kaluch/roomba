@@ -20,7 +20,7 @@ public class Tache{
 		forme.paint(g2,facteurEchelle,centrex,centrey);
 		//g2.fillRect((int)(this.getPosture().getX()-this.dimension),(int) (this.getPosture().getY()-this.dimension),(int) dimension*2, (int)dimension*2);
 	}
-	
-	
 
+	public Forme getForme() {		return forme;	}
+	public void setForme(Forme forme) {		this.forme = forme;	}
 }

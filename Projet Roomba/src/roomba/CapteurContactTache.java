@@ -3,8 +3,6 @@ package roomba;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import javax.swing.JPanel;
-
 
 public class CapteurContactTache extends CapteurContact {
 	
@@ -17,7 +15,7 @@ public class CapteurContactTache extends CapteurContact {
 	@Override
 	public void miseAjour(Environnement environ) {
 			for (Tache x : environ.getTaches() )
-				contact = x.collision((Vecteur2D) forme.getPosture().getPosition());
+				contact = forme.collisionExterne(x.getForme());
 	}
 	@Override
 	public void draw(Graphics2D g2, int facteurEchelle, int centrex, int centrey) {

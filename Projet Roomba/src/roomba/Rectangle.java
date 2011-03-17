@@ -64,5 +64,18 @@ public class Rectangle extends Forme {
 				||(rectangle.getPosture().getY()>=getPosture().getY()+hauteur)
 				||(rectangle.getPosture().getY()+rectangle.getHauteur()<=getPosture().getY()))? false : true;
 	}
-
+	@Override
+	public boolean collisionExterne(Forme forme) {
+		if(forme instanceof Carre) return collisionExterne((Carre)forme);
+		else if(forme instanceof Cercle) return collisionExterne((Cercle)forme);
+		else if(forme instanceof Rectangle) return collisionExterne((Rectangle)forme);
+		else return false;
+	}
+	@Override
+	public boolean collisionInterne(Forme forme) {
+		if(forme instanceof Carre) return collisionInterne((Carre)forme);
+		else if(forme instanceof Cercle) return collisionInterne((Cercle)forme);
+		else if(forme instanceof Rectangle) return collisionInterne((Rectangle)forme);
+		else return false;
+	}
 }

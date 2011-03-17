@@ -52,4 +52,18 @@ public class Cercle extends Forme {
 		double ym = (getPosture().getY() <= rectangle.getPosture().getY())?rectangle.getPosture().getY() : (getPosture().getY() <= rectangle.getPosture().getY()+rectangle.getHauteur())?getPosture().getY() : rectangle.getPosture().getY()+rectangle.getHauteur();
 		return (Math.pow(getPosture().getX()-xm,2)+ Math.pow(getPosture().getY()-ym,2)<=getDiametre()* getDiametre()/4)?true:false;
 	}
+	@Override
+	public boolean collisionExterne(Forme forme) {
+		if(forme instanceof Carre) return collisionExterne((Carre)forme);
+		else if(forme instanceof Cercle) return collisionExterne((Cercle)forme);
+		else if(forme instanceof Rectangle) return collisionExterne((Rectangle)forme);
+		else return false;
+	}
+	@Override
+	public boolean collisionInterne(Forme forme) {
+		if(forme instanceof Carre) return collisionInterne((Carre)forme);
+		else if(forme instanceof Cercle) return collisionInterne((Cercle)forme);
+		else if(forme instanceof Rectangle) return collisionInterne((Rectangle)forme);
+		else return false;
+	}
 }
