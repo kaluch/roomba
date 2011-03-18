@@ -46,8 +46,12 @@ public class Rectangle extends Forme {
 				||(carre.getPosture().getY()+carre.getCote()<=getPosture().getY()))? false : true;
 	}
 	public boolean collisionInterne(Cercle cercle){
-		//if()
-		return false;
+		return ((cercle.getPosture().getY()-cercle.getDiametre()/2 <= getPosture().getY()-getHauteur()/2)
+			|| (cercle.getPosture().getX()-cercle.getDiametre()/2 <= getPosture().getX()-getLargeur()/2)
+			||(cercle.getPosture().getY()+cercle.getDiametre()/2 >= getPosture().getY()+getHauteur()/2)
+			|| (cercle.getPosture().getX()+cercle.getDiametre()/2 >= getPosture().getX()+getLargeur()/2))?
+				true : false;
+	
 	}
 	public boolean collisionExterne(Cercle cercle){
 		return false;

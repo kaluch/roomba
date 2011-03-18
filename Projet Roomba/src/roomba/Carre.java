@@ -38,8 +38,12 @@ public class Carre extends Forme {
 				
 	}
 	public boolean collisionInterne(Cercle cercle){
-		//if()
-		return false;
+		return ((cercle.getPosture().getY()-cercle.getDiametre()/2 <= getPosture().getY()-getCote()/2)
+			|| (cercle.getPosture().getX()-cercle.getDiametre()/2 <= getPosture().getX()-getCote()/2)
+			||(cercle.getPosture().getY()+cercle.getDiametre()/2 >= getPosture().getY()+getCote()/2)
+			|| (cercle.getPosture().getX()+cercle.getDiametre()/2 >= getPosture().getX()+getCote()/2))?
+				true : false;
+	
 	}
 	public boolean collisionExterne(Cercle cercle){
 		double xm = (cercle.getPosture().getX() <= getPosture().getX())?getPosture().getX() : (cercle.getPosture().getX() <= getPosture().getX()+getCote())?cercle.getPosture().getX() : getPosture().getX()+getCote();

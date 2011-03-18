@@ -59,16 +59,18 @@ public class RoombaProjectX extends JFrame {
 		pan.repaint();
 	}
 	public static void main(String[] args) {
-		
 		Roomba roomba = new Roomba(0.34,new EvitObstacles());
-		Environnement environ = new Environnement(new Arene(new Cercle(0,0,0,3.8)));
-		//environ.ajouterObstacle(new Obstacle(new Cercle(1.5,0,0,1)));
+		Environnement environ = new Environnement(new Arene(new Carre(0,0,1,2)));
+		environ.ajouterTache(new Tache(new Cercle(0.3,0,0,0.3)));
+		environ.ajouterTache(new Tache(new Cercle(0.5,0,0,0.3)));
+		environ.ajouterObstacle(new Obstacle(new Cercle(-1,0.2,0,1)));
 		//environ.ajouterObstacle(new Obstacle(new Cercle(1,1.5,0,1)));
-		environ.ajouterObstacle(new Obstacle(new Cercle(1,0.5,0,1)));
+		//environ.ajouterObstacle(new Obstacle(new Cercle(1,0.5,0,1)));
 		
 		RoombaProjectX fen = new RoombaProjectX("Roomba Simulation",environ,roomba);
 		fen.setVisible(true);
 		while(true){
+			environ.nettoyerTache();
 			roomba.move(0.01,environ);
 			// attend 0.1 sec
 			try  { Thread.sleep(10); }
@@ -120,9 +122,10 @@ public class RoombaProjectX extends JFrame {
 			environ.getArene().draw(g2,facteurEchelle,centrex,centrey);
 		}
 		private void paintCapteurs(Graphics2D g2, int facteurEchelle){
-			g2.setColor(Color.GREEN);
-			for(Capteur x : roomba.getCapteurs())
+			for(Capteur x : roomba.getCapteurs()){
+				g2.setColor(Color.GREEN);
 				x.draw(g2,facteurEchelle,centrex,centrey);
+			}
 
 		}
 		private void refresh(Graphics2D g2){

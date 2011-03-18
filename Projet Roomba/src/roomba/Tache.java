@@ -10,17 +10,23 @@ public class Tache{
 		this.forme = forme;
 	}
 
-	public boolean collision(Vecteur2D position) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 	
 	public void paint(Graphics2D g2,int facteurEchelle,int centrex,int centrey){
 		g2.setColor(Color.DARK_GRAY);
 		forme.paint(g2,facteurEchelle,centrex,centrey);
-		//g2.fillRect((int)(this.getPosture().getX()-this.dimension),(int) (this.getPosture().getY()-this.dimension),(int) dimension*2, (int)dimension*2);
 	}
-
+	public void nettoyer(){
+		if(forme instanceof Carre)
+			((Carre) forme).setCote(((Carre) forme).getCote()-0.001);
+		else if(forme instanceof Rectangle){
+			((Rectangle) forme).setHauteur(((Rectangle) forme).getHauteur()-0.001);
+			((Rectangle) forme).setLargeur(((Rectangle) forme).getLargeur()-0.001);}
+		else if(forme instanceof Cercle)
+			((Cercle) forme).setDiametre(((Cercle) forme).getDiametre()-0.001);
+			
+		
+	}
 	public Forme getForme() {		return forme;	}
 	public void setForme(Forme forme) {		this.forme = forme;	}
 }

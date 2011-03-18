@@ -2,6 +2,7 @@ package roomba;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Environnement {
 
@@ -28,5 +29,23 @@ public class Environnement {
 	
 	public void ajouterObstacle(Obstacle obs)	{		obstacles.add(obs);	}
 		public void ajouterTache(Tache dirt)	{		taches.add(dirt);	}
-		public void nettoyerTache(Tache dirt)	{		taches.remove(dirt);	}
+		public void nettoyerTache()	{
+			ArrayList<Tache> del = new ArrayList<Tache>();
+			for(Tache x : taches){
+				if(x.getForme() instanceof Carre){
+					if(((Carre) x.getForme()).getCote()<=0)
+						del.add(x);
+				}
+				else if(x.getForme() instanceof Rectangle){
+					if(((Rectangle) x.getForme()).getLargeur()<=0 || ((Rectangle) x.getForme()).getHauteur()<=0 )
+						del.add(x);
+				}
+				else if(x.getForme() instanceof Cercle){
+					if(((Cercle) x.getForme()).getDiametre()<=0)
+						del.add(x);
+				}
+			}
+			taches.removeAll((Collection<Tache>) del);
+		}
+		
 }

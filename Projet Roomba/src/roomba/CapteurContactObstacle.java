@@ -29,14 +29,18 @@ public class CapteurContactObstacle extends CapteurContact {
 
 	@Override
 	public void miseAjour(Environnement environ) {
+		boolean temp = false;
 			for (Obstacle x : environ.getObstacles() )
-				contact = forme.collisionExterne(x.getForme())|| environ.getArene().getForme().collisionInterne(x.getForme());
+				temp = temp || forme.collisionExterne(x.getForme());
+			temp = temp || environ.getArene().getForme().collisionInterne(forme);
+			contact = temp;
+			
 	}
 
 	@Override
 	public void draw(Graphics2D g2, int facteurEchelle, int centrex, int centrey) {
-		if(contact)g2.setColor(Color.RED); g2.setColor(Color.GREEN);
-		forme.draw(g2, facteurEchelle, centrex, centrey);
+		if(contact)g2.setColor(Color.RED);
+		forme.paint(g2, facteurEchelle, centrex, centrey);
 	}
 	
 
