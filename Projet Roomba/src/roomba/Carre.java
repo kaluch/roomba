@@ -2,7 +2,7 @@ package roomba;
 
 import java.awt.Graphics2D;
 
-public class Carre extends Forme {
+public class Carre extends Forme implements Cloneable {
 
 	protected double cote;
 	Carre(double x, double y, double theta,double cote) {
@@ -46,9 +46,17 @@ public class Carre extends Forme {
 	
 	}
 	public boolean collisionExterne(Cercle cercle){
-		double xm = (cercle.getPosture().getX() <= getPosture().getX())?getPosture().getX() : (cercle.getPosture().getX() <= getPosture().getX()+getCote())?cercle.getPosture().getX() : getPosture().getX()+getCote();
-		double ym = (cercle.getPosture().getY() <= getPosture().getY())?getPosture().getY() : (cercle.getPosture().getY() <= getPosture().getY()+getCote())?cercle.getPosture().getY() : getPosture().getY()+getCote();
-		return (Math.pow(cercle.getPosture().getX()-xm,2)+ Math.pow(cercle.getPosture().getY()-ym,2)<=cercle.getDiametre()* cercle.getDiametre()/4)?true:false;
+		double xm = (cercle.getPosture().getX() <= getPosture().getX()-getCote()/2)?
+				getPosture().getX()-getCote()/2 :
+					(cercle.getPosture().getX() <= getPosture().getX()+getCote()/2)?
+							cercle.getPosture().getX() : getPosture().getX()+getCote()/2;
+		double ym = (cercle.getPosture().getY() <= getPosture().getY()-getCote()/2)?
+				getPosture().getY()-getCote()/2 : 
+					(cercle.getPosture().getY() <= getPosture().getY()+getCote()/2)?
+							cercle.getPosture().getY() : getPosture().getY()+getCote()/2;
+		return (Math.sqrt(Math.pow(cercle.getPosture().getX()-xm,2)+
+				Math.pow(cercle.getPosture().getY()-ym,2))
+				<=cercle.getDiametre()/2)?true:false;
 	}
 	public boolean collisionInterne(Rectangle rectangle){
 		return ((rectangle.getPosture().getY() <= getPosture().getY())
@@ -78,5 +86,18 @@ public class Carre extends Forme {
 		else if(forme instanceof Rectangle) return collisionInterne((Rectangle)forme);
 		else return false;
 	}
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		Carre o = (Carre) super.clone();
+		o.cote = cote;
+		return  o;
+	}
+	@Override
+	public Forme normalize(int facteurEchelle) {
+		super.normalize(facteurEchelle);
+		cote = cote/facteurEchelle;
+		return this;
+	}
+	
 	
 }

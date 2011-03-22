@@ -4,12 +4,18 @@ import java.awt.Graphics2D;
 
 
 
-abstract public class Forme {
+abstract public class Forme implements Cloneable{
 
 	/*
 	 * ATTRIBUTS
 	 */
 	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		Forme o = (Forme) super.clone();
+		o.posture = (Posture) posture.clone();
+		return o;
+	}
 	protected Posture posture;
 	
 	/*
@@ -36,6 +42,11 @@ abstract public class Forme {
 	protected int getyPix(int facteurEchelle){ return (int)( posture.getY() * facteurEchelle); }
 	abstract public boolean collisionExterne(Forme forme);
 	abstract public boolean collisionInterne(Forme forme);
+	public Forme normalize(int facteurEchelle){
+		posture.setX(posture.getX()/facteurEchelle);
+		posture.setY(posture.getY()/facteurEchelle);
+		return null;
+	}
 
 
 	

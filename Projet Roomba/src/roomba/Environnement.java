@@ -4,7 +4,7 @@ package roomba;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Environnement {
+public class Environnement implements Cloneable {
 
 	//ATTRIBUTS
 	protected Arene arene;
@@ -46,6 +46,15 @@ public class Environnement {
 				}
 			}
 			taches.removeAll((Collection<Tache>) del);
+		}
+		@SuppressWarnings("unchecked")
+		@Override
+		protected Object clone() throws CloneNotSupportedException {
+			Environnement o = (Environnement) super.clone();
+			o.obstacles = (ArrayList<Obstacle>) obstacles.clone();
+			o.taches = (ArrayList<Tache>) taches.clone();
+			o.arene = (Arene) arene.clone();
+			return o;
 		}
 		
 }

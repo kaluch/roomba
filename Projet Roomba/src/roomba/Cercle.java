@@ -2,7 +2,7 @@ package roomba;
 
 import java.awt.Graphics2D;
 
-public class Cercle extends Forme {
+public class Cercle extends Forme implements Cloneable {
 
 	protected double diametre;
 	Cercle(double x, double y, double theta,double diametre) {
@@ -44,7 +44,7 @@ public class Cercle extends Forme {
 		double xm = (getPosture().getX() <= carre.getPosture().getX()-carre.getCote()/2)?
 				carre.getPosture().getX()-carre.getCote()/2 :
 					(getPosture().getX() <= carre.getPosture().getX()+carre.getCote()/2)?
-							getPosture().getX() : carre.getPosture().getX()+carre.getCote();
+							getPosture().getX() : carre.getPosture().getX()+carre.getCote()/2;
 		double ym = (getPosture().getY() <= carre.getPosture().getY()-carre.getCote()/2)?
 				carre.getPosture().getY()-carre.getCote()/2 : 
 					(getPosture().getY() <= carre.getPosture().getY()+carre.getCote()/2)?
@@ -81,7 +81,7 @@ public class Cercle extends Forme {
 		double xm = (getPosture().getX() <= rectangle.getPosture().getX()-rectangle.getLargeur()/2)?
 				rectangle.getPosture().getX()-rectangle.getLargeur()/2 :
 					(getPosture().getX() <= rectangle.getPosture().getX()+rectangle.getLargeur()/2)?
-							getPosture().getX() : rectangle.getPosture().getX()+rectangle.getLargeur();
+							getPosture().getX() : rectangle.getPosture().getX()+rectangle.getLargeur()/2;
 		double ym = (getPosture().getY() <= rectangle.getPosture().getY()-rectangle.getHauteur()/2)?
 				rectangle.getPosture().getY()-rectangle.getHauteur()/2 : 
 					(getPosture().getY() <= rectangle.getPosture().getY()+rectangle.getHauteur()/2)?
@@ -103,5 +103,17 @@ public class Cercle extends Forme {
 		else if(forme instanceof Cercle) return collisionInterne((Cercle)forme);
 		else if(forme instanceof Rectangle) return collisionInterne((Rectangle)forme);
 		else return false;
+	}
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		Cercle o = (Cercle) super.clone();
+		o.diametre = diametre;
+		return  o;
+	}
+	@Override
+	public Forme normalize(int facteurEchelle) {
+		super.normalize(facteurEchelle);
+		diametre = diametre/facteurEchelle;
+		return this;
 	}
 }

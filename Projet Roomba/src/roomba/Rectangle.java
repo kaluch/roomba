@@ -54,7 +54,17 @@ public class Rectangle extends Forme {
 	
 	}
 	public boolean collisionExterne(Cercle cercle){
-		return false;
+		double xm = (cercle.getPosture().getX() <= getPosture().getX()-getLargeur()/2)?
+				getPosture().getX()-getLargeur()/2 :
+					(cercle.getPosture().getX() <= getPosture().getX()+getLargeur()/2)?
+							cercle.getPosture().getX() : getPosture().getX()+getLargeur()/2;
+		double ym = (cercle.getPosture().getY() <= getPosture().getY()-getHauteur()/2)?
+				getPosture().getY()-getHauteur()/2 : 
+					(cercle.getPosture().getY() <= getPosture().getY()+getHauteur()/2)?
+							cercle.getPosture().getY() : getPosture().getY()+getHauteur()/2;
+		return (Math.sqrt(Math.pow(cercle.getPosture().getX()-xm,2)+
+				Math.pow(cercle.getPosture().getY()-ym,2))
+				<=cercle.getDiametre()/2)?true:false;
 	}
 	public boolean collisionInterne(Rectangle rectangle){
 		return ((rectangle.getPosture().getY() <= getPosture().getY())
@@ -81,5 +91,19 @@ public class Rectangle extends Forme {
 		else if(forme instanceof Cercle) return collisionInterne((Cercle)forme);
 		else if(forme instanceof Rectangle) return collisionInterne((Rectangle)forme);
 		else return false;
+	}
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		Rectangle o = (Rectangle) super.clone();
+		o.hauteur = hauteur;
+		o.largeur = largeur;
+		return  o;
+	}
+	@Override
+	public Forme normalize(int facteurEchelle) {
+		super.normalize(facteurEchelle);
+		largeur = largeur/facteurEchelle;
+		hauteur = hauteur/facteurEchelle;
+		return this;
 	}
 }

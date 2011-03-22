@@ -19,7 +19,7 @@ public class CapteurDistance extends Capteur {
 
 	@Override
 	public void miseAjour(Environnement environ) {
-		// TODO parcourir environ
+		// TODO parcourir environ et recuperer les distances
 
 	}
 
@@ -32,12 +32,17 @@ public class CapteurDistance extends Capteur {
 	}
 	@Override
 	public void draw(Graphics2D g2, int facteurEchelle, int centrex, int centrey) {
+		g2.setColor(Color.BLACK); 
+		forme.paint(g2, facteurEchelle, centrex, centrey);
 		g2.setColor(Color.RED); 
-		forme.draw(g2, facteurEchelle, centrex, centrey);
+		g2.drawLine((int)(forme.getPosture().getX() * facteurEchelle) + centrex,
+				(int)(forme.getPosture().getY() * facteurEchelle) + centrey,
+				(int)((forme.getPosture().getX()+100*Math.cos(forme.getPosture().getTheta()))*facteurEchelle)+centrex,
+				(int)((forme.getPosture().getY()+100*Math.sin(forme.getPosture().getTheta()))*facteurEchelle)+centrey);
 	}
 	protected void setPosition(Polair posRel,Posture origine){
 		super.setPosition(posRel, origine);
-		setAlpha(alphaRel + origine.getTheta());
+		forme.getPosture().setTheta(alphaRel + origine.getTheta());
 		
 	}
 	protected void setPosRel(Vecteur origine){

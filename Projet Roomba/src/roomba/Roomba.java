@@ -13,40 +13,33 @@ public Roomba(double diametre,Comportement comportement) {
 			this.roues.add(new Roue());
 			
 			this.capteurs.add(new CapteurContactObstacle(
-					new Cercle(diametre/4*Math.cos(0)+posture.getPosition().getX(),
-							diametre/4*Math.sin(0)+posture.getPosition().getY(),0,0.195),
-							diametre/2*Math.PI/6,diametre));
-			this.capteurs.add(new CapteurContactObstacle(new Cercle(
-					diametre/4*Math.cos(Math.PI/3)+posture.getPosition().getX(),
-					diametre/4*Math.sin(Math.PI/3)+posture.getPosition().getY(),0,0.195),
-					diametre/2*Math.PI/6,diametre));
-			this.capteurs.add(new CapteurContactObstacle(new Cercle(
-					diametre/4*Math.cos(-Math.PI/3)+posture.getPosition().getX(),
-					diametre/4*Math.sin(-Math.PI/3)+posture.getPosition().getY(),0,0.195),
-					diametre/2*Math.PI/6,diametre));
+					new Cercle(0.06,0.06,0,0.215)));
+			this.capteurs.add(new CapteurContactObstacle(
+					new Cercle(0.06,0,0,0.27)));
+			this.capteurs.add(new CapteurContactObstacle(
+					new Cercle(0.06,-0.06,0,0.215)));
+		
 			this.comportement = comportement;
 			
-		/*	this.capteurs.add(new CapteurDistance(
-					new Cercle(diametre*Math.cos(0)+posture.getPosition().getX(),
-							diametre*Math.sin(0)+posture.getPosition().getY(),0,0.195),
-							diametre/2*Math.PI/6));*/
-			//this.capteurs.add(new CapteurDistance(new Vecteur2D(diametre/2*Math.cos(Math.PI/6),diametre/2*Math.sin(Math.PI/6)),0));
+			this.capteurs.add(new CapteurDistance(
+					new Cercle(diametre/2*Math.cos(Math.PI/6)+posture.getPosition().getX(),
+							diametre/2*Math.sin(Math.PI/6)+posture.getPosition().getY(),0,0.05),
+							0));
+			this.capteurs.add(new CapteurDistance(
+					new Cercle(diametre/2*Math.cos(-Math.PI/6)+posture.getPosition().getX(),
+							diametre/2*Math.sin(-Math.PI/6)+posture.getPosition().getY(),0,0.05),
+							0));
 			
 			this.capteurs.add(new CapteurContactTache(new Cercle(0,0,0,0.195),0.05));
 			for(Capteur x : capteurs)
-				x.setPosRel(posture.getPosition());
-			
-// Constructeur a finir ?
-		
+				x.setPosRel(posture.getPosition());		
 	}
 	
 	public double getDiametre() {		return diametre;	}
 	public void setDiametre(double diametre) {		this.diametre = diametre;	}
 	public void move(double to,Environnement environ){
-		for (Capteur x : capteurs){
+		for (Capteur x : capteurs)
 			x.miseAjour(environ);
-			System.out.println(x.toString());
-			}
 		comportement.calcul(capteurs);
 		this.calculVitesseRoue(comportement);
 		posture.move(roues.get(0).getVitesse()*to , roues.get(1).getVitesse()*to, diametre);
@@ -65,7 +58,7 @@ public Roomba(double diametre,Comportement comportement) {
 		try {
 			roues.get(0).setVitesse(vitesse);
 		} catch (ExceptionVitesseMax e) {
-			System.out.println("Vitesse max depassé : code a écrire");
+			System.out.println("Vitesse max depassee");
 			e.printStackTrace();
 		}
 	}
@@ -74,7 +67,7 @@ public Roomba(double diametre,Comportement comportement) {
 		try {
 			roues.get(1).setVitesse(vitesse);
 		} catch (ExceptionVitesseMax e) {
-			System.out.println("Vitesse max depassé : code a écrire");
+			System.out.println("Vitesse max depassee");
 			e.printStackTrace();
 		}
 	}

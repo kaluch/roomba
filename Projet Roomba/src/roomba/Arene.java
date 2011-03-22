@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 
-public  class Arene{
+public  class Arene implements Cloneable{
 
 	protected Forme forme;
 	
@@ -19,4 +19,12 @@ public  class Arene{
 		g2.setColor(Color.BLACK);
 		forme.draw(g2,facteurEchelle,centrex,centrey);
 	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		Arene o = (Arene) super.clone();
+		o.forme = (Forme) forme.clone();
+		return o;
+	}
+	
 }

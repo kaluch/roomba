@@ -4,10 +4,26 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import roomba.Click;
+import roomba.ClickForme;
 
+
+enum Click{
+	OBSTACLE,
+	TACHE,
+	VAL
+};
+enum ClickForme{
+	CERCLE,
+	CARRE,
+	RECTANGLE
+};
 @SuppressWarnings("serial")
 public class RoombaProjectX extends JFrame {
 
@@ -18,16 +34,59 @@ public class RoombaProjectX extends JFrame {
 	/**
 	 * @param args
 	 */
-	RoombaPanel pan;
-	protected Environnement environ;
+	
+	RoombaPanel jPanel1;
+	private javax.swing.ButtonGroup buttonGroup1;
+	private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JRadioButton jRadioButton7;    
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+	protected volatile Environnement environ;
+	protected Environnement environSave;
+	protected Comportement comportementTest;
+	protected Comportement comportementSave;
 	protected Roomba roomba;
 	protected int facteurEchelle;
+	protected boolean animated = false;
+	private Thread thread;
+	Click click = Click.OBSTACLE;
+	ClickForme clickForme = ClickForme.CERCLE;
+
 	
-	RoombaProjectX(String string,Environnement environ, Roomba roomba,int facteurEchelle){
+	RoombaProjectX(String string, Comportement comportementTest,int facteurEchelle){
 		super(string);
-		this.environ = environ;
-		this.roomba = roomba;
+		this.environ = new Environnement(new Arene(new Carre(0,0,0,4)));
+		try {
+			this.environSave =(Environnement) environ.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		this.comportementTest=comportementTest;
+		this.comportementSave=(Comportement) comportementTest.clone();
+		this.roomba = new Roomba(0.34,comportementTest);
 		this.facteurEchelle = facteurEchelle;
+		//this.test = test;
 		this.setTitle("Roomba !");
         this.setSize(500, 700);
         this.setLocationRelativeTo(null);
@@ -36,13 +95,21 @@ public class RoombaProjectX extends JFrame {
         this.setBackground(Color.WHITE);
         initComponents();
 	}
-	RoombaProjectX(String string,Environnement environ, Roomba roomba){
+	RoombaProjectX(String string, Comportement comportementTest){
 		super(string);
-		this.environ = environ;
-		this.roomba = roomba;
+		this.environ  = new Environnement(new Arene(new Carre(0,0,0,4)));
+		try {
+			this.environSave = (Environnement) environ.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		this.comportementTest=comportementTest;
+		this.comportementSave=(Comportement) comportementTest.clone();
+		this.roomba = new Roomba(0.34,comportementTest);
+		//this.test = test;
 		facteurEchelle = 150;
 		this.setTitle("Roomba !");
-        // 400 px de large et 500 px de haut
+        // 600 px de large et 600 px de haut
         this.setSize(600, 600);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(RoombaX.EXIT_ON_CLOSE);
@@ -52,40 +119,480 @@ public class RoombaProjectX extends JFrame {
 	}
 	
 	private void initComponents(){
-		pan = new RoombaPanel();
-		this.getContentPane().add(pan);
+		jPanel1 = new RoombaPanel();		
+		buttonGroup1 = new javax.swing.ButtonGroup();
+		buttonGroup2 = new javax.swing.ButtonGroup();
+		buttonGroup3 = new javax.swing.ButtonGroup();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jRadioButton6 = new javax.swing.JRadioButton();
+        jRadioButton7 = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel(){
+        	public void paint(Graphics g){
+        	Graphics2D g2 = (Graphics2D) g;
+        	if(roomba.getCapteurs().get(0).lecture()==1)
+        		g2.setColor(Color.RED);
+        	else
+        		g2.setColor(Color.GREEN);
+        	g2.fillRect(0,0,15, 15);
+        	}
+        };
+        jPanel3 = new javax.swing.JPanel(){
+        	public void paint(Graphics g){
+            	Graphics2D g2 = (Graphics2D) g;
+            	if(roomba.getCapteurs().get(1).lecture()==1)
+            		g2.setColor(Color.RED);
+            	else
+            		g2.setColor(Color.GREEN);
+            	g2.fillRect(0,0,15, 15);}
+            	};
+        jPanel4 = new javax.swing.JPanel(){
+        	public void paint(Graphics g){
+            	Graphics2D g2 = (Graphics2D) g;
+            	if(roomba.getCapteurs().get(2).lecture()==1)
+            		g2.setColor(Color.RED);
+            	else
+            		g2.setColor(Color.GREEN);
+            	g2.fillRect(0,0,15, 15);}
+            	};
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+		this.getContentPane().add(jPanel1);
+		this.getContentPane().add(jPanel2);
+		this.getContentPane().add(jPanel3);
+		this.getContentPane().add(jPanel4);
+
+
+		//here
+		
+		
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 600));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setMaximumSize(new java.awt.Dimension(600, 600));
+        jPanel1.setMinimumSize(new java.awt.Dimension(600, 600));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 598, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 598, Short.MAX_VALUE)
+        );
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18));
+        jButton1.setText("START");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jButton2.setText("Stop");
+        jButton2.setEnabled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Init");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("Obstacle");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("Tache");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(jRadioButton3);
+        jRadioButton3.setText("Carre");
+        jRadioButton3.setBorderPainted(true);
+        jRadioButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lucas\\Desktop\\RoombaEGit\\roomba\\Projet Roomba\\resources\\carre.jpg")); // NOI18N
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(jRadioButton4);
+        jRadioButton4.setSelected(true);
+        jRadioButton4.setText("Cercle");
+        jRadioButton4.setBorderPainted(true);
+        jRadioButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lucas\\Desktop\\RoombaEGit\\roomba\\Projet Roomba\\resources\\cercleChosen.jpg")); // NOI18N
+        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton4ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(jRadioButton5);
+        jRadioButton5.setText("Rectangle");
+        jRadioButton5.setBorderPainted(true);
+        jRadioButton5.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("file:/C:/Users/Lucas/Desktop/RoombaEGit/roomba/Projet Roomba/resources/rectangle.jpg")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
+        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton5ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Roue droite      :");
+
+        jLabel2.setText("Roue gauche   :");
+
+        jButton4.setText("Save");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Load");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(jRadioButton6);
+        jRadioButton6.setSelected(true);
+        jRadioButton6.setText("Arène Carrée");
+        jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton6ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(jRadioButton7);
+        jRadioButton7.setText("Aréne Circulaire");
+        jRadioButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton7ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Capteur 0");
+
+        jLabel4.setText("Capteur 1");
+
+        jLabel5.setText("Catpeur 2");
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 13, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 13, Short.MAX_VALUE)
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 13, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 13, Short.MAX_VALUE)
+        );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 13, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 13, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(21, 21, 21)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jRadioButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jRadioButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jRadioButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jRadioButton1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jRadioButton6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jRadioButton7)
+                            .addGap(101, 101, 101))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jRadioButton2)
+                                .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButton6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButton7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButton5)
+                .addGap(16, 16, 16)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel4)
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        pack();
 	}
 	public void repaint(){
-		pan.repaint();
+		jPanel1.repaint();
+		jPanel2.repaint();
+		jPanel3.repaint();
+		jPanel4.repaint();
 	}
-	public static void main(String[] args) {
-		Roomba roomba = new Roomba(0.34,new EvitObstacles());
-		Environnement environ = new Environnement(new Arene(new Carre(0,0,1,2)));
-		environ.ajouterTache(new Tache(new Cercle(0.3,0,0,0.3)));
-		environ.ajouterTache(new Tache(new Cercle(0.5,0,0,0.3)));
-		environ.ajouterObstacle(new Obstacle(new Cercle(-1,0.2,0,1)));
-		//environ.ajouterObstacle(new Obstacle(new Cercle(1,1.5,0,1)));
-		//environ.ajouterObstacle(new Obstacle(new Cercle(1,0.5,0,1)));
-		
-		RoombaProjectX fen = new RoombaProjectX("Roomba Simulation",environ,roomba);
-		fen.setVisible(true);
-		while(true){
-			environ.nettoyerTache();
-			roomba.move(0.01,environ);
-			// attend 0.1 sec
-			try  { Thread.sleep(10); }
-			catch (Exception e) {}
-		fen.repaint();
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+		jButton1.setEnabled(false);
+		jButton2.setEnabled(true);
+		animated = true;
+		thread = new Thread(new PlayAnimation(roomba,environ));
+		thread.start();
+	}
+	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+		jButton1.setEnabled(true);
+		jButton2.setEnabled(false);
+		animated = false;
+	}
+	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+		roomba.setPosture(0,0,0);
+		jButton1.setEnabled(true);
+		jButton2.setEnabled(false);
+		animated = false;
+		environ = new Environnement(new Arene(new Carre(0,0,1,4)));
+		roomba.setComportement((Comportement)comportementSave.clone());
+		roomba.move(0.000000000000001, environ);
+		repaint();
+	}
+	private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
+		try {
+			environSave = (Environnement) environ.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
 		}
+		
+	}
+	private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
+		try {
+			environ = (Environnement) environSave.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		jButton2ActionPerformed(evt);
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		jButton1ActionPerformed(evt);
+		
+	}
+	
+	
+	private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+		click = Click.OBSTACLE;
+	}
+
+	private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+	    click = Click.TACHE;
+    }
+	private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+	    clickForme = ClickForme.CARRE;
+	    setIcon();
+	    }
+	private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {
+	    clickForme = ClickForme.CERCLE;
+	    setIcon();
+    }
+	private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {
+	    clickForme = ClickForme.RECTANGLE;
+	    setIcon();
+    }
+	private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {
+		environ.setArene(new Arene(new Carre(0,0,0,4)));
+		repaint();
+	}
+	private void jRadioButton7ActionPerformed(java.awt.event.ActionEvent evt) {
+		environ.setArene(new Arene(new Cercle(0,0,0,4)));
+		repaint();
+	}
+	
+	
+private void go(Roomba roomba,Environnement environ){
+	while(this.animated){
+		repaint();
+		jLabel1.setText("Roue droite      : "+roomba.getRoues().get(1).toString()+"  "+"m/s");
+        jLabel2.setText("Roue gauche   : "+roomba.getRoues().get(1).toString()+"  "+"m/s");
+		environ.nettoyerTache();
+		roomba.move(0.01,environ);
+		// attend 0.01 sec
+		try  { Thread.sleep(10); }
+		catch (Exception e) {}
+	}	
+}
+
+	public static void main(String[] args) {
+		
+		Comportement test = new Hazard();
+		
+		RoombaProjectX fen = new RoombaProjectX("Roomba Simulation",test);
+    	fen.setVisible(true);
 
 	}
 
-	public class RoombaPanel extends JPanel {
+	public class RoombaPanel extends JPanel implements MouseListener,MouseMotionListener{
 		/**
 		 * 
 		 */
 		protected int centrex;
 		protected int centrey;
+		protected boolean clicked = false;
+		protected int clickedX;
+		protected int clickedY;
+		protected Forme newForme = new Cercle(0,0,0,0);
+		protected Thread threadForme;
 		
 		RoombaPanel(){
 			super();
@@ -95,17 +602,21 @@ public class RoombaProjectX extends JFrame {
 			this.setDoubleBuffered(true);
 			this.setLocation(10, 10);
 			this.setMaximumSize(new Dimension(facteurEchelle*4,facteurEchelle*4));
+	        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+	        this.addMouseListener(this);
+	        this.addMouseMotionListener(this);
 		}
 		public void paint(Graphics g){
 			Graphics2D g2 = (Graphics2D) g;
 			refresh(g2);
 		    paintEnvironnement(g2,facteurEchelle);
-		    paintObstacles(g2,facteurEchelle);
 		    paintTaches(g2,facteurEchelle);
+		    paintObstacles(g2,facteurEchelle);
 		    paintCapteurs(g2,facteurEchelle);
 		    paintRoomba(g2,facteurEchelle);
+		    if(clicked)
+		    	paintNewForme(g2,1);
 			g2.dispose();
-			
 		}
 		private void paintRoomba(Graphics2D g2, int facteurEchelle){
 			int x = centrex+roomba.getPosxPix(facteurEchelle);
@@ -113,7 +624,6 @@ public class RoombaProjectX extends JFrame {
 			int d = roomba.getDiametrePix(facteurEchelle);
 			g2.setColor(Color.gray);
 			roomba.getForme().paint(g2,facteurEchelle,centrex,centrey);
-		   // g2.fillOval(x, y,d,d);
 		    g2.setColor(Color.BLACK);
 		    g2.drawLine(x,y,x+(int)(d/2 *Math.cos(roomba.posture.getTheta())),y+(int)(d/2 *Math.sin(roomba.posture.getTheta())));
 		}
@@ -126,11 +636,14 @@ public class RoombaProjectX extends JFrame {
 				g2.setColor(Color.GREEN);
 				x.draw(g2,facteurEchelle,centrex,centrey);
 			}
-
+		}
+		private void paintNewForme(Graphics2D g2, int facteurEchelle){
+			g2.setColor(Color.cyan);
+			newForme.paint(g2, facteurEchelle, centrex, centrey);
 		}
 		private void refresh(Graphics2D g2){
 			g2.setColor(Color.WHITE);
-			g2.fillRect(0,0,pan.getWidth(),pan.getHeight());
+			g2.fillRect(0,0,jPanel1.getWidth(),jPanel1.getHeight());
 			
 		}
 		
@@ -143,6 +656,154 @@ public class RoombaProjectX extends JFrame {
 			for(Tache i : environ.getTaches())
 				i.paint(g2,facteurEchelle,centrex,centrey);
 		}
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			// Nothing to do
+		}
+		@Override
+		public void mouseEntered(MouseEvent arg0) {			
+		}
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			
+		}
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+				clicked = true;
+				clickedX = (arg0.getX()-centrex);
+				clickedY = (arg0.getY()-centrey);
+			
+		}
+		
+		@Override
+		public synchronized void mouseReleased(MouseEvent arg0) {
+			if(!clickedOn(newForme)){
+				if(click==Click.TACHE)
+					environ.ajouterTache(new Tache(newForme.normalize(facteurEchelle)));
+				else if(click == Click.OBSTACLE)
+					environ.ajouterObstacle(new Obstacle(newForme.normalize(facteurEchelle)));
+			}
+			clicked = false;
+			repaint();
+			
+		}
+		private boolean clickedOn(Forme forme){
+			boolean retour = false;
+			for(Obstacle o : environ.getObstacles())
+				retour = retour || forme.collisionExterne(o.getForme());
+			for(Tache o : environ.getTaches())
+				retour = retour|| forme.collisionExterne(o.getForme());
+			return retour;
+			
+		}
+		@Override
+		public void mouseDragged(MouseEvent arg0) {
+			threadForme = new Thread( new PaintForme(arg0,this));
+			threadForme.start();
+		}
+		@Override
+		public void mouseMoved(MouseEvent arg0) {
+			
+		}
+	}
+	class PlayAnimation implements Runnable{
+		
+		Roomba roomba;
+		Environnement environ;
+		PlayAnimation(Roomba roomba,Environnement environ){
+			this.roomba = roomba;
+			this.environ = environ;
+		}
+		@Override
+		public void run() {
+			go(roomba, environ);
+		}
+	}
+	class PaintForme implements Runnable{
+
+		private MouseEvent mouseEvent;
+		private RoombaPanel component;
+		
+		PaintForme(MouseEvent mouseEvent,RoombaPanel component){
+			this.mouseEvent = mouseEvent;
+			this.component = component;
+		}
+		@Override
+		public void run() {
+			if(component.clicked){
+			double actualX = (mouseEvent.getX() - component.centrex);
+			double actualY = (mouseEvent.getY() - component.centrey);
+				switch(clickForme){
+				case CERCLE : 
+					component.newForme = new Cercle(
+							component.clickedX,component.clickedY,0,2*Math.sqrt(Math.pow(component.clickedX-actualX, 2)+Math.pow(component.clickedY-actualY, 2)));
+					break;
+				case CARRE : 
+					component.newForme = new Carre(
+							component.clickedX,component.clickedY,0,2*Math.sqrt(Math.pow(component.clickedX-actualX, 2)+Math.pow(component.clickedY-actualY,2)));
+					break;
+				case RECTANGLE : 
+					component.newForme = new Rectangle(
+							component.clickedX,component.clickedY,0,4*Math.abs(component.clickedX-actualX)/2,4*Math.abs(component.clickedY-actualY)/2);
+					break;
+					default : component.newForme = new Cercle(
+							component.clickedX,component.clickedY,0,2*Math.sqrt(Math.pow(component.clickedX-actualX, 2)+Math.pow(component.clickedX-actualX, 2)));
+				}
+			}
+			repaint();
+		}
+		
+	}
+	private void setIcon(){
+		jRadioButton3.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                	if(clickForme == ClickForme.CARRE)
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("file:/C:/Users/Lucas/Desktop/RoombaEGit/roomba/Projet Roomba/resources/carreChosen.jpg")
+                    );
+                	else
+                		return new javax.swing.ImageIcon(
+                                new java.net.URL("file:/C:/Users/Lucas/Desktop/RoombaEGit/roomba/Projet Roomba/resources/carre.jpg")
+                            );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());    
+	jRadioButton4.setIcon(new javax.swing.JLabel() {
+        public javax.swing.Icon getIcon() {
+            try {
+            	if(clickForme == ClickForme.CERCLE)
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("file:/C:/Users/Lucas/Desktop/RoombaEGit/roomba/Projet Roomba/resources/cercleChosen.jpg")
+                    );
+                	else
+                		return new javax.swing.ImageIcon(
+                                new java.net.URL("file:/C:/Users/Lucas/Desktop/RoombaEGit/roomba/Projet Roomba/resources/cercle.jpg")
+                            );
+            } catch (java.net.MalformedURLException e) {
+            }
+            return null;
+        }
+    }.getIcon());    
+	jRadioButton5.setIcon(new javax.swing.JLabel() {
+        public javax.swing.Icon getIcon() {
+            try {
+            	if(clickForme == ClickForme.RECTANGLE)
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("file:/C:/Users/Lucas/Desktop/RoombaEGit/roomba/Projet Roomba/resources/rectangleChosen.jpg")
+                    );
+                	else
+                		return new javax.swing.ImageIcon(
+                                new java.net.URL("file:/C:/Users/Lucas/Desktop/RoombaEGit/roomba/Projet Roomba/resources/rectangle.jpg")
+                            );
+            } catch (java.net.MalformedURLException e) {
+            }
+            return null;
+        }
+    }.getIcon());    
+	
 	}
 	
 }

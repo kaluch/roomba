@@ -19,5 +19,9 @@ public class IdiotVillage extends Comportement {
 	}
 	@Override
 	void calcul(ArrayList<Capteur> capteurs) {	}
+	@Override
+	public Object clone() {
+		return new IdiotVillage();
+	}
 
 }
