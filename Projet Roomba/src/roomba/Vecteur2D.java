@@ -36,4 +36,14 @@ public class Vecteur2D extends Vecteur{
 	Vecteur2D plus(Vecteur2D vecteur) {
 		return new Vecteur2D(x+vecteur.getX(),y+vecteur.getY());
 	}
+	Vecteur2D moins(Vecteur2D vecteur) {
+		return new Vecteur2D(x-vecteur.getX(),y-vecteur.getY());
+	}
+	double pScal(Vecteur2D vecteur) {
+		 return (x*vecteur.getX()+y*vecteur.getY());
+	}
+	double det(Vecteur2D vecteur) {
+		return (x*vecteur.getY()-y*vecteur.getX());
+	}
+	
 }
