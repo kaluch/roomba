@@ -116,4 +116,16 @@ public class Cercle extends Forme implements Cloneable {
 		diametre = diametre/facteurEchelle;
 		return this;
 	}
+	@Override
+	public boolean collisionPoint(double x, double y) {
+		Vecteur2D A = new Vecteur2D(x,y);
+		Vecteur2D C = getPosture().getPosition();
+		Vecteur2D AC = A.moins(C);
+		return AC.norme()<diametre/2;
+	}
+	@Override
+	public void iso(double a) {
+		diametre*=a;
+		
+	}
 }

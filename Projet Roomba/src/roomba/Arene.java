@@ -17,7 +17,9 @@ public  class Arene implements Cloneable{
 	
 	public void draw(Graphics2D g2,int facteurEchelle, int centrex, int centrey){
 		g2.setColor(Color.BLACK);
-		forme.draw(g2,facteurEchelle,centrex,centrey);
+		g2.fillRect(-centrex, -centrey, 3*centrex,3*centrey);
+		g2.setColor(Color.WHITE);
+		forme.paint(g2,facteurEchelle,centrex,centrey);
 	}
 
 	@Override

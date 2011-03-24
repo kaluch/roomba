@@ -47,6 +47,10 @@ abstract public class Forme implements Cloneable{
 		posture.setY(posture.getY()/facteurEchelle);
 		return null;
 	}
+	abstract public boolean collisionPoint(double x, double y);
+	abstract public void iso(double a);
+	protected int tangeantPoint(double d, double e);
+	
 
 
 	

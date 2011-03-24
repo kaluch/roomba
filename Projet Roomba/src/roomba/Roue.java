@@ -19,7 +19,7 @@ public class Roue  {
 		this.vitesse = vitesse;
 	}
 	public String toString(){
-		return String.valueOf(vitesse);
+		return String.valueOf((float)vitesse);
 	}
 	
 	

@@ -98,6 +98,15 @@ public class Carre extends Forme implements Cloneable {
 		cote = cote/facteurEchelle;
 		return this;
 	}
+	@Override
+	public boolean collisionPoint(double x, double y) {
+		return (x>posture.getX()-cote/2 && x<posture.getX()+cote/2
+				&& y>posture.getY()-cote/2 && y<posture.getY()+cote/2)? true : false;	
+	}
+	@Override
+	public void iso(double a) {
+		cote*=a;		
+	}
 	
 	
 }

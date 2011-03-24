@@ -17,6 +17,7 @@ public class Environnement implements Cloneable {
 	public void setArene(Arene arene) {		this.arene = arene;	}
 	public ArrayList<Obstacle> getObstacles() {		return obstacles;	}
 	public ArrayList<Tache> getTaches() {		return taches;	}
+	public void enleverObstacle(Obstacle obstacle){		obstacles.remove(obstacle);}
 
 	//Constructeurs
 	public Environnement(Arene arene)

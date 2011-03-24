@@ -93,6 +93,26 @@ public class Rectangle extends Forme {
 		else return false;
 	}
 	@Override
+	public boolean collisionPoint(double x, double y) {
+		return (x>posture.getX()-largeur/2 && x<posture.getX()+largeur/2
+				&& y>posture.getY()-hauteur/2 && y<posture.getY()+hauteur/2)? true : false;
+	}
+	@Override
+	public int tangeantPoint(double x, double y) {
+		System.out.println(Math.abs(y-posture.getY()-hauteur/2 )+ " " +Math.abs( y-posture.getY()+hauteur/2) );
+		if(Math.abs(x-posture.getX()-largeur/2)<=0.02)
+			if (y>=posture.getY()-hauteur/2 || y<=posture.getY()+hauteur/2) return 1 ;
+		if(Math.abs( x-posture.getX()+largeur/2)<=0.02)
+			if(y>=posture.getY()-hauteur/2 || y<=posture.getY()+hauteur/2) return 1;
+		if(Math.abs(y-posture.getY()-hauteur/2)<=0.02)
+			if(x>=posture.getX()-largeur/2 || x<=posture.getX()+largeur/2) return 2 ;
+		if(Math.abs( y-posture.getY()+hauteur/2)<=0.02)
+			if (x>=posture.getX()-largeur/2 || x<=posture.getX()+largeur/2) return 2;
+		
+		
+		return 0;
+	}
+	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		Rectangle o = (Rectangle) super.clone();
 		o.hauteur = hauteur;
@@ -105,5 +125,9 @@ public class Rectangle extends Forme {
 		largeur = largeur/facteurEchelle;
 		hauteur = hauteur/facteurEchelle;
 		return this;
+	}
+	public void iso(double a){
+		largeur*=a;
+		hauteur*=a;
 	}
 }
