@@ -35,7 +35,7 @@ public class Hazard extends Comportement  {
 			}
 			rotate--;
 			if(rotate ==0){
-					if(capteurs.get(3).lecture()-capteurs.get(4).lecture()>0)
+					if(capteurs.get(4).lecture()-capteurs.get(5).lecture()>0)
 						turnLeft = false;
 					else
 						turnLeft = true;
@@ -47,15 +47,15 @@ public class Hazard extends Comportement  {
 				rotate = rand.nextInt(70);
 				changeDirection = 600;
 			}
-			if(capteurs.get(3).lecture()-capteurs.get(4).lecture()>0.1){
-				if(capteurs.get(4).lecture()<0.3){
+			if(capteurs.get(4).lecture()-capteurs.get(5).lecture()>0.1){
+				if(capteurs.get(5).lecture()<0.3){
 					iL = 1;
 					iR = 0.1;
 				}else{
 			iL = 1;
 			iR = 0.6;}}
-			else if(capteurs.get(4).lecture()-capteurs.get(3).lecture()>0.1){
-				if(capteurs.get(3).lecture()<0.3){
+			else if(capteurs.get(5).lecture()-capteurs.get(4).lecture()>0.1){
+				if(capteurs.get(4).lecture()<0.3){
 					iR = 1;
 					iL = 0.1;
 				}else{

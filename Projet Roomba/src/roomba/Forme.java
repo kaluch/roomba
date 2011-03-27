@@ -49,7 +49,7 @@ abstract public class Forme implements Cloneable{
 	}
 	abstract public boolean collisionPoint(double x, double y);
 	abstract public void iso(double a);
-	protected int tangeantPoint(double d, double e);
+	abstract public int tangeantPoint(double x, double y);
 	
 
 

@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -52,32 +53,35 @@ public class RoombaProjectX extends JFrame {
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;    
+    private javax.swing.JRadioButton jRadioButton8;    
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
 	protected volatile Environnement environ;
 	protected Environnement environSave;
 	protected Comportement comportementTest;
 	protected Comportement comportementSave;
 	protected Roomba roomba;
+	protected ArrayList<Vecteur2D> parcour;
 	protected int facteurEchelle;
 	protected boolean animated = false;
+	protected boolean drawParcour = false;
 	private Thread thread;
 	Click click = Click.OBSTACLE;
 	ClickForme clickForme = ClickForme.CERCLE;
 
 	
-	RoombaProjectX(String string, Comportement comportementTest,int facteurEchelle){
+	RoombaProjectX(String string, Comportement comportementTest,int facteurEchelle,Roomba roomba){
 		super(string);
 		this.environ = new Environnement(new Arene(new Carre(0,0,0,4)));
 		try {
@@ -87,9 +91,9 @@ public class RoombaProjectX extends JFrame {
 		}
 		this.comportementTest=comportementTest;
 		this.comportementSave=(Comportement) comportementTest.clone();
-		this.roomba = new Roomba(0.34,comportementTest);
+		this.roomba =roomba;
+		this.parcour = new ArrayList<Vecteur2D>();
 		this.facteurEchelle = facteurEchelle;
-		//this.test = test;
 		this.setTitle("Roomba !");
         this.setSize(500, 700);
         this.setLocationRelativeTo(null);
@@ -98,7 +102,7 @@ public class RoombaProjectX extends JFrame {
         this.setBackground(Color.WHITE);
         initComponents();
 	}
-	RoombaProjectX(String string, Comportement comportementTest){
+	RoombaProjectX(String string, Comportement comportementTest,Roomba roomba){
 		super(string);
 		this.environ  = new Environnement(new Arene(new Carre(0,0,0,4)));
 		try {
@@ -108,11 +112,11 @@ public class RoombaProjectX extends JFrame {
 		}
 		this.comportementTest=comportementTest;
 		this.comportementSave=(Comportement) comportementTest.clone();
-		this.roomba = new Roomba(0.34,comportementTest);
+		this.parcour = new ArrayList<Vecteur2D>();
+		this.roomba = roomba;
 		//this.test = test;
 		facteurEchelle = 150;
 		this.setTitle("Roomba !");
-        // 600 px de large et 600 px de haut
         this.setSize(600, 600);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(RoombaX.EXIT_ON_CLOSE);
@@ -138,6 +142,7 @@ public class RoombaProjectX extends JFrame {
         jRadioButton5 = new javax.swing.JRadioButton();
         jRadioButton6 = new javax.swing.JRadioButton();
         jRadioButton7 = new javax.swing.JRadioButton();
+        jRadioButton8 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -174,8 +179,8 @@ public class RoombaProjectX extends JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
 		this.getContentPane().add(jPanel1);
 		this.getContentPane().add(jPanel2);
 		this.getContentPane().add(jPanel3);
@@ -365,137 +370,149 @@ public class RoombaProjectX extends JFrame {
             .addGap(0, 13, Short.MAX_VALUE)
         );
 
-        jLabel6.setText("Laser 1 :");
+        jLabel6.setText("Capteurs supplémentaires : ");
 
-        jLabel7.setText("Laser 2 :");
+        jRadioButton8.setText("Trace");
+        jRadioButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jRadioButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jRadioButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jRadioButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jRadioButton1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jRadioButton2, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton7)
-                                .addGap(101, 101, 101))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                                    .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                                        .addComponent(jRadioButton6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                                        .addComponent(jRadioButton7))
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addComponent(jRadioButton2)
-                                    .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                                    .addComponent(jRadioButton8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jRadioButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18))))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(jRadioButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jRadioButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton5)
-                .addGap(16, 16, 16)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabel4)
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton5)
+                            .addComponent(jButton4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addGap(7, 7, 7)
-                .addComponent(jLabel7))
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton6)
+                            .addComponent(jRadioButton7))
+                        .addGap(4, 4, 4)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jRadioButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton1)
+                            .addComponent(jRadioButton2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton3)
+                            .addComponent(jRadioButton4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(7, 7, 7)
+                                .addComponent(jLabel4)
+                                .addGap(7, 7, 7)
+                                .addComponent(jLabel5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setIcon();
 	}
 	public void repaint(){
 		jPanel1.repaint();
@@ -520,6 +537,7 @@ public class RoombaProjectX extends JFrame {
 		jButton1.setEnabled(true);
 		jButton2.setEnabled(false);
 		animated = false;
+		parcour.clear();
 		try {
 			environ = new Environnement((Arene) environ.getArene().clone());
 		} catch (CloneNotSupportedException e) {
@@ -581,16 +599,25 @@ public class RoombaProjectX extends JFrame {
 		environ.setArene(new Arene(new Cercle(0,0,0,4)));
 		repaint();
 	}
+	private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {
+		drawParcour = !drawParcour;
+		repaint();
+	}
 	
 	
 private void go(Roomba roomba,Environnement environ){
 	while(this.animated){
+		String tmp = new String();
+		String rc = new String("<br>");
 		repaint();
 		jLabel1.setText("Roue droite      : "+roomba.getRoues().get(1).toString()+"  "+"m/s");
         jLabel2.setText("Roue gauche   : "+roomba.getRoues().get(1).toString()+"  "+"m/s");
-        jLabel6.setText("Laser 1 : "+(float)roomba.getCapteurs().get(3).lecture()+ " m");
-        jLabel7.setText("Laser 2 : "+(float)roomba.getCapteurs().get(4).lecture()+ " m");
+        for(int i=3;i<roomba.getCapteurs().size();++i)
+        	tmp += i+1 + " " +roomba.getCapteurs().get(i).toString()+rc;
+        	jLabel6.setText("<html>"+tmp+"</html>");
 		environ.nettoyerTache();
+		if(drawParcour)
+			parcour.add(roomba.getPosture().getPosition());
 		roomba.move(0.01,environ);
 		// attend 0.01 sec
 		try  { Thread.sleep(10); }
@@ -600,9 +627,18 @@ private void go(Roomba roomba,Environnement environ){
 
 	public static void main(String[] args) {
 		
-		Comportement test = new Hazard();
-		
-		RoombaProjectX fen = new RoombaProjectX("Roomba Simulation",test);
+		Comportement testComportement = new Hazard();
+		Roomba roomba = new Roomba(0.34,testComportement);
+
+		roomba.addCapteur(new CapteurDistance(
+				new Cercle(0.17*Math.cos(Math.PI/2)+roomba.getPosture().getPosition().getX(),
+						0.17*Math.sin(Math.PI/2)+roomba.getPosture().getPosition().getY(),Math.PI/12,0.025),
+						Math.PI/12));
+		roomba.addCapteur(new CapteurDistance(
+				new Cercle(0.17*Math.cos(-Math.PI/2)+roomba.getPosture().getPosition().getX(),
+						0.17*Math.sin(-Math.PI/2)+roomba.getPosture().getPosition().getY(),-Math.PI/12,0.025),
+						-Math.PI/12));
+		RoombaProjectX fen = new RoombaProjectX("Roomba Simulation",testComportement,roomba);
     	fen.setVisible(true);
 
 	}
@@ -642,6 +678,8 @@ private void go(Roomba roomba,Environnement environ){
 			refresh(g2);
 		    paintEnvironnement(g2,facteurEchelle);
 		    paintTaches(g2,facteurEchelle);
+		    if(drawParcour)
+				paintParcour(g2,facteurEchelle);
 		    paintObstacles(g2,facteurEchelle);
 		    paintCapteurs(g2,facteurEchelle);
 		    paintRoomba(g2,facteurEchelle);
@@ -661,6 +699,12 @@ private void go(Roomba roomba,Environnement environ){
 		private void paintEnvironnement(Graphics2D g2, int facteurEchelle){
 			g2.setColor(Color.GRAY);
 			environ.getArene().draw(g2,facteurEchelle,centrex,centrey);
+		}
+		private void paintParcour(Graphics2D g2, int facteurEchelle){
+			g2.setColor(Color.BLACK);
+			for(int i=0;i<parcour.size()-1;++i)
+				g2.drawLine((int)((parcour.get(i).getX()*facteurEchelle+centrex)),(int)((parcour.get(i).getY())*facteurEchelle+centrey),
+						(int)((parcour.get(i+1).getX())*facteurEchelle+centrex),(int)((parcour.get(i+1).getY())*facteurEchelle+centrey));
 		}
 		private void paintCapteurs(Graphics2D g2, int facteurEchelle){
 			for(Capteur x : roomba.getCapteurs()){
@@ -755,7 +799,6 @@ private void go(Roomba roomba,Environnement environ){
 				else{
 					newForme.getPosture().setX(formeOn.getPosture().getX()*facteurEchelle-centrex+((double)(-clickedX+arg0.getX())));
 					newForme.getPosture().setY(formeOn.getPosture().getY()*facteurEchelle-centrey+((double)(-clickedY+arg0.getY())));
-					repaint();
 				}		
 			}
 			else if(sizeOn!=0){
@@ -785,9 +828,8 @@ private void go(Roomba roomba,Environnement environ){
 					newForme = new Rectangle(
 							formeOn.getPosture().getX()*facteurEchelle,
 							formeOn.getPosture().getY()*facteurEchelle,0,
-							4*Math.abs(formeOn.getPosture().getX()-arg0.getX())/2,
-							4*Math.abs(formeOn.getPosture().getY()-arg0.getY())/2);
-					repaint();
+							Math.abs(2*(arg0.getX()+((Rectangle) formeOn).getLargeur()-clickedX)),
+							Math.abs(2*(arg0.getY()+((Rectangle) formeOn).getHauteur()-clickedY)));
 				}
 				
 			}
@@ -795,6 +837,8 @@ private void go(Roomba roomba,Environnement environ){
 				threadForme = new Thread( new PaintNewForme(arg0,this));
 				threadForme.start();
 			}	
+			repaint();
+
 		}
 		@Override
 		public void mouseMoved(MouseEvent arg0) {
@@ -827,7 +871,6 @@ private void go(Roomba roomba,Environnement environ){
 				cursorOn = true;
 			else
 				cursorOn = false;
-				repaint();
 			return retour;
 		}
 		protected boolean selectSize(double x, double y){
@@ -842,7 +885,6 @@ private void go(Roomba roomba,Environnement environ){
 					obstacleOn = w;
 				}					
 			}
-				repaint();
 			return retour;
 		}
 	}
@@ -891,7 +933,6 @@ private void go(Roomba roomba,Environnement environ){
 							component.clickedX,component.clickedY,0,2*Math.sqrt(Math.pow(component.clickedX-actualX, 2)+Math.pow(component.clickedX-actualX, 2)));
 				}
 			}
-			repaint();
 		}
 		
 	}
@@ -901,11 +942,11 @@ private void go(Roomba roomba,Environnement environ){
                 try {
                 	if(clickForme == ClickForme.CARRE)
                     return new javax.swing.ImageIcon(
-                        new java.net.URL("file:/C:/Users/Lucas/Desktop/RoombaEGit/roomba/Projet Roomba/resources/carreChosen.jpg")
+                        new java.net.URL("file:resources/carreChosen.jpg")
                     );
                 	else
                 		return new javax.swing.ImageIcon(
-                                new java.net.URL("file:/C:/Users/Lucas/Desktop/RoombaEGit/roomba/Projet Roomba/resources/carre.jpg")
+                                new java.net.URL("file:resources/carre.jpg")
                             );
                 } catch (java.net.MalformedURLException e) {
                 }
@@ -917,11 +958,11 @@ private void go(Roomba roomba,Environnement environ){
             try {
             	if(clickForme == ClickForme.CERCLE)
                     return new javax.swing.ImageIcon(
-                        new java.net.URL("file:/C:/Users/Lucas/Desktop/RoombaEGit/roomba/Projet Roomba/resources/cercleChosen.jpg")
+                        new java.net.URL("file:resources/cercleChosen.jpg")
                     );
                 	else
                 		return new javax.swing.ImageIcon(
-                                new java.net.URL("file:/C:/Users/Lucas/Desktop/RoombaEGit/roomba/Projet Roomba/resources/cercle.jpg")
+                                new java.net.URL("file:resources/cercle.jpg")
                             );
             } catch (java.net.MalformedURLException e) {
             }
@@ -933,11 +974,11 @@ private void go(Roomba roomba,Environnement environ){
             try {
             	if(clickForme == ClickForme.RECTANGLE)
                     return new javax.swing.ImageIcon(
-                        new java.net.URL("file:/C:/Users/Lucas/Desktop/RoombaEGit/roomba/Projet Roomba/resources/rectangleChosen.jpg")
+                        new java.net.URL("file:resources/rectangleChosen.jpg")
                     );
                 	else
                 		return new javax.swing.ImageIcon(
-                                new java.net.URL("file:/C:/Users/Lucas/Desktop/RoombaEGit/roomba/Projet Roomba/resources/rectangle.jpg")
+                                new java.net.URL("file:resources/rectangle.jpg")
                             );
             } catch (java.net.MalformedURLException e) {
             }

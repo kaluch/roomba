@@ -107,6 +107,21 @@ public class Carre extends Forme implements Cloneable {
 	public void iso(double a) {
 		cote*=a;		
 	}
+	@Override
+	public int tangeantPoint(double x, double y) {
+		System.out.println(Math.abs(y-posture.getY()-cote/2 )+ " " +Math.abs( y-posture.getY()+cote/2) );
+		if(Math.abs(x-posture.getX()-cote/2)<=0.02)
+			if (y>=posture.getY()-cote/2 || y<=posture.getY()+cote/2) return 1 ;
+		if(Math.abs( x-posture.getX()+cote/2)<=0.02)
+			if(y>=posture.getY()-cote/2 || y<=posture.getY()+cote/2) return 1;
+		if(Math.abs(y-posture.getY()-cote/2)<=0.02)
+			if(x>=posture.getX()-cote/2 || x<=posture.getX()+cote/2) return 2 ;
+		if(Math.abs( y-posture.getY()+cote/2)<=0.02)
+			if (x>=posture.getX()-cote/2 || x<=posture.getX()+cote/2) return 2;
+		
+		return 0;
+	
+	}
 	
 	
 }

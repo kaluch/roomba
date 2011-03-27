@@ -131,7 +131,8 @@ public class CapteurDistance extends Capteur {
 		return distance;
 	}
 	public String toString(){
-		return forme.toString()+ " " +String.valueOf(distance);
+		String tmp = new String(String.valueOf(distance+0.0000000000001));
+		return " "+"Laser : "+String.valueOf(tmp.charAt(0))+tmp.charAt(1)+tmp.charAt(2) + " m";
 	}
 	@Override
 	public void draw(Graphics2D g2, int facteurEchelle, int centrex, int centrey) {

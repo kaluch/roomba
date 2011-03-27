@@ -16,7 +16,7 @@ protected boolean contact;
 		return (contact)? 1 :0;
 	}
 	public String toString(){
-		return (contact)?forme.getPosture().getPosition().toString()+" " + "contact" :forme.getPosture().getPosition().toString() + " " +"non-contact"; 
+		return (contact)? "contact" :"non-contact"; 
 	}
 
 }

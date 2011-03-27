@@ -28,6 +28,11 @@ public class CapteurContactTache extends CapteurContact {
 		forme.paint(g2, facteurEchelle, centrex, centrey);
 	}
 
+	@Override
+	public String toString() {
+		return "Tache : "+super.toString();
+	}
+
 
 
 }

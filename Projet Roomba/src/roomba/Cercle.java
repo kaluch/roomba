@@ -124,6 +124,15 @@ public class Cercle extends Forme implements Cloneable {
 		return AC.norme()<diametre/2;
 	}
 	@Override
+	public int tangeantPoint(double x, double y) {
+		Vecteur2D A = new Vecteur2D(x,y);
+		Vecteur2D C = getPosture().getPosition();
+		Vecteur2D AC = A.moins(C);
+		if( Math.abs(AC.norme()-diametre/2)<0.2)
+			return 1;
+		return 0;
+	}
+	@Override
 	public void iso(double a) {
 		diametre*=a;
 		

@@ -18,19 +18,10 @@ public Roomba(double diametre,Comportement comportement) {
 					new Cercle(0.06,0,0,0.24)));
 			this.capteurs.add(new CapteurContactObstacle(
 					new Cercle(0.06,-0.06,0,0.20)));
-		
+			this.capteurs.add(new CapteurContactTache(new Cercle(0,0,0,0.195),0.05));
+
 			this.comportement = comportement;
 			
-			this.capteurs.add(new CapteurDistance(
-					new Cercle(diametre/2*Math.cos(Math.PI/2)+posture.getPosition().getX(),
-							diametre/2*Math.sin(Math.PI/2)+posture.getPosition().getY(),0,0.025),
-							Math.PI/12));
-			this.capteurs.add(new CapteurDistance(
-					new Cercle(diametre/2*Math.cos(-Math.PI/2)+posture.getPosition().getX(),
-							diametre/2*Math.sin(-Math.PI/2)+posture.getPosition().getY(),0,0.025),
-							-Math.PI/12));
-			
-			this.capteurs.add(new CapteurContactTache(new Cercle(0,0,0,0.195),0.05));
 			for(Capteur x : capteurs)
 				x.setPosRel(posture.getPosition());		
 	}
@@ -74,5 +65,9 @@ public Roomba(double diametre,Comportement comportement) {
 	public int getDiametrePix(int facteurEchelle){ return (int) (facteurEchelle * diametre) ; }
 	public int getPosxPix(int facteurEchelle){ return (int) (posture.getX() * facteurEchelle) ; }
 	public int getPosyPix(int facteurEchelle){ return (int) (posture.getY() * facteurEchelle) ; }
+	public void addCapteur(Capteur capteur){
+		capteurs.add(capteur);
+		capteur.setPosRel(posture.getPosition());	
+	}
 	
 }
