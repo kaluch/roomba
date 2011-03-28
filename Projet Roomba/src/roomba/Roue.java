@@ -1,26 +1,30 @@
 package roomba;
 
-
-public class Roue  {
+public class Roue {
 
 	protected double vitesse;
-	
-	public double getVitesse() {		return vitesse;	}
+
+	public double getVitesse() {
+		return vitesse;
+	}
+
 	public void setVitesse(double vitesse) throws ExceptionVitesseMax {
-		if(vitesse > 1)
-		throw new ExceptionVitesseMax();
+		if (vitesse > 1)
+			throw new ExceptionVitesseMax();
 		this.vitesse = vitesse;
-		}
-	
-	public Roue(){
+	}
+
+	public Roue() {
+
 		vitesse = 0;
 	}
-	public Roue(double vitesse){
+
+	public Roue(double vitesse) {
 		this.vitesse = vitesse;
 	}
-	public String toString(){
-		return String.valueOf((float)vitesse);
+
+	public String toString() {
+		return String.valueOf((float) vitesse);
 	}
-	
-	
+
 }

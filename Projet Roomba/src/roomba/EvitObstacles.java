@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class EvitObstacles extends Comportement {
 
-	EvitObstacles(){
+	EvitObstacles() {
 		super();
 	}
 
@@ -13,18 +13,18 @@ public class EvitObstacles extends Comportement {
 		int comportement = 0;
 		boolean contact = false;
 		boolean tache = false;
-		for(Capteur x : capteurs){
-			if(x instanceof CapteurContactObstacle)
-				contact = contact || x.lecture()==1;
-			if(x instanceof CapteurContactTache)
-				tache = tache || x.lecture()==1;
-			if(tache)
+		for (Capteur x : capteurs) {
+			if (x instanceof CapteurContactObstacle)
+				contact = contact || x.lecture() == 1;
+			if (x instanceof CapteurContactTache)
+				tache = tache || x.lecture() == 1;
+			if (tache)
 				comportement = 1;
-			if(contact)
+			if (contact)
 				comportement = 2;
 		}
-		switch (comportement){
-		case 2 :
+		switch (comportement) {
+		case 2:
 			iL = -0.5;
 			iR = 0.5;
 			break;
@@ -43,5 +43,5 @@ public class EvitObstacles extends Comportement {
 	public Object clone() {
 		return new EvitObstacles();
 	}
-	
+
 }

@@ -1,9 +1,7 @@
 package roomba;
 
-
 public class ExceptionVitesseMax extends Exception {
 
-	
 	/**
 	 * 
 	 */
