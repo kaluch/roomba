@@ -32,13 +32,13 @@ public Roomba(double diametre,Comportement comportement) {
 		for (Capteur x : capteurs)
 			x.miseAjour(environ);
 		comportement.calcul(capteurs);
-		this.calculVitesseRoue(comportement);
+		this.calculVitesseRoue();
 		posture.move(roues.get(0).getVitesse()*to , roues.get(1).getVitesse()*to, diametre);
 		forme.setPosture(posture);
 		for(Capteur x : capteurs)
 			x.setPosition(x.getPosRel(),posture);
 	}
-	public void calculVitesseRoue(Comportement comportement){
+	public void calculVitesseRoue(){
 		setVitesseRoue1(comportement.vitesseRoueR());
 		setVitesseRoue2(comportement.vitesseRoueL());
 	}

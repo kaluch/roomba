@@ -8,7 +8,7 @@ public  class Arene implements Cloneable{
 
 	protected Forme forme;
 	
-	Arene(Forme forme){
+	public Arene(Forme forme){
 		this.forme = forme;
 	}
 

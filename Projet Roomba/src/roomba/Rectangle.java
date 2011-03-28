@@ -6,12 +6,12 @@ public class Rectangle extends Forme {
 
 	protected double largeur;
 	protected double hauteur;
-	Rectangle(double x, double y, double theta,double largeur,double hauteur) {
+	public Rectangle(double x, double y, double theta,double largeur,double hauteur) {
 		super(x, y, theta);
 		this.largeur = largeur;
 		this.hauteur = hauteur;
 	}
-	Rectangle(Posture posture,double largeur,double hauteur){
+	public Rectangle(Posture posture,double largeur,double hauteur){
 		super(posture);
 		this.largeur = largeur;
 		this.hauteur = hauteur;

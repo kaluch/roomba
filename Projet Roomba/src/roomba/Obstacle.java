@@ -9,7 +9,7 @@ public  class Obstacle{
 	protected Forme forme;
 	
 	
-	Obstacle(Forme forme) {
+	public Obstacle(Forme forme) {
 		this.forme = forme;
 	}
 	

@@ -6,7 +6,7 @@ public class Tache{
 
 	Forme forme;
 	
-	Tache(Forme forme){
+	public Tache(Forme forme){
 		this.forme = forme;
 	}
 

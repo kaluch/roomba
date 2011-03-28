@@ -20,7 +20,7 @@ public class Hazard extends Comportement  {
 				tache = tache || x.lecture()==1;
 		}
 		if(contact && rotate == 0){
-			rotate = rand.nextInt(70);
+			rotate = rand.nextInt(30);
 		}
 		
 		

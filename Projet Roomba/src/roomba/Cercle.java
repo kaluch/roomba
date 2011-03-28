@@ -5,11 +5,11 @@ import java.awt.Graphics2D;
 public class Cercle extends Forme implements Cloneable {
 
 	protected double diametre;
-	Cercle(double x, double y, double theta,double diametre) {
+	public Cercle(double x, double y, double theta,double diametre) {
 		super(x, y, theta);
 		this.diametre = diametre;
 	}
-	Cercle(Posture posture,double diametre){
+	public Cercle(Posture posture,double diametre){
 		super(posture);
 		this.diametre = diametre;
 	}

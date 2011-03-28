@@ -12,10 +12,10 @@ public class Roue  {
 		this.vitesse = vitesse;
 		}
 	
-	Roue(){
+	public Roue(){
 		vitesse = 0;
 	}
-	Roue(double vitesse){
+	public Roue(double vitesse){
 		this.vitesse = vitesse;
 	}
 	public String toString(){

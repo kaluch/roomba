@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class IdiotVillage extends Comportement {
 
-	IdiotVillage(){
+	public IdiotVillage(){
 		super();
 	}
 	@Override

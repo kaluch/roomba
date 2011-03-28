@@ -6,12 +6,12 @@ public class Vecteur2D extends Vecteur{
 	protected double x;
 	protected double y;
 	
-	Vecteur2D(){
+	public Vecteur2D(){
 		x=0;
 		y=0;
 	}
 	
-	Vecteur2D(double x,double y){
+	public Vecteur2D(double x,double y){
 		this.x = x;
 		this.y = y;
 	}
@@ -33,16 +33,16 @@ public class Vecteur2D extends Vecteur{
 	public double angle() {
 		return Math.atan2(y,x);		
 	}
-	Vecteur2D plus(Vecteur2D vecteur) {
+	public Vecteur2D plus(Vecteur2D vecteur) {
 		return new Vecteur2D(x+vecteur.getX(),y+vecteur.getY());
 	}
-	Vecteur2D moins(Vecteur2D vecteur) {
+	public Vecteur2D moins(Vecteur2D vecteur) {
 		return new Vecteur2D(x-vecteur.getX(),y-vecteur.getY());
 	}
-	double pScal(Vecteur2D vecteur) {
+	public double pScal(Vecteur2D vecteur) {
 		 return (x*vecteur.getX()+y*vecteur.getY());
 	}
-	double det(Vecteur2D vecteur) {
+	public double det(Vecteur2D vecteur) {
 		return (x*vecteur.getY()-y*vecteur.getX());
 	}
 	

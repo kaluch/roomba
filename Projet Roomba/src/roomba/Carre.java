@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 public class Carre extends Forme implements Cloneable {
 
 	protected double cote;
-	Carre(double x, double y, double theta,double cote) {
+	public Carre(double x, double y, double theta,double cote) {
 		super(x, y, theta);
 		this.cote = cote;
 		// TODO Auto-generated constructor stub
