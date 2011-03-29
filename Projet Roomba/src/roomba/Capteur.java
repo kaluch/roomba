@@ -7,8 +7,16 @@ public abstract class Capteur {
 	protected Forme forme;
 	protected Polair posRel;
 
+	/**
+	 * update the current state of the sensor
+	 * @param environ environment in which the robot is evolving
+	 */
 	abstract public void miseAjour(Environnement environ);
 
+	/**
+	 * 
+	 * @return the state of the sensor
+	 */
 	abstract public double lecture();
 
 	Capteur(Forme forme) {
@@ -17,6 +25,10 @@ public abstract class Capteur {
 
 	}
 
+	/**
+	 * setter for the position relative to an origin
+	 * @param origine for the position
+	 */
 	protected void setPosRel(Vecteur origine) {
 		posRel.setTheta(forme.getPosture().getPosition().angle()
 				- origine.angle());
@@ -60,6 +72,13 @@ public abstract class Capteur {
 						* Math.sin(posRel.getTheta() + origine.getTheta()));
 	}
 
+	/**
+	 * draw the sensor
+	 * @param g2 relative to the window
+	 * @param facteurEchelle defines the ratio between actual size and pixels
+	 * @param centrex x-position of the center of the sensor
+	 * @param centrey y-position of the center of the sensor
+	 */
 	abstract public void draw(Graphics2D g2, int facteurEchelle, int centrex,
 			int centrey);
 

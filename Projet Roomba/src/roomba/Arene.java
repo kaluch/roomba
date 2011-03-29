@@ -19,6 +19,13 @@ public class Arene implements Cloneable {
 		this.forme = forme;
 	}
 
+	/**
+	 * draw the arena
+	 * @param g2 relative to the window
+	 * @param facteurEchelle defines the ratio between actual size and pixels
+	 * @param centrex x-position of the center of the arena
+	 * @param centrey y-position of the center of the arena
+	 */
 	public void draw(Graphics2D g2, int facteurEchelle, int centrex, int centrey) {
 		g2.setColor(Color.BLACK);
 		g2.fillRect(-centrex, -centrey, 3 * centrex, 3 * centrey);
