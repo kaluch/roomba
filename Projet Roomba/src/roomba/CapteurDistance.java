@@ -8,7 +8,7 @@ public class CapteurDistance extends Capteur {
 	protected double distance;
 	protected double orientation;
 
-	CapteurDistance(Forme forme, double orientation) {
+	public CapteurDistance(Forme forme, double orientation) {
 		super(forme);
 		this.orientation = orientation;
 		distance = 10;

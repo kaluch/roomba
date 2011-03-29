@@ -4,7 +4,7 @@
 package testroomba;
 
 import static org.junit.Assert.*;
-
+import roomba.*;
 import org.junit.Test;
 
 /**
@@ -34,7 +34,10 @@ public class CapteurDistanceTest {
 	 */
 	@Test
 	public void testCapteurDistance() {
-		fail("Not yet implemented");
+		Cercle c = new Cercle(0,1,0,0.4);
+		CapteurDistance capt = new CapteurDistance(c,0);
+		assertEquals(capt.getForme(),c);
+		assertEquals(capt.getOrientation(),0,0);
 	}
 
 }
