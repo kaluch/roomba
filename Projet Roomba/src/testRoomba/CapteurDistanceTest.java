@@ -18,7 +18,14 @@ public class CapteurDistanceTest {
 	 */
 	@Test
 	public void testMiseAjour() {
-		fail("Not yet implemented");
+		Cercle c = new Cercle(0,0,0,0.5);
+		CapteurDistance capt = new CapteurDistance(c,0);
+		assertEquals(capt.lecture(),10,0);
+		Environnement environ = new Environnement(new Arene(new Carre(0,0,0,5)));
+		environ.ajouterObstacle(new Obstacle(new Cercle(3,0,1,1)));
+		capt.miseAjour(environ);
+		assertEquals(capt.lecture(),2.5,0);
+		
 	}
 
 	/**
@@ -26,7 +33,9 @@ public class CapteurDistanceTest {
 	 */
 	@Test
 	public void testLecture() {
-		fail("Not yet implemented");
+		Cercle c = new Cercle(0,1,0,0.4);
+		CapteurDistance capt = new CapteurDistance(c,0);
+		assertEquals(capt.lecture(),10,0);
 	}
 
 	/**

@@ -36,6 +36,11 @@ public class CapteurDistance extends Capteur {
 		distance = Math.min(distTemp, Math.min(distTemp2, distTemp3));
 	}
 
+	/**
+	 * 
+	 * @param forme whose contact is tested
+	 * @return the distance between the sensor and the form
+	 */
 	private double contactRectangleCarre(Forme forme) {
 		double distTemp = 10;
 		double largeur = 0;
@@ -181,9 +186,6 @@ public class CapteurDistance extends Capteur {
 		super.setPosRel(origine);
 	}
 
-	public double getDistance() {
-		return distance;
-	}
 
 	public void setDistance(double distance) {
 		this.distance = distance;
