@@ -69,7 +69,7 @@ public class RoombaProjectX extends JFrame {
 	protected Comportement comportementTest;
 	protected Comportement comportementSave;
 	protected Roomba roomba;
-	protected ArrayList<Vecteur2D> parcour;
+	protected ArrayList<Vecteur> parcour;
 	protected int facteurEchelle;
 	protected boolean animated = false;
 	protected boolean drawParcour = false;
@@ -89,7 +89,7 @@ public class RoombaProjectX extends JFrame {
 		this.comportementTest = comportementTest;
 		this.comportementSave = (Comportement) comportementTest.clone();
 		this.roomba = roomba;
-		this.parcour = new ArrayList<Vecteur2D>();
+		this.parcour = new ArrayList<Vecteur>();
 		this.facteurEchelle = facteurEchelle;
 		this.setTitle("Roomba !");
 		this.setSize(500, 700);
@@ -109,9 +109,8 @@ public class RoombaProjectX extends JFrame {
 		}
 		this.comportementTest = comportementTest;
 		this.comportementSave = (Comportement) comportementTest.clone();
-		this.parcour = new ArrayList<Vecteur2D>();
+		this.parcour = new ArrayList<Vecteur>();
 		this.roomba = roomba;
-		// this.test = test;
 		facteurEchelle = 150;
 		this.setTitle("Roomba !");
 		this.setSize(600, 600);
@@ -877,18 +876,7 @@ public class RoombaProjectX extends JFrame {
 		Comportement testComportement = new Hazard();
 		Roomba roomba = new Roomba(0.34, testComportement);
 
-		roomba.addCapteur(new CapteurDistance(
-				new Cercle(0.17 * Math.cos(Math.PI / 2)
-						+ roomba.getPosture().getPosition().getX(), 0.17
-						* Math.sin(Math.PI / 2)
-						+ roomba.getPosture().getPosition().getY(),
-						Math.PI / 12, 0.025), Math.PI / 12));
-		roomba.addCapteur(new CapteurDistance(new Cercle(0.17
-				* Math.cos(-Math.PI / 2)
-				+ roomba.getPosture().getPosition().getX(), 0.17
-				* Math.sin(-Math.PI / 2)
-				+ roomba.getPosture().getPosition().getY(), -Math.PI / 12,
-				0.025), -Math.PI / 12));
+		
 		RoombaProjectX fen = new RoombaProjectX("Roomba Simulation",
 				testComportement, roomba);
 		fen.setVisible(true);

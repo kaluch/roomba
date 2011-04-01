@@ -7,16 +7,8 @@ public abstract class Capteur {
 	protected Forme forme;
 	protected Polair posRel;
 
-	/**
-	 * update the current state of the sensor
-	 * @param environ environment in which the robot is evolving
-	 */
 	abstract public void miseAjour(Environnement environ);
 
-	/**
-	 * 
-	 * @return the state of the sensor
-	 */
 	abstract public double lecture();
 
 	Capteur(Forme forme) {
@@ -25,18 +17,15 @@ public abstract class Capteur {
 
 	}
 
-	/**
-	 * setter for the position relative to an origin
-	 * @param origine for the position
-	 */
 	protected void setPosRel(Vecteur origine) {
 		posRel.setTheta(forme.getPosture().getPosition().angle()
 				- origine.angle());
-		posRel.setRho(Math.sqrt(Math.pow(((Vecteur2D) forme.getPosture()
-				.getPosition()).getX() - ((Vecteur2D) origine).getX(), 2)
+		posRel.setRho(Math.sqrt(Math.pow(forme.getPosture().getPosition()
+				.getX()
+				- (origine).getX(), 2)
 				+ Math.pow(
-						((Vecteur2D) forme.getPosture().getPosition()).getY()
-								- ((Vecteur2D) origine).getY(), 2)));
+						forme.getPosture().getPosition().getY()
+								- (origine).getY(), 2)));
 	}
 
 	public Polair getPosRel() {
@@ -56,11 +45,11 @@ public abstract class Capteur {
 	}
 
 	protected int getPosxPix(int facteurEchelle) {
-		return (int) (((Vecteur2D) forme.getPosture().getPosition()).getX() * facteurEchelle);
+		return (int) (forme.getPosture().getPosition().getX() * facteurEchelle);
 	}
 
 	protected int getPosyPix(int facteurEchelle) {
-		return (int) (((Vecteur2D) forme.getPosture().getPosition()).getY() * facteurEchelle);
+		return (int) (forme.getPosture().getPosition().getY() * facteurEchelle);
 	}
 
 	protected void setPosition(Polair posRel, Posture origine) {
@@ -72,13 +61,6 @@ public abstract class Capteur {
 						* Math.sin(posRel.getTheta() + origine.getTheta()));
 	}
 
-	/**
-	 * draw the sensor
-	 * @param g2 relative to the window
-	 * @param facteurEchelle defines the ratio between actual size and pixels
-	 * @param centrex x-position of the center of the sensor
-	 * @param centrey y-position of the center of the sensor
-	 */
 	abstract public void draw(Graphics2D g2, int facteurEchelle, int centrex,
 			int centrey);
 

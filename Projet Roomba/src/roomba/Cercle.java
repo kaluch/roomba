@@ -171,17 +171,17 @@ public class Cercle extends Forme implements Cloneable {
 
 	@Override
 	public boolean collisionPoint(double x, double y) {
-		Vecteur2D A = new Vecteur2D(x, y);
-		Vecteur2D C = getPosture().getPosition();
-		Vecteur2D AC = A.moins(C);
+		Vecteur A = new Vecteur(x, y);
+		Vecteur C = getPosture().getPosition();
+		Vecteur AC = A.moins(C);
 		return AC.norme() < diametre / 2;
 	}
 
 	@Override
 	public int tangeantPoint(double x, double y) {
-		Vecteur2D A = new Vecteur2D(x, y);
-		Vecteur2D C = getPosture().getPosition();
-		Vecteur2D AC = A.moins(C);
+		Vecteur A = new Vecteur(x, y);
+		Vecteur C = getPosture().getPosition();
+		Vecteur AC = A.moins(C);
 		if (Math.abs(AC.norme() - diametre / 2) < 0.1) {
 			if (AC.getX() / Math.abs(AC.getX()) == AC.getY()
 					/ Math.abs(AC.getY()))

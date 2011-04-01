@@ -55,8 +55,8 @@ public class Posture implements Cloneable {
 		return a;
 	}
 
-	public Vecteur2D getPosition() {
-		return new Vecteur2D(x, y);
+	public Vecteur getPosition() {
+		return new Vecteur(x, y);
 	}
 
 	public void setX(double x) {
