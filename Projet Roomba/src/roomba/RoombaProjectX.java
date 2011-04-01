@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -24,7 +26,7 @@ enum ClickForme {
 };
 
 @SuppressWarnings("serial")
-public class RoombaProjectX extends JFrame {
+public class RoombaProjectX extends JFrame implements WindowListener {
 
 	/**
 	 * 
@@ -73,7 +75,7 @@ public class RoombaProjectX extends JFrame {
 	protected int facteurEchelle;
 	protected boolean animated = false;
 	protected boolean drawParcour = false;
-	private Thread thread;
+	protected boolean closed = false;
 	Click click = Click.OBSTACLE;
 	ClickForme clickForme = ClickForme.CERCLE;
 
@@ -309,7 +311,7 @@ public class RoombaProjectX extends JFrame {
 
 		buttonGroup3.add(jRadioButton6);
 		jRadioButton6.setSelected(true);
-		jRadioButton6.setText("Arène Carrée");
+		jRadioButton6.setText("Arï¿½ne Carrï¿½e");
 		jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jRadioButton6ActionPerformed(evt);
@@ -317,7 +319,7 @@ public class RoombaProjectX extends JFrame {
 		});
 
 		buttonGroup3.add(jRadioButton7);
-		jRadioButton7.setText("Aréne Circulaire");
+		jRadioButton7.setText("Arï¿½ne Circulaire");
 		jRadioButton7.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jRadioButton7ActionPerformed(evt);
@@ -369,7 +371,7 @@ public class RoombaProjectX extends JFrame {
 				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 13,
 				Short.MAX_VALUE));
 
-		jLabel6.setText("Capteurs supplémentaires : ");
+		jLabel6.setText("Capteurs supplï¿½mentaires : ");
 
 		jRadioButton8.setText("Trace");
 		jRadioButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -751,14 +753,13 @@ public class RoombaProjectX extends JFrame {
 		jPanel2.repaint();
 		jPanel3.repaint();
 		jPanel4.repaint();
+		
 	}
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 		jButton1.setEnabled(false);
 		jButton2.setEnabled(true);
 		animated = true;
-		thread = new Thread(new PlayAnimation(roomba, environ));
-		thread.start();
 	}
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -845,9 +846,9 @@ public class RoombaProjectX extends JFrame {
 		drawParcour = !drawParcour;
 		repaint();
 	}
-
-	private void go(Roomba roomba, Environnement environ) {
-		while (this.animated) {
+		
+	public void mAJ() {
+		if(this.animated) {
 			String tmp = new String();
 			String rc = new String("<br>");
 			repaint();
@@ -862,14 +863,12 @@ public class RoombaProjectX extends JFrame {
 			environ.nettoyerTache();
 			if (drawParcour)
 				parcour.add(roomba.getPosture().getPosition());
-			roomba.move(0.01, environ);
-			// attend 0.01 sec
-			try {
-				Thread.sleep(10);
-			} catch (Exception e) {
-			}
+			
 		}
+		
 	}
+	
+	public boolean getAnimated() { return animated;}
 
 	public static void main(String[] args) {
 
@@ -1175,22 +1174,6 @@ public class RoombaProjectX extends JFrame {
 		}
 	}
 
-	class PlayAnimation implements Runnable {
-
-		Roomba roomba;
-		Environnement environ;
-
-		PlayAnimation(Roomba roomba, Environnement environ) {
-			this.roomba = roomba;
-			this.environ = environ;
-		}
-
-		@Override
-		public void run() {
-			go(roomba, environ);
-		}
-	}
-
 	class PaintNewForme implements Runnable {
 
 		private MouseEvent mouseEvent;
@@ -1290,5 +1273,53 @@ public class RoombaProjectX extends JFrame {
 		}.getIcon());
 
 	}
+
+	public Environnement getEnviron() {
+		return environ;
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		closed = true;
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	public boolean getClosed(){return closed;}
+
+	
 
 }
