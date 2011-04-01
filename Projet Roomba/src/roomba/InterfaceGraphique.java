@@ -6,11 +6,27 @@ public class InterfaceGraphique extends Interface {
 	
 	InterfaceGraphique(RoombaProjectX roombaX){
 		this.roombaX = roombaX;
+		roombaX.setVisible(true);
+	}
+
+	@Override
+	public boolean getAnimated() {
+		return roombaX.getAnimated();
 	}
 	@Override
-	void startSimulation() {
-		roombaX.setVisible(true);
-
+	public void mAJ() {
+		roombaX.mAJ();
+		
 	}
+
+	public Environnement getEnviron(){
+		return roombaX.getEnviron();
+	}
+
+	public RoombaProjectX getRoombaX() {
+		return roombaX;
+	}
+	public boolean getClosed(){return roombaX.getClosed();}
+
 
 }

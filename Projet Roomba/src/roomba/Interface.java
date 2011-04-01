@@ -2,5 +2,12 @@ package roomba;
 
 public abstract class Interface {
 
-	abstract void startSimulation();
+
+	abstract public boolean getAnimated();
+
+	abstract public void mAJ();
+
+	abstract public boolean getClosed();
+
+	
 }

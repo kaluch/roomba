@@ -29,11 +29,11 @@ public class RoombaMain {
 					isX = true;
 				if (x.contains("--size=")) {
 					size = Integer.valueOf(x.substring(7));
-					if(size<100 || size>150){
+					if (size < 100 || size > 150) {
 						usage();
 						return;
 					}
-						
+
 				}
 			}
 		}
@@ -45,7 +45,12 @@ public class RoombaMain {
 			InterfaceGraphique kGraphique = new InterfaceGraphique(
 					new RoombaProjectX("Simulation Roomba", comportTest, size,
 							roomba));
-			kGraphique.startSimulation();
+			Simulation simulation = new Simulation(roomba, kGraphique,
+					kGraphique.getEnviron());
+			 
+			 while(simulation.startSimulation())
+				 	;
+
 		} else {
 			InterfaceConsole kConsole = new InterfaceConsole();
 			kConsole.startSimulation();
