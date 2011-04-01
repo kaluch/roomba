@@ -8,7 +8,7 @@ public class CapteurDistance extends Capteur {
 	protected double distance;
 	protected double orientation;
 
-	CapteurDistance(Forme forme, double orientation) {
+	public CapteurDistance(Forme forme, double orientation) {
 		super(forme);
 		this.orientation = orientation;
 		distance = 10;
@@ -36,6 +36,11 @@ public class CapteurDistance extends Capteur {
 		distance = Math.min(distTemp, Math.min(distTemp2, distTemp3));
 	}
 
+	/**
+	 * 
+	 * @param forme whose contact is tested
+	 * @return the distance between the sensor and the form
+	 */
 	private double contactRectangleCarre(Forme forme) {
 		double distTemp = 10;
 		double largeur = 0;
@@ -48,19 +53,19 @@ public class CapteurDistance extends Capteur {
 			hauteur = largeur;
 		} else
 			return distTemp;
-		Vecteur O = new Vecteur(this.getForme().getPosture().getX(),
+		Vecteur2D O = new Vecteur2D(this.getForme().getPosture().getX(),
 				getForme().getPosture().getY());
-		Vecteur P = new Vecteur(this.getForme().getPosture().getX() + 10000
+		Vecteur2D P = new Vecteur2D(this.getForme().getPosture().getX() + 10000
 				* Math.cos(this.getForme().getPosture().getTheta()), this
 				.getForme().getPosture().getY()
 				+ 10000 * Math.sin(this.getForme().getPosture().getTheta()));
-		Vecteur A = new Vecteur(forme.getPosture().getX() - largeur / 2,
+		Vecteur2D A = new Vecteur2D(forme.getPosture().getX() - largeur / 2,
 				forme.getPosture().getY() - hauteur / 2);
-		Vecteur B = new Vecteur(forme.getPosture().getX() - largeur / 2,
+		Vecteur2D B = new Vecteur2D(forme.getPosture().getX() - largeur / 2,
 				forme.getPosture().getY() + hauteur / 2);
-		Vecteur C = new Vecteur(forme.getPosture().getX() + largeur / 2,
+		Vecteur2D C = new Vecteur2D(forme.getPosture().getX() + largeur / 2,
 				forme.getPosture().getY() + hauteur / 2);
-		Vecteur D = new Vecteur(forme.getPosture().getX() + largeur / 2,
+		Vecteur2D D = new Vecteur2D(forme.getPosture().getX() + largeur / 2,
 				forme.getPosture().getY() - hauteur / 2);
 
 		distTemp = Math.min(distTemp, distanceSegSeg(A, B, O, P));
@@ -70,20 +75,20 @@ public class CapteurDistance extends Capteur {
 		return distTemp;
 	}
 
-	private boolean collisionSegDroite(Vecteur A, Vecteur B, Vecteur O,
-			Vecteur P) {
-		Vecteur AP = P.moins(A);
-		Vecteur AB = B.moins(A);
-		Vecteur AO = O.moins(A);
+	private boolean collisionSegDroite(Vecteur2D A, Vecteur2D B, Vecteur2D O,
+			Vecteur2D P) {
+		Vecteur2D AP = P.moins(A);
+		Vecteur2D AB = B.moins(A);
+		Vecteur2D AO = O.moins(A);
 		return (AB.det(AP) * AB.det(AO) >= 0) ? false : true;
 
 	}
 
-	private double distanceSegSeg(Vecteur A, Vecteur B, Vecteur O,
-			Vecteur P) {
+	private double distanceSegSeg(Vecteur2D A, Vecteur2D B, Vecteur2D O,
+			Vecteur2D P) {
 		if (collisionSegDroite(A, B, O, P) && collisionSegDroite(O, P, A, B)) {
-			Vecteur AB = B.moins(A);
-			Vecteur OP = P.moins(O);
+			Vecteur2D AB = B.moins(A);
+			Vecteur2D OP = P.moins(O);
 			double k = -(A.det(OP) - O.det(OP)) / (AB.det(OP));
 			if (k > 0 && k < 1)
 				return OP.norme() * (AB.det(A) - AB.det(O)) / (AB.det(OP));
@@ -94,10 +99,10 @@ public class CapteurDistance extends Capteur {
 	private double contactCercle(Cercle cercle) {
 		double distTemp = 10;
 
-		Vecteur u = new Vecteur(
+		Vecteur2D u = new Vecteur2D(
 				10 * Math.cos(forme.getPosture().getTheta()),
 				10 * Math.sin(forme.getPosture().getTheta()));
-		Vecteur ac = new Vecteur(cercle.getPosture().getX()
+		Vecteur2D ac = new Vecteur2D(cercle.getPosture().getX()
 				- forme.getPosture().getX(), cercle.getPosture().getY()
 				- forme.getPosture().getY());
 		double num = Math.abs(u.getX() * ac.getY() - u.getY() * ac.getX());
@@ -106,7 +111,7 @@ public class CapteurDistance extends Capteur {
 		if (ci >= cercle.getDiametre() / 2)
 			return distTemp;
 		else {
-			Vecteur bc = new Vecteur(cercle.getPosture().getX()
+			Vecteur2D bc = new Vecteur2D(cercle.getPosture().getX()
 					- forme.getPosture().getX() + 1000
 					* Math.cos(forme.getPosture().getTheta()), cercle
 					.getPosture().getY()
@@ -119,15 +124,15 @@ public class CapteurDistance extends Capteur {
 					|| ac.norme() < cercle.getDiametre() / 2) {
 				double ti = (u.getX() * ac.getX() + u.getY() * ac.getY())
 						/ (Math.pow(u.norme(), 2));
-				Vecteur ai = new Vecteur(ti * u.getX(), ti * u.getY());
-				Vecteur ca = new Vecteur(-ac.getX(), -ac.getY());
-				Vecteur cif = new Vecteur(ca.plus(ai));
+				Vecteur2D ai = new Vecteur2D(ti * u.getX(), ti * u.getY());
+				Vecteur2D ca = new Vecteur2D(-ac.getX(), -ac.getY());
+				Vecteur2D cif = new Vecteur2D(ca.plus(ai));
 				double norme = ai.norme()
 						- Math.sqrt(Math.pow(cercle.getDiametre() / 2, 2)
 								- Math.pow(cif.norme(), 2));
 				if (ac.norme() < cercle.getDiametre() / 2) {
-					Vecteur som = u.plus(ai);
-					Vecteur dif = u.moins(ai);
+					Vecteur2D som = u.plus(ai);
+					Vecteur2D dif = u.moins(ai);
 					if (som.norme() >= dif.norme())
 						norme = ai.norme()
 								+ Math.sqrt(Math.pow(cercle.getDiametre() / 2,
@@ -181,9 +186,6 @@ public class CapteurDistance extends Capteur {
 		super.setPosRel(origine);
 	}
 
-	public double getDistance() {
-		return distance;
-	}
 
 	public void setDistance(double distance) {
 		this.distance = distance;
