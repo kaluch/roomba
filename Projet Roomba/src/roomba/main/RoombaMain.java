@@ -11,7 +11,9 @@ import com.roomba.ui.RoombaProjectX;
 public class RoombaMain {
 
 	/**
-	 * @param args
+	 * usage : [-option] [--size=(100-150)] 
+	 * option : X interface graphique
+	 * 		size : mise a l'echelle de l'interface graphique
 	 */
 	public static void main(String[] args) {
 		boolean isX = false;
