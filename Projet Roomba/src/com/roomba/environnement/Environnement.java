@@ -9,11 +9,21 @@ public class Environnement implements Cloneable {
 	protected Arene arene;
 	protected ArrayList<Obstacle> obstacles;
 	protected ArrayList<Tache> taches;
+	protected ArrayList<Tache> cleanedDirt;
+	protected ArrayList<Obstacle> metObstacle;
 
 	// METHODES
 
 	public Arene getArene() {
 		return arene;
+	}
+
+	public ArrayList<Tache> getCleanedDirt() {
+		return cleanedDirt;
+	}
+
+	public ArrayList<Obstacle> getMetObstacle() {
+		return metObstacle;
 	}
 
 	public void setArene(Arene arene) {
@@ -37,6 +47,8 @@ public class Environnement implements Cloneable {
 		this.arene = arene;
 		obstacles = new ArrayList<Obstacle>();
 		taches = new ArrayList<Tache>();
+		cleanedDirt = new ArrayList<Tache>();
+		metObstacle = new ArrayList<Obstacle>();
 	}
 
 	//
@@ -64,6 +76,7 @@ public class Environnement implements Cloneable {
 					del.add(x);
 			}
 		}
+		cleanedDirt = del;
 		taches.removeAll((Collection<Tache>) del);
 	}
 

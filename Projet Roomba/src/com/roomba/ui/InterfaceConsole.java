@@ -1,40 +1,36 @@
 package com.roomba.ui;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Scanner;
-import java.util.ArrayList;
+import com.roomba.environnement.*;
+import com.roomba.shape.*;
+import com.roomba.robot.*;
+import com.roomba.comportement.*;
 
-import com.roomba.environnement.Obstacle;
-import com.roomba.environnement.Tache;
-import com.roomba.robot.Robot;
-import com.roomba.robot.Roomba;
-import com.roomba.shape.Rectangle;
-
-
-public class InterfaceConsole extends Interface {
+public class InterfaceConsole extends Interface implements KeyListener {
 
 	Environnement environ;
-	Robot robot;
-	ArrayList<Obstacle> obstacles;
-	ArrayList<Tache> taches;
+	protected Roomba roomba;
+	boolean animated;
 
-	public InterfaceConsole() {
+	public InterfaceConsole(Roomba roomba) {
 		environ = new Environnement(new Arene(new Carre(0, 0, 0, 4)));
-		robot = new Roomba(0.2, new Hazard());
-		obstacles = new ArrayList<Obstacle>();
-		taches = new ArrayList<Tache>();
+		this.roomba = roomba;
 	}
 
 	public static void main(String[] args) {
-		Interface console = new InterfaceConsole();
+		InterfaceConsole console = new InterfaceConsole(new Roomba(0.34,
+				new Hazard()));
 		console.startSimulation();
 
 	}
 
 	public void startSimulation() {
 		System.out
-		.println("Bienvenue dans le simulateur de Roomba Zamuner/Souchet");
-		int choix =1;
-		while(choix != 0) {
+				.println("Bienvenue dans le simulateur de Roomba Zamuner/Souchet");
+		int choix = 1;
+		while (choix != 0) {
 			choix = menuAccueil();
 			switch (choix) {
 			case 0: // QUITTER
@@ -43,8 +39,16 @@ public class InterfaceConsole extends Interface {
 				gestionEnv();
 				break;
 			case 2: // SIMU
+				
+				if (animated)
+					System.out.println("PAUSE");
+				else
+					System.out.println("PLAY");
+				animated = !animated;
+				//mAJ();
 				break;
 			default:
+				System.out.println("Choix non valide");
 				break;
 			}
 		}
@@ -55,7 +59,8 @@ public class InterfaceConsole extends Interface {
 		int choix = -1;
 		System.out.println("Veuillez faire votre choix :");
 		System.out.println("1. Configurer l'environnement");
-		System.out.println("2. Lancer la simulation");
+		System.out
+				.println("Appuyez sur SPACE pour lancer la simulation ou la mettre en pause");
 		System.out.println("0. Quitter");
 		Scanner scan = new Scanner(System.in);
 		while (choix < 0)
@@ -72,7 +77,7 @@ public class InterfaceConsole extends Interface {
 		case 2: // Ajouter tache
 			ajouterTache();
 			break;
-		case 3: //Reset
+		case 3: // Reset
 			resetEnv();
 			break;
 		case 0: // Retour
@@ -98,12 +103,14 @@ public class InterfaceConsole extends Interface {
 			choix = scan.nextInt();
 		return choix;
 	}
-	
+
 	private void afficherEnv() {
-		int nbT = environ.getTaches().size(), nbO=environ.getObstacles().size();
-		System.out.println("L'environnement mesure 4mx4m et compte "+nbO+" obstacles et "+nbT+" taches");
+		int nbT = environ.getTaches().size(), nbO = environ.getObstacles()
+				.size();
+		System.out.println("L'environnement mesure 4mx4m et compte " + nbO
+				+ " obstacles et " + nbT + " taches");
 	}
-	
+
 	private void ajouterObstacle() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Quelle forme?");
@@ -111,15 +118,15 @@ public class InterfaceConsole extends Interface {
 		System.out.println("2. Cercle");
 		System.out.println("3. Rectangle");
 		int choix = -1;
-		double x=-3, y=-3;
+		double x = -3, y = -3;
 		while (choix != 1 && choix != 2 && choix != 3) {
 			choix = sc.nextInt();
 		}
 		System.out.println("Abscisse[-2:2](m) :");
-		while(x<-2 || x>2)
+		while (x < -2 || x > 2)
 			x = sc.nextDouble();
 		System.out.println("Ordonnee[-2:2](m) :");
-		while(y<-2 || y >2)
+		while (y < -2 || y > 2)
 			y = sc.nextDouble();
 		switch (choix) {
 		case 1:
@@ -149,8 +156,8 @@ public class InterfaceConsole extends Interface {
 			hauteur = sc.nextDouble();
 			this.environ.ajouterObstacle(new Obstacle(new Rectangle(x, y, 0,
 					largeur, hauteur)));
-			System.out.println("Obstacle rectangulaire  " + largeur
-					+"m x "+hauteur+"m ajoute en (" + x + "," + y + ")");
+			System.out.println("Obstacle rectangulaire  " + largeur + "m x "
+					+ hauteur + "m ajoute en (" + x + "," + y + ")");
 			break;
 		default:
 			System.out.println("Choix non valide");
@@ -158,7 +165,7 @@ public class InterfaceConsole extends Interface {
 			break;
 		}
 	}
-	
+
 	private void ajouterTache() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Quelle forme?");
@@ -179,17 +186,15 @@ public class InterfaceConsole extends Interface {
 			double cote;
 			System.out.println("Cote :");
 			cote = sc.nextDouble();
-			this.environ
-					.ajouterTache(new Tache(new Carre(x, y, 0, cote)));
-			System.out.println("Tache carree de cote " + cote
-					+ " ajoutee en (" + x + "," + y + ")");
+			this.environ.ajouterTache(new Tache(new Carre(x, y, 0, cote)));
+			System.out.println("Tache carree de cote " + cote + " ajoutee en ("
+					+ x + "," + y + ")");
 			break;
 		case 2:
 			double diametre;
 			System.out.println("Diametre :");
 			diametre = sc.nextDouble();
-			this.environ.ajouterTache(new Tache(new Cercle(x, y, 0,
-					diametre)));
+			this.environ.ajouterTache(new Tache(new Cercle(x, y, 0, diametre)));
 			System.out.println("Tache circulaire de diametre " + diametre
 					+ " ajoutee en (" + x + "," + y + ")");
 			break;
@@ -200,10 +205,10 @@ public class InterfaceConsole extends Interface {
 			largeur = sc.nextDouble();
 			System.out.println("Hauteur :");
 			hauteur = sc.nextDouble();
-			this.environ.ajouterTache(new Tache(new Rectangle(x, y, 0,
-					largeur, hauteur)));
-			System.out.println("Tache rectangulaire  " + largeur
-					+"x"+hauteur+" ajoutee en (" + x + "," + y + ")");
+			this.environ.ajouterTache(new Tache(new Rectangle(x, y, 0, largeur,
+					hauteur)));
+			System.out.println("Tache rectangulaire  " + largeur + "x"
+					+ hauteur + " ajoutee en (" + x + "," + y + ")");
 			break;
 		default:
 			System.out.println("Choix non valide");
@@ -211,25 +216,66 @@ public class InterfaceConsole extends Interface {
 			break;
 		}
 	}
-	
-	private void resetEnv(){
+
+	private void resetEnv() {
 		environ.getObstacles().clear();
 		environ.getTaches().clear();
-		System.out.println("Environnement r√©initialis√©");
+		System.out.println("Environnement reinitialise");
 	}
 
 	@Override
 	public boolean getAnimated() {
+		return animated;
+	}
+
+	@Override
+	public void mAJ() {
+		
+		System.out.println(roomba.toString());
+		if(environ.getCleanedDirt().size() != 0)
+		{
+			for(int i=1;i<=environ.getCleanedDirt().size();i++)
+			{
+				double x = environ.getCleanedDirt().get(i).getForme().getPosture().getX();
+				double y = environ.getCleanedDirt().get(i).getForme().getPosture().getY();
+				System.out.println("Le roomba a nettoyÈ la tache situÈe en ("+x+","+y+")");
+		
+			}
+		}
+	}
+
+	@Override
+	public boolean getClosed() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void mAJ() {
+	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		if (e.getKeyChar() == java.awt.event.KeyEvent.VK_SPACE) {
+			animated = !animated;
+			if (animated)
+				System.out.println("PAUSE");
+			else
+				System.out.println("PLAY");
+
+		}
+	}
+
+	public Environnement getEnviron() {
+		return environ;
+	}
 
 }
