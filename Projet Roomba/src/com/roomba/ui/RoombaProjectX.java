@@ -23,7 +23,6 @@ import com.roomba.shape.*;
 import com.roomba.ui.Click;
 import com.roomba.ui.ClickForme;
 
-
 enum Click {
 	OBSTACLE, TACHE, VAL
 };
@@ -743,7 +742,7 @@ public class RoombaProjectX extends JFrame implements WindowListener {
 		jPanel2.repaint();
 		jPanel3.repaint();
 		jPanel4.repaint();
-		
+
 	}
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -836,9 +835,9 @@ public class RoombaProjectX extends JFrame implements WindowListener {
 		drawParcour = !drawParcour;
 		repaint();
 	}
-		
+
 	public void mAJ() {
-		if(this.animated) {
+		if (this.animated) {
 			String tmp = new String();
 			String rc = new String("<br>");
 			repaint();
@@ -853,12 +852,14 @@ public class RoombaProjectX extends JFrame implements WindowListener {
 			environ.nettoyerTache();
 			if (drawParcour)
 				parcour.add(roomba.getPosture().getPosition());
-			
+
 		}
-		
+
 	}
-	
-	public boolean getAnimated() { return animated;}
+
+	public boolean getAnimated() {
+		return animated;
+	}
 
 	public class RoombaPanel extends JPanel implements MouseListener,
 			MouseMotionListener {
@@ -916,9 +917,15 @@ public class RoombaProjectX extends JFrame implements WindowListener {
 			g2.setColor(Color.gray);
 			roomba.getForme().paint(g2, facteurEchelle, centrex, centrey);
 			g2.setColor(Color.BLACK);
-			g2.drawLine(x, y,
-					x + (int) (d / 2 * Math.cos(roomba.getPosture().getTheta())),
-					y + (int) (d / 2 * Math.sin(roomba.getPosture().getTheta())));
+			g2.drawLine(
+					x,
+					y,
+					x
+							+ (int) (d / 2 * Math.cos(roomba.getPosture()
+									.getTheta())),
+					y
+							+ (int) (d / 2 * Math.sin(roomba.getPosture()
+									.getTheta())));
 		}
 
 		private void paintEnvironnement(Graphics2D g2, int facteurEchelle) {
@@ -1254,12 +1261,12 @@ public class RoombaProjectX extends JFrame implements WindowListener {
 
 	public Environnement getEnviron() {
 		return environ;
-		
+
 	}
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-		
+
 	}
 
 	@Override
@@ -1269,35 +1276,27 @@ public class RoombaProjectX extends JFrame implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
-	public boolean getClosed(){return closed;}
 
-	
+	public boolean getClosed() {
+		return closed;
+	}
 
 }

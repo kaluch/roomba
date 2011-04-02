@@ -44,7 +44,6 @@ public abstract class Comportement implements Cloneable {
 			o.iL = iL;
 			o.iR = iR;
 		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return o;

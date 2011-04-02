@@ -3,6 +3,7 @@ package roomba.main;
 import com.roomba.comportement.*;
 import com.roomba.robot.*;
 import com.roomba.shape.*;
+import com.roomba.ui.Interface;
 import com.roomba.ui.InterfaceConsole;
 import com.roomba.ui.InterfaceGraphique;
 import com.roomba.ui.RoombaProjectX;
@@ -18,6 +19,8 @@ public class RoombaMain {
 
 		Comportement comportTest = new Hazard();
 		Roomba roomba = new Roomba(0.34, comportTest);
+		Interface out;
+		Simulation simulation;
 		roomba.addCapteur(new CapteurDistance(
 				new Cercle(0.17 * Math.cos(Math.PI / 2)
 						+ roomba.getPosture().getPosition().getX(), 0.17
@@ -48,22 +51,16 @@ public class RoombaMain {
 		if (args.length > 2) {
 			RoombaMain.usage();
 		}
-		if (isX) {
-			InterfaceGraphique kGraphique = new InterfaceGraphique(
-					new RoombaProjectX("Simulation Roomba", comportTest, size,
-							roomba));
-			Simulation simulation = new Simulation(roomba, kGraphique,
-					kGraphique.getEnviron());
+		if (isX)
+			out = new InterfaceGraphique(new RoombaProjectX(
+					"Simulation Roomba", comportTest, size, roomba));
 
-			while (simulation.startSimulation())
-				;
+		else
+			out = new InterfaceConsole(roomba);
 
-		} else {
-			InterfaceConsole kConsole = new InterfaceConsole(roomba);
-			Simulation simulation = new Simulation(roomba, kConsole, kConsole.getEnviron());
-			while(simulation.startSimulation());
-			
-		}
+		simulation = new Simulation(roomba, out, out.getEnviron());
+		while (simulation.startSimulation())
+			;
 
 	}
 

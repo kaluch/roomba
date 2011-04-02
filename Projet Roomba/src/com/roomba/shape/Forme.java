@@ -3,7 +3,6 @@ package com.roomba.shape;
 import java.awt.Graphics2D;
 import com.roomba.roombautil.*;
 
-
 abstract public class Forme implements Cloneable {
 
 	/*
@@ -41,6 +40,7 @@ abstract public class Forme implements Cloneable {
 
 	/**
 	 * paint the shape in the window
+	 * 
 	 * @param g2
 	 * @param facteurEchelle
 	 * @param centrex
@@ -51,6 +51,7 @@ abstract public class Forme implements Cloneable {
 
 	/**
 	 * draw the shape in the window
+	 * 
 	 * @param g2
 	 * @param facteurEchelle
 	 * @param centrex
@@ -69,41 +70,58 @@ abstract public class Forme implements Cloneable {
 
 	/**
 	 * test the external collision between 2 formes
+	 * 
 	 * @param forme
-	 * @return true if forme is in contact with the external outline of the current shape. false elsewhere
+	 * @return true if forme is in contact with the external outline of the
+	 *         current shape. false elsewhere
 	 */
 	abstract public boolean collisionExterne(Forme forme);
 
 	/**
 	 * test the internal collision between 2 formes
+	 * 
 	 * @param forme
-	 * @return true if forme is in contact with the internal outline of the current shape. false elsewhere
+	 * @return true if forme is in contact with the internal outline of the
+	 *         current shape. false elsewhere
 	 */
 	abstract public boolean collisionInterne(Forme forme);
 
 	/**
 	 * Set the correct values for X and Y according to facteurEchelle
+	 * 
 	 * @param facteurEchelle
 	 * @return
 	 */
 	public Forme normalize(int facteurEchelle) {
 		posture.setX(posture.getX() / facteurEchelle);
 		posture.setY(posture.getY() / facteurEchelle);
-		return null;//TODO pourquoi retourne NULL?
+		return this;
 	}
 
 	/**
-	 * test if a point belongs to the current shape
+	 * test if the point belongs to the current shape
+	 * 
 	 * @param x
 	 * @param y
-	 * @return true if the point belons to the current shape
+	 * @return true if the point belongs to the current shape
 	 */
 	abstract public boolean collisionPoint(double x, double y);
 
-	//TODO definition
+	/**
+	 * isometric of the current shape, factor a
+	 * 
+	 * @param a
+	 * @return true if the point (x,y) belongs to the current shape
+	 */
 	abstract public void iso(double a);
 
-	//TODO definition
+	/**
+	 * test if the point (x,y) tangents the current shape
+	 * 
+	 * @param x
+	 * @param y
+	 * @return true if the point (x,y) tangents the current shape
+	 */
 	abstract public int tangeantPoint(double x, double y);
 
 }

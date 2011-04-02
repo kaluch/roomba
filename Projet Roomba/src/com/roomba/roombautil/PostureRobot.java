@@ -18,7 +18,6 @@ public class PostureRobot extends Posture {
 	 */
 	public PostureRobot(double x, double y, double theta) {
 		super(x, y, theta);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

@@ -33,7 +33,6 @@ public class InterfaceGraphique extends Interface {
 
 	@Override
 	public void debut() {
-		// TODO Auto-generated method stub
 		
 	}
 

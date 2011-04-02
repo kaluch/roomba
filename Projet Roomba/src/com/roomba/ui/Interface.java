@@ -1,5 +1,7 @@
 package com.roomba.ui;
 
+import com.roomba.environnement.Environnement;
+
 /**
  * represents the user interface
  * @author Lucas
@@ -21,5 +23,7 @@ public abstract class Interface {
 	 * behavior at the beginning of the simulation
 	 */
 	public abstract void debut();
+
+	abstract public Environnement getEnviron();
 	
 }

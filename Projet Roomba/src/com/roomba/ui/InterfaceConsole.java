@@ -1,14 +1,11 @@
 package com.roomba.ui;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Scanner;
 import com.roomba.environnement.*;
 import com.roomba.shape.*;
 import com.roomba.robot.*;
-import com.roomba.comportement.*;
 
-public class InterfaceConsole extends Interface implements KeyListener {
+public class InterfaceConsole extends Interface {
 
 	Environnement environ;
 	protected Roomba roomba;
@@ -17,13 +14,6 @@ public class InterfaceConsole extends Interface implements KeyListener {
 	public InterfaceConsole(Roomba roomba) {
 		environ = new Environnement(new Arene(new Carre(0, 0, 0, 4)));
 		this.roomba = roomba;
-	}
-
-	public static void main(String[] args) {
-		InterfaceConsole console = new InterfaceConsole(new Roomba(0.34,
-				new Hazard()));
-		console.startSimulation();
-
 	}
 
 	public void startSimulation() {
@@ -39,28 +29,21 @@ public class InterfaceConsole extends Interface implements KeyListener {
 				gestionEnv();
 				break;
 			case 2: // SIMU
-				
-				if (animated)
-					System.out.println("PAUSE");
-				else
-					System.out.println("PLAY");
-				animated = !animated;
-				//mAJ();
+				animated = true;
+				choix = 0;
 				break;
 			default:
 				System.out.println("Choix non valide");
 				break;
 			}
 		}
-		System.out.println("Au revoir!");
 	}
 
 	private int menuAccueil() {
 		int choix = -1;
 		System.out.println("Veuillez faire votre choix :");
 		System.out.println("1. Configurer l'environnement");
-		System.out
-				.println("Appuyez sur SPACE pour lancer la simulation ou la mettre en pause");
+		System.out.println("2. Lancer la simulation");
 		System.out.println("0. Quitter");
 		Scanner scan = new Scanner(System.in);
 		while (choix < 0)
@@ -230,48 +213,23 @@ public class InterfaceConsole extends Interface implements KeyListener {
 
 	@Override
 	public void mAJ() {
-		startSimulation();
 		System.out.println(roomba.toString());
-		if(environ.getCleanedDirt().size() != 0)
-		{
-			for(int i=1;i<=environ.getCleanedDirt().size();i++)
-			{
-				double x = environ.getCleanedDirt().get(i).getForme().getPosture().getX();
-				double y = environ.getCleanedDirt().get(i).getForme().getPosture().getY();
-				System.out.println("Le roomba a nettoyé la tache située en ("+x+","+y+")");
-		
+		if (environ.getCleanedDirt().size() != 0) {
+			for (int i = 1; i <= environ.getCleanedDirt().size(); i++) {
+				double x = environ.getCleanedDirt().get(i).getForme()
+						.getPosture().getX();
+				double y = environ.getCleanedDirt().get(i).getForme()
+						.getPosture().getY();
+				System.out.println("Le roomba a nettoyé la tache située en ("
+						+ x + "," + y + ")");
+
 			}
 		}
 	}
 
 	@Override
 	public boolean getClosed() {
-		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		if (e.getKeyChar() == java.awt.event.KeyEvent.VK_SPACE) {
-			animated = !animated;
-			if (animated)
-				System.out.println("PAUSE");
-			else
-				System.out.println("PLAY");
-
-		}
 	}
 
 	public Environnement getEnviron() {
@@ -281,7 +239,6 @@ public class InterfaceConsole extends Interface implements KeyListener {
 	@Override
 	public void debut() {
 		startSimulation();
-		
 	}
 
 }
