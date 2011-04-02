@@ -1,4 +1,4 @@
-package roomba.main;
+package com.roomba.main;
 
 import com.roomba.comportement.*;
 import com.roomba.robot.*;
@@ -11,18 +11,21 @@ import com.roomba.ui.RoombaProjectX;
 public class RoombaMain {
 
 	/**
-	 * usage : [-option] [--size=(100-150)] 
-	 * option : X interface graphique
-	 * 		size : mise a l'echelle de l'interface graphique
+	 * usage : [-option] [--size=(100-150)] option : X interface graphique size
+	 * : mise a l'echelle de l'interface graphique
 	 */
 	public static void main(String[] args) {
 		boolean isX = false;
-		int size = 150;
-
+		int size = 150; 	
+		// ****************************************************
+		// INSTANCE DU COMPORTEMENT TEST
 		Comportement comportTest = new Hazard();
+		//*****************************************************
 		Roomba roomba = new Roomba(0.34, comportTest);
 		Interface out;
 		Simulation simulation;
+		// ****************************************************
+		// CONFIGURATION DU ROOMBA
 		roomba.addCapteur(new CapteurDistance(
 				new Cercle(0.17 * Math.cos(Math.PI / 2)
 						+ roomba.getPosture().getPosition().getX(), 0.17
@@ -35,6 +38,8 @@ public class RoombaMain {
 				* Math.sin(-Math.PI / 2)
 				+ roomba.getPosture().getPosition().getY(), -Math.PI / 12,
 				0.025), -Math.PI / 12));
+
+		// *****************************************************
 		if (args.length >= 1 && args.length <= 2) {
 			for (String x : args) {
 				if (x.equals("-X"))

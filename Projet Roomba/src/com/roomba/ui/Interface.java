@@ -9,7 +9,10 @@ import com.roomba.environnement.Environnement;
  */
 public abstract class Interface {
 
-
+	/**
+	 * returns the current state of the animation of the simulation
+	 * @return  true if the animation of the simulation is running
+	 */
 	abstract public boolean getAnimated();
 
 	/**
@@ -17,13 +20,21 @@ public abstract class Interface {
 	 */
 	abstract public void mAJ();
 
+	/**
+	 *  Return the state of the simulation
+	 * @return true if the simulation is over
+	 */
 	abstract public boolean getClosed();
 
 	/**
-	 * behavior at the beginning of the simulation
+	 * behavior at the beginning of the simulation : initialization
 	 */
 	public abstract void debut();
-
+	
+	/**
+	 * returns the current Environnement of the simulation
+	 * @return  current Environnement of the simulation
+	 */
 	abstract public Environnement getEnviron();
 	
 }

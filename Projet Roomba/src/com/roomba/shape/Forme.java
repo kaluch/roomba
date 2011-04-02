@@ -108,7 +108,7 @@ abstract public class Forme implements Cloneable {
 	abstract public boolean collisionPoint(double x, double y);
 
 	/**
-	 * isometric of the current shape, factor a
+	 * omni-directional isometric of the current shape, factor a
 	 * 
 	 * @param a
 	 * @return true if the point (x,y) belongs to the current shape
