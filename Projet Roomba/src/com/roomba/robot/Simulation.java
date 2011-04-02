@@ -16,6 +16,7 @@ public class Simulation {
 		this.roomba = roomba;
 		this.environ = environ;
 		this.out = out;
+		out.debut();
 	}
 
 	public boolean startSimulation() {

@@ -9,5 +9,6 @@ public abstract class Interface {
 
 	abstract public boolean getClosed();
 
+	public abstract void debut();
 	
 }

@@ -61,7 +61,6 @@ public class RoombaMain {
 		} else {
 			InterfaceConsole kConsole = new InterfaceConsole(roomba);
 			Simulation simulation = new Simulation(roomba, kConsole, kConsole.getEnviron());
-			kConsole.startSimulation();
 			while(simulation.startSimulation());
 			
 		}

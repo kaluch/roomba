@@ -31,5 +31,11 @@ public class InterfaceGraphique extends Interface {
 	}
 	public boolean getClosed(){return roombaX.getClosed();}
 
+	@Override
+	public void debut() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

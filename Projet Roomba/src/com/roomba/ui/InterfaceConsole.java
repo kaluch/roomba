@@ -230,7 +230,7 @@ public class InterfaceConsole extends Interface implements KeyListener {
 
 	@Override
 	public void mAJ() {
-		
+		startSimulation();
 		System.out.println(roomba.toString());
 		if(environ.getCleanedDirt().size() != 0)
 		{
@@ -276,6 +276,12 @@ public class InterfaceConsole extends Interface implements KeyListener {
 
 	public Environnement getEnviron() {
 		return environ;
+	}
+
+	@Override
+	public void debut() {
+		startSimulation();
+		
 	}
 
 }
