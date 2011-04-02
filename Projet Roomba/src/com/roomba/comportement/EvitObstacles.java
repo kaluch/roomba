@@ -3,16 +3,19 @@ package com.roomba.comportement;
 import java.util.ArrayList;
 
 import com.roomba.robot.*;
-
+/**
+ * Beahvior the allows the robot to avoid obstacles and follow walls
+ * @author Lucas
+ *
+ */
 public class EvitObstacles extends Comportement {
 
-	EvitObstacles() {
+	public EvitObstacles() {
 		super();
 	}
 
 	@Override
-	public
-	void calcul(ArrayList<Capteur> capteurs) {
+	public void calcul(ArrayList<Capteur> capteurs) {
 		int comportement = 0;
 		boolean contact = false;
 		boolean tache = false;

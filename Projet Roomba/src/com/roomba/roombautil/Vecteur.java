@@ -1,5 +1,10 @@
 package com.roomba.roombautil;
 
+/**
+ * represent a point (x,y)
+ * @author Lucas
+ *
+ */
 public class Vecteur{
 
 	protected double x;

@@ -1,5 +1,10 @@
 package com.roomba.robot;
 import com.roomba.shape.Forme;
+/**
+ * Represents the sensor type bumper
+ * @author Lucas
+ *
+ */
 abstract class CapteurContact extends Capteur {
 
 	protected boolean contact;

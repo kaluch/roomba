@@ -3,6 +3,12 @@ package com.roomba.environnement;
 import java.util.ArrayList;
 import java.util.Collection;
 import com.roomba.shape.*;
+
+/**
+ * The environment represents the environment of the robot
+ * @author Lucas
+ *
+ */
 public class Environnement implements Cloneable {
 
 	// ATTRIBUTS
@@ -51,16 +57,26 @@ public class Environnement implements Cloneable {
 		metObstacle = new ArrayList<Obstacle>();
 	}
 
-	//
+	/**
+	 * add an obstacle to the ArrayList obstacles
+	 * @param obs
+	 */
 
 	public void ajouterObstacle(Obstacle obs) {
 		obstacles.add(obs);
 	}
 
+	/**
+	 * add a dirt to the ArrayList taches
+	 * @param dirt
+	 */
 	public void ajouterTache(Tache dirt) {
 		taches.add(dirt);
 	}
 
+	/**
+	 * Remove from the ArrayList of dirt all the dirts that do not exist anymore
+	 */
 	public void nettoyerTache() {
 		ArrayList<Tache> del = new ArrayList<Tache>();
 		for (Tache x : taches) {

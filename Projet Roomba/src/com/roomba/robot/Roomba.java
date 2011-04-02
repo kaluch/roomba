@@ -7,6 +7,11 @@ import com.roomba.comportement.Comportement;
 import com.roomba.environnement.*;
 import com.roomba.exception.ExceptionVitesseMax;
 
+/**
+ * Configures a roomba-type robot with the actual dimensions and sensors
+ * @author Lucas
+ *
+ */
 public class Roomba extends Robot {
 
 	protected double diametre;
@@ -97,6 +102,10 @@ public class Roomba extends Robot {
 		return (int) (posture.getY() * facteurEchelle);
 	}
 
+	/**
+	 * add a sensor to the robot
+	 * @param capteur
+	 */
 	public void addCapteur(Capteur capteur) {
 		capteurs.add(capteur);
 		capteur.setPosRel(posture.getPosition());

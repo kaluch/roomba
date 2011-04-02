@@ -2,6 +2,11 @@ package com.roomba.robot;
 
 import com.roomba.exception.ExceptionVitesseMax;
 
+/**
+ * Represents the wheels of the robot
+ * @author Lucas
+ *
+ */
 public class Roue {
 
 	protected double vitesse;

@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.roomba.robot.*;
-
+/**
+ * Behavior which allows the robot to use the laser sensor to determine the best trajectory
+ * Partly random to determine the rotation
+ * @author Lucas
+ *
+ */
 public class Hazard extends Comportement {
 	protected int rotate = 0;
 	protected int changeDirection = 100;

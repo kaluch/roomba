@@ -1,5 +1,10 @@
 package com.roomba.roombautil;
 
+/**
+ * Polar representation of points
+ * @author Lucas
+ *
+ */
 public class Polair {
 	protected double rho;
 	protected double theta;

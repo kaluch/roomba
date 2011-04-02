@@ -5,6 +5,11 @@ import java.awt.Graphics2D;
 
 import com.roomba.shape.Forme;
 
+/**
+ * The arena represents the workspace for the robot. It can't indeed work out of the arena
+ * @author Lucas
+ *
+ */
 public class Arene implements Cloneable {
 
 	protected Forme forme;
@@ -21,6 +26,13 @@ public class Arene implements Cloneable {
 		this.forme = forme;
 	}
 
+	/**
+	 * draw the arena
+	 * @param g2 Graphics2D object that represents the window
+	 * @param facteurEchelle ratio between actual size and pixels
+	 * @param centrex x-position of the center of the arena
+	 * @param centrey y-position of the center of the arena
+	 */
 	public void draw(Graphics2D g2, int facteurEchelle, int centrex, int centrey) {
 		g2.setColor(Color.BLACK);
 		g2.fillRect(-centrex, -centrey, 4 * centrex, 4* centrey);

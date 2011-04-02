@@ -3,7 +3,12 @@ package com.roomba.robot;
 import com.roomba.environnement.Environnement;
 import com.roomba.ui.Interface;
 
-
+/**
+ * represents the whole simulation.
+ * It contains the robot, the environment and an user interface
+ * @author Lucas
+ *
+ */
 public class Simulation {
 
 	protected Roomba roomba;
@@ -19,6 +24,10 @@ public class Simulation {
 		out.debut();
 	}
 
+	/**
+	 * launch the simulation
+	 * @return
+	 */
 	public boolean startSimulation() {
 		if(out.getAnimated()&&!running){
 			running = true;
@@ -29,6 +38,10 @@ public class Simulation {
 		return !out.getClosed();
 	}
 
+	/**
+	 * behavior when the simulation is not paused
+	 * @return
+	 */
 	public boolean go() {
 		out.mAJ();
 		while (out.getAnimated()) {
@@ -43,6 +56,11 @@ public class Simulation {
 		return false;
 	}
 
+	/**
+	 * Concerns the thread of the animation of the movement of the robot
+	 * @author Lucas
+	 *
+	 */
 	class PlayAnimation implements Runnable {
 
 		Roomba roomba;

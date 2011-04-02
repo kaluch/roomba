@@ -6,13 +6,26 @@ import com.roomba.shape.*;
 import com.roomba.environnement.Environnement;
 import com.roomba.roombautil.*;
 
+/**
+ * Represents the different sensors of the robot
+ * @author Lucas
+ *
+ */
 public abstract class Capteur {
 
 	protected Forme forme;
 	protected Polair posRel;
 
+	/**
+	 * update the state of the sensor according to the situation of environ
+	 * @param environ environment of the robot
+	 */
 	abstract public void miseAjour(Environnement environ);
 
+	/**
+	 * getter for the state of the sensor
+	 * @return
+	 */
 	abstract public double lecture();
 
 	Capteur(Forme forme) {
@@ -21,6 +34,10 @@ public abstract class Capteur {
 
 	}
 
+	/**
+	 * Setter for the position relative to the robot
+	 * @param origine
+	 */
 	protected void setPosRel(Vecteur origine) {
 		posRel.setTheta(forme.getPosture().getPosition().angle()
 				- origine.angle());
@@ -65,6 +82,13 @@ public abstract class Capteur {
 						* Math.sin(posRel.getTheta() + origine.getTheta()));
 	}
 
+	/**
+	 * draw the sensor
+	 * @param g2
+	 * @param facteurEchelle
+	 * @param centrex
+	 * @param centrey
+	 */
 	abstract public void draw(Graphics2D g2, int facteurEchelle, int centrex,
 			int centrey);
 

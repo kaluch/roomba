@@ -5,6 +5,11 @@ import java.awt.Graphics2D;
 
 import com.roomba.shape.Forme;
 
+/**
+ * Represents the obstacles in the environment that can't be traversed by the robot
+ * @author Lucas
+ *
+ */
 public class Obstacle {
 
 	protected Forme forme;
@@ -21,6 +26,13 @@ public class Obstacle {
 		this.forme = forme;
 	}
 
+	/**
+	 * paint the obstacle
+	 * @param g2 grachics2d object that represent the window
+	 * @param facteurEchelle ration between actual size and pixels
+	 * @param centrex x-position of the obstacle
+	 * @param centrey y-position of the obstacle
+	 */
 	public void paint(Graphics2D g2, int facteurEchelle, int centrex,
 			int centrey) {
 		g2.setColor(Color.LIGHT_GRAY);

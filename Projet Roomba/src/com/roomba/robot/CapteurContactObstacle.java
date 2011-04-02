@@ -4,6 +4,11 @@ import com.roomba.environnement.*;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+/**
+ * Represent the bumper-sensors that detect the obstacles
+ * @author Lucas
+ *
+ */
 public class CapteurContactObstacle extends CapteurContact {
 
 	protected double perimetre;

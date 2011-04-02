@@ -5,7 +5,8 @@ package com.roomba.roombautil;
 
 
 /**
- * @author souchet
+ * represent the posture of the robot
+ * @author lucas
  * 
  */
 public class PostureRobot extends Posture {

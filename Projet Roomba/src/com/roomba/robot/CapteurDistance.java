@@ -9,6 +9,11 @@ import com.roomba.roombautil.Vecteur;
 import com.roomba.shape.*;
 import com.roomba.environnement.*;
 
+/**
+ * Laser-type sensor use to evaluate the distance to an obstacle
+ * @author Lucas
+ *
+ */
 public class CapteurDistance extends Capteur {
 
 	protected double distance;
@@ -81,6 +86,14 @@ public class CapteurDistance extends Capteur {
 		return distTemp;
 	}
 
+	/**
+	 * Test the collision between a straight line and a segment
+	 * @param A 
+	 * @param B
+	 * @param O
+	 * @param P
+	 * @return
+	 */
 	private boolean collisionSegDroite(Vecteur A, Vecteur B, Vecteur O,
 			Vecteur P) {
 		Vecteur AP = P.moins(A);
@@ -90,6 +103,14 @@ public class CapteurDistance extends Capteur {
 
 	}
 
+	/**
+	 * Evaluates the distance between two segments
+	 * @param A
+	 * @param B
+	 * @param O
+	 * @param P
+	 * @return
+	 */
 	private double distanceSegSeg(Vecteur A, Vecteur B, Vecteur O,
 			Vecteur P) {
 		if (collisionSegDroite(A, B, O, P) && collisionSegDroite(O, P, A, B)) {
@@ -102,6 +123,11 @@ public class CapteurDistance extends Capteur {
 		return 1000000;
 	}
 
+	/**
+	 * Evaluates the collision between a right line and a circle
+	 * @param cercle
+	 * @return
+	 */
 	private double contactCercle(Cercle cercle) {
 		double distTemp = 10;
 

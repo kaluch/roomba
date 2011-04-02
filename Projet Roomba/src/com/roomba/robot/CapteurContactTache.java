@@ -4,6 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import com.roomba.shape.*;
 import com.roomba.environnement.*;
+
+/**
+ * Represent the bumper-sensors that detect dirts
+ * @author Lucas
+ *
+ */
 public class CapteurContactTache extends CapteurContact {
 
 	protected double diametre;
