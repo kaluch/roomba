@@ -15,7 +15,7 @@ import org.junit.Test;
 public class TacheTest {
 
 	/**
-	 * Test method for {@link roomba.Tache#Tache(roomba.Forme)}.
+	 * Test method for {@link com.roomba.environnement.Tache#Tache(com.roomba.shape.Forme)}.
 	 */
 	@Test
 	public void testTache() {
@@ -28,7 +28,7 @@ public class TacheTest {
 
 	
 	/**
-	 * Test method for {@link roomba.Tache#nettoyer(roomba.Vecteur2D)}.
+	 * Test method for {@link com.roomba.environnement.Tache#nettoyer()}.
 	 */
 	@Test
 	public void testNettoyer() {

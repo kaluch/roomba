@@ -16,7 +16,7 @@ import org.junit.Test;
 public class CercleTest {
 
 	/**
-	 * Test method for {@link roomba.Cercle#Cercle(double, double, double, double)}.
+	 * Test method for {@link com.roomba.shape.Cercle#Cercle(double, double, double, double)}.
 	 */
 	@Test
 	public void testCercleDoubleDoubleDoubleDouble() {
@@ -28,7 +28,7 @@ public class CercleTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Cercle#Cercle(roomba.Posture, double)}.
+	 * Test method for {@link com.roomba.shape.Cercle#Cercle(com.roomba.roombautil.Posture, double)}.
 	 */
 	@Test
 	public void testCerclePostureDouble() {
@@ -41,7 +41,7 @@ public class CercleTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Cercle#collisionInterne(roomba.Carre)}.
+	 * Test method for {@link com.roomba.shape.Cercle#collisionInterne(com.roomba.shape.Carre)}.
 	 */
 	@Test
 	public void testCollisionInterneCarre() {
@@ -54,7 +54,7 @@ public class CercleTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Cercle#collisionExterne(roomba.Carre)}.
+	 * Test method for {@link com.roomba.shape.Cercle#collisionExterne(com.roomba.shape.Carre)}.
 	 */
 	@Test
 	public void testCollisionExterneCarre() {
@@ -67,7 +67,7 @@ public class CercleTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Cercle#collisionInterne(roomba.Cercle)}.
+	 * Test method for {@link com.roomba.shape.Cercle#collisionInterne(com.roomba.shape.Cercle)}.
 	 */
 	@Test
 	public void testCollisionInterneCercle() {
@@ -80,7 +80,7 @@ public class CercleTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Cercle#collisionExterne(roomba.Cercle)}.
+	 * Test method for {@link com.roomba.shape.Cercle#collisionExterne(com.roomba.shape.Cercle)}.
 	 */
 	@Test
 	public void testCollisionExterneCercle() {
@@ -93,7 +93,7 @@ public class CercleTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Cercle#collisionInterne(roomba.Rectangle)}.
+	 * Test method for {@link com.roomba.shape.Cercle#collisionInterne(com.roomba.shape.Rectangle)}.
 	 */
 	@Test
 	public void testCollisionInterneRectangle() {
@@ -106,7 +106,7 @@ public class CercleTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Cercle#collisionExterne(roomba.Rectangle)}.
+	 * Test method for {@link com.roomba.shape.Cercle#collisionExterne(com.roomba.shape.Rectangle)}.
 	 */
 	@Test
 	public void testCollisionExterneRectangle() {

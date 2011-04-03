@@ -82,7 +82,7 @@ public class RectangleTest {
 	public void testCollisionInterneRectangle() {
 		Rectangle rect = new Rectangle(0,0,0,4,2);
 		Rectangle rect1 = new Rectangle(0,0,0,2,1), rect2 = new Rectangle(0,0,0,3,2), rect3 = new Rectangle(-2,0,0,3,4), rect4 = new Rectangle(0,5,0,2,3);
-		assertEquals(rect.collisionInterne(rect1),false);//TODO plante
+		assertEquals(rect.collisionInterne(rect1),false);
 		assertEquals(rect.collisionInterne(rect2),true);
 		assertEquals(rect.collisionInterne(rect3),true);
 		assertEquals(rect.collisionInterne(rect4),true);

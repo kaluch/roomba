@@ -14,13 +14,13 @@ public class CapteurContactObstacle extends CapteurContact {
 	protected double perimetre;
 	protected double diametre;
 
-	CapteurContactObstacle(Forme position, double perimetre, double diametre) {
+	public CapteurContactObstacle(Forme position, double perimetre, double diametre) {
 		super(position);
 		this.perimetre = perimetre;
 		this.diametre = diametre;
 	}
 
-	CapteurContactObstacle(Forme position) {
+	public CapteurContactObstacle(Forme position) {
 		super(position);
 		perimetre = 0;
 		diametre = 0;

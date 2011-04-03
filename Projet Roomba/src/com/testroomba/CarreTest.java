@@ -27,7 +27,7 @@ public class CarreTest {
 	}
 
 	/**
-	 * Test method for {@link com.roomba.shape.Carre#Carre(roomba.Posture, double)}.
+	 * Test method for {@link com.roomba.shape.Carre#Carre(com.roomba.roombautil.Posture, double)}.
 	 */
 	@Test
 	public void testCarrePostureDouble() {
@@ -42,7 +42,7 @@ public class CarreTest {
 	}
 
 	/**
-	 * Test method for {@link com.roomba.shape.Carre#collisionInterne(roomba.Carre)}.
+	 * Test method for {@link com.roomba.shape.Carre#collisionInterne(com.roomba.shape.Carre)}.
 	 */
 	@Test
 	public void testCollisionInterneCarre() {
@@ -55,7 +55,7 @@ public class CarreTest {
 	}
 
 	/**
-	 * Test method for {@link com.roomba.shape.Carre#collisionExterne(roomba.Carre)}.
+	 * Test method for {@link com.roomba.shape.Carre#collisionExterne(com.roomba.shape.Carre)}.
 	 */
 	@Test
 	public void testCollisionExterneCarre() {
@@ -68,7 +68,7 @@ public class CarreTest {
 	}
 
 	/**
-	 * Test method for {@link com.roomba.shape.Carre#collisionInterne(roomba.Cercle)}.
+	 * Test method for {@link com.roomba.shape.Carre#collisionInterne(com.roomba.shape.Cercle)}.
 	 */
 	@Test
 	public void testCollisionInterneCercle() {
@@ -81,7 +81,7 @@ public class CarreTest {
 	}
 
 	/**
-	 * Test method for {@link com.roomba.shape.Carre#collisionExterne(roomba.Cercle)}.
+	 * Test method for {@link com.roomba.shape.Carre#collisionExterne(com.roomba.shape.Cercle)}.
 	 */
 	@Test
 	public void testCollisionExterneCercle() {
@@ -94,20 +94,20 @@ public class CarreTest {
 	}
 
 	/**
-	 * Test method for {@link com.roomba.shape.Carre#collisionInterne(roomba.Rectangle)}.
+	 * Test method for {@link com.roomba.shape.Carre#collisionInterne(com.roomba.shape.Rectangle)}.
 	 */
 	@Test
 	public void testCollisionInterneRectangle() {
 		Carre carre1 = new Carre(0,0,0,2);
 		Rectangle rect1 = new Rectangle(0,0,0,1,1.5), rect2 = new Rectangle(1,0,0,1,0.75), rect3 = new Rectangle(1,0,0,2,2), rect4 = new Rectangle(3,0,0,1,2);
-		assertEquals(carre1.collisionInterne(rect1),false);//TODO foire
+		assertEquals(carre1.collisionInterne(rect1),false);
 		assertEquals(carre1.collisionInterne(rect2),true);
 		assertEquals(carre1.collisionInterne(rect3),true);
 		assertEquals(carre1.collisionInterne(rect4),true);
 	}
 
 	/**
-	 * Test method for {@link com.roomba.shape.Carre#collisionExterne(roomba.Rectangle)}.
+	 * Test method for {@link com.roomba.shape.Carre#collisionExterne(com.roomba.shape.Rectangle)}.
 	 */
 	@Test
 	public void testCollisionExterneRectangle() {

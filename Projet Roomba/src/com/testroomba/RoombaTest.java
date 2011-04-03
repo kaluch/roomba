@@ -17,7 +17,7 @@ import org.junit.Test;
 public class RoombaTest {
 
 	/**
-	 * Test method for {@link roomba.Roomba#Roomba(double)}.
+	 * Test method for {@link com.roomba.robot.Roomba#Roomba(double,com.roomba.comportement.Comportement)}.
 	 */
 	@Test
 	public void testRoomba() {
@@ -29,7 +29,7 @@ public class RoombaTest {
 	}
 	
 	/**
-	 * Test method for {@link roomba.Roomba#move(double)}.
+	 * Test method for {@link com.roomba.robot.Roomba#move(double,com.roomba.environnement.Environnement)}.
 	 */
 	@Test
 	public void testMove() {
@@ -43,7 +43,7 @@ public class RoombaTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Roomba#toString()}.
+	 * Test method for {@link com.roomba.robot.Roomba#toString()}.
 	 */
 	@Test
 	public void testToString() {
@@ -53,7 +53,7 @@ public class RoombaTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Roomba#calculVitesseRoue(roomba.Comportement)}.
+	 * Test method for {@link com.roomba.robot.Roomba#calculVitesseRoue()}.
 	 */
 	@Test
 	public void testCalculVitesseRoue() {

@@ -26,7 +26,7 @@ public class Simulation {
 
 	/**
 	 * launch the simulation
-	 * @return
+	 * @return true while the simulation is running
 	 */
 	public boolean startSimulation() {
 		if(out.getAnimated()&&!running){
@@ -40,7 +40,7 @@ public class Simulation {
 
 	/**
 	 * behavior when the simulation is not paused
-	 * @return
+	 * @return false when the simulation stops
 	 */
 	public boolean go() {
 		out.mAJ();

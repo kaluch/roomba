@@ -15,7 +15,7 @@ import org.junit.Test;
 public class VecteurTest {
 
 	/**
-	 * Test method for {@link roomba.Vecteur#norme()}.
+	 * Test method for {@link com.roomba.roombautil.Vecteur#norme()}.
 	 */
 	@Test
 	public void testNorme() {
@@ -24,7 +24,7 @@ public class VecteurTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Vecteur#angle()}.
+	 * Test method for {@link com.roomba.roombautil.Vecteur#angle()}.
 	 */
 	@Test
 	public void testAngle() {
@@ -36,7 +36,7 @@ public class VecteurTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Vecteur#Vecteur()}.
+	 * Test method for {@link com.roomba.roombautil.Vecteur#Vecteur()}.
 	 */
 	@Test
 	public void testVecteur() {
@@ -46,7 +46,7 @@ public class VecteurTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Vecteur#Vecteur(double, double)}.
+	 * Test method for {@link com.roomba.roombautil.Vecteur#Vecteur(double, double)}.
 	 */
 	@Test
 	public void testVecteurDoubleDouble() {
@@ -56,7 +56,7 @@ public class VecteurTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Vecteur#Vecteur(roomba.Vecteur)}.
+	 * Test method for {@link com.roomba.roombautil.Vecteur#Vecteur(com.roomba.roombautil.Vecteur)}.
 	 */
 	@Test
 	public void testVecteurVecteur() {
@@ -67,7 +67,7 @@ public class VecteurTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Vecteur#toString()}.
+	 * Test method for {@link com.roomba.roombautil.Vecteur#toString()}.
 	 */
 	@Test
 	public void testToString() {
@@ -76,7 +76,7 @@ public class VecteurTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Vecteur#plus(roomba.Vecteur)}.
+	 * Test method for {@link com.roomba.roombautil.Vecteur#plus(com.roomba.roombautil.Vecteur)}.
 	 */
 	@Test
 	public void testPlus() {
@@ -88,7 +88,7 @@ public class VecteurTest {
 	}
 	
 	/**
-	 * Test method for {@link roomba.Vecteur#moins(roomba.Vecteur)}.
+	 * Test method for {@link com.roomba.roombautil.Vecteur#moins(com.roomba.roombautil.Vecteur)}.
 	 */
 	@Test
 	public void testMoins() {
@@ -100,7 +100,7 @@ public class VecteurTest {
 	}
 	
 	/**
-	 * Test method for {@link roomba.Vecteur#pScal(roomba.Vecteur)}.
+	 * Test method for {@link com.roomba.roombautil.Vecteur#pScal(com.roomba.roombautil.Vecteur)}.
 	 */
 	@Test
 	public void testPScal() {
@@ -110,7 +110,7 @@ public class VecteurTest {
 	}
 	
 	/**
-	 * Test method for {@link roomba.Vecteur#det(roomba.Vecteur)}.
+	 * Test method for {@link com.roomba.roombautil.Vecteur#det(com.roomba.roombautil.Vecteur)}.
 	 */
 	@Test
 	public void testDet() {

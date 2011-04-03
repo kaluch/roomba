@@ -14,7 +14,7 @@ import org.junit.Test;
 public class RoueTest {
 
 	/**
-	 * Test method for {@link roomba.Roue#Roue()}.
+	 * Test method for {@link com.roomba.robot.Roue#Roue()}.
 	 */
 	@Test
 	public void testRoue() {
@@ -23,7 +23,7 @@ public class RoueTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Roue#Roue(double)}.
+	 * Test method for {@link com.roomba.robot.Roue#Roue(double)}.
 	 */
 	@Test
 	public void testRoueDouble() {
@@ -32,7 +32,7 @@ public class RoueTest {
 	}
 
 	/**
-	 * Test method for {@link roomba.Roue#toString()}.
+	 * Test method for {@link com.roomba.robot.Roue#toString()}.
 	 */
 	@Test
 	public void testToString() {

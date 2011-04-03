@@ -34,13 +34,6 @@ enum ClickForme {
 @SuppressWarnings("serial")
 public class RoombaProjectX extends JFrame implements WindowListener {
 
-	/**
-	 * 
-	 */
-
-	/**
-	 * @param args
-	 */
 
 	RoombaPanel jPanel1;
 	private javax.swing.ButtonGroup buttonGroup1;

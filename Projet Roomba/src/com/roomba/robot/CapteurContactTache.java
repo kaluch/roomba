@@ -14,7 +14,7 @@ public class CapteurContactTache extends CapteurContact {
 
 	protected double diametre;
 
-	CapteurContactTache(Forme forme, double diametre) {
+	public CapteurContactTache(Forme forme, double diametre) {
 		super(forme);
 		this.diametre = diametre;
 	}

@@ -90,7 +90,7 @@ abstract public class Forme implements Cloneable {
 	 * Set the correct values for X and Y according to facteurEchelle
 	 * 
 	 * @param facteurEchelle
-	 * @return
+	 * @return the shape with normalized values
 	 */
 	public Forme normalize(int facteurEchelle) {
 		posture.setX(posture.getX() / facteurEchelle);
@@ -111,7 +111,6 @@ abstract public class Forme implements Cloneable {
 	 * omni-directional isometric of the current shape, factor a
 	 * 
 	 * @param a
-	 * @return true if the point (x,y) belongs to the current shape
 	 */
 	abstract public void iso(double a);
 

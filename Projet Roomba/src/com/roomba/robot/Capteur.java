@@ -24,7 +24,7 @@ public abstract class Capteur {
 
 	/**
 	 * getter for the state of the sensor
-	 * @return
+	 * @return the value of the sensor
 	 */
 	abstract public double lecture();
 
