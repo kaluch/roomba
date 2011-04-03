@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.roomba.robot.Capteur"/>
+<fullyQualifiedTypeName name="com.roomba.shape.Forme"/>
+<fullyQualifiedTypeName name="com.roomba.roombautil.Polair"/>
+<fullyQualifiedTypeName name="com.roomba.exception.ExceptionVitesseMax"/>
+<fullyQualifiedTypeName name="com.roomba.roombautil.Posture"/>
+<fullyQualifiedTypeName name="com.roomba.environnement.Environnement"/>
+<fullyQualifiedTypeName name="com.roomba.robot.Roomba"/>
+<fullyQualifiedTypeName name="com.roomba.roombautil.Vecteur"/>
+<fullyQualifiedTypeName name="com.roomba.shape.Carre"/>
+<fullyQualifiedTypeName name="com.roomba.comportement.Comportement"/>
+<fullyQualifiedTypeName name="com.roomba.robot.CapteurDistance"/>
+<fullyQualifiedTypeName name="com.roomba.shape.Cercle"/>
+<fullyQualifiedTypeName name="com.roomba.ui.Interface"/>
+</qualifiedTypeNameHistroy>
