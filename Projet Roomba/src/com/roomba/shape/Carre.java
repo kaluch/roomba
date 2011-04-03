@@ -37,9 +37,7 @@ public class Carre extends Forme implements Cloneable {
 	}
 
 	public boolean collisionInterne(Carre carre) {
-		return ((carre.getPosture().getY() <= getPosture().getY())
-				|| (carre.getPosture().getX() <= getPosture().getX())
-				|| (carre.getPosture().getX() + carre.getCote() >= getPosture()
+		return ((carre.getPosture().getX() + carre.getCote() >= getPosture()
 						.getX() + getCote()) || (carre.getPosture().getY()
 				+ carre.getCote() >= getPosture().getY() + getCote())) ? true
 				: false;
@@ -49,9 +47,9 @@ public class Carre extends Forme implements Cloneable {
 		return ((carre.getPosture().getX() >= getPosture().getX() + cote)
 				|| (carre.getPosture().getX() + carre.getCote() <= getPosture()
 						.getX())
-				|| (carre.getPosture().getY() >= getPosture().getY() + cote) || (carre
-				.getPosture().getY() + carre.getCote() <= getPosture().getY())) ? false
-				: true;
+				|| (carre.getPosture().getY() >= getPosture().getY() + cote) || (
+						carre.getPosture().getY() + carre.getCote() <= getPosture()
+				.getY())) ? false : true;
 
 	}
 
@@ -84,9 +82,7 @@ public class Carre extends Forme implements Cloneable {
 	}
 
 	public boolean collisionInterne(Rectangle rectangle) {
-		return ((rectangle.getPosture().getY() <= getPosture().getY())
-				|| (rectangle.getPosture().getX() <= getPosture().getX())
-				|| (rectangle.getPosture().getX() + rectangle.getLargeur() >= getPosture()
+		return ((rectangle.getPosture().getX() + rectangle.getLargeur() >= getPosture()
 						.getX() + getCote()) || (rectangle.getPosture().getY()
 				+ rectangle.getHauteur() >= getPosture().getY() + getCote())) ? true
 				: false;

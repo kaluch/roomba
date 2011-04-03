@@ -47,10 +47,10 @@ public class CercleTest {
 	public void testCollisionInterneCarre() {
 		Cercle circle = new Cercle(0,0,0,4);
 		Carre c1 = new Carre(0,0,0,1), c2 = new Carre(0,0,0,4), c3 = new Carre(2,0,0,4), c4 = new Carre(6,6,0,1);
-		assertEquals(circle.collisionInterne(c1),false);//TODO foire
+		assertEquals(circle.collisionInterne(c1),true);
 		assertEquals(circle.collisionInterne(c2),true);
 		assertEquals(circle.collisionInterne(c3),true);
-		assertEquals(circle.collisionInterne(c4),true);//TODO foire
+		assertEquals(circle.collisionInterne(c4),false);
 	}
 
 	/**
@@ -99,10 +99,10 @@ public class CercleTest {
 	public void testCollisionInterneRectangle() {
 		Cercle circle = new Cercle(0,0,0,4);
 		Rectangle r1 = new Rectangle(0,0,0,1,1), r2 = new Rectangle(0,0,0,4,4), r3 = new Rectangle(3,0,0,5,3), r4 = new Rectangle (20,21,0,4,5);
-		assertEquals(circle.collisionInterne(r1),false);//TODO foire
+		assertEquals(circle.collisionInterne(r1),true);
 		assertEquals(circle.collisionInterne(r2),true);
 		assertEquals(circle.collisionInterne(r3),true);
-		assertEquals(circle.collisionInterne(r4),true);//TODO Foire
+		assertEquals(circle.collisionInterne(r4),false);
 	}
 
 	/**

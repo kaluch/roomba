@@ -49,7 +49,7 @@ public class CarreTest {
 		Carre carre = new Carre(0,0,0,2);
 		Carre c1 = new Carre(0,0,0,1), c2 = new Carre(0.5,0.5,0,1), c3 = new Carre(1.5,0.5,0,2), c4 = new Carre(2,2,0,0.3);
 		assertEquals(carre.collisionInterne(c1),false);
-		assertEquals(carre.collisionInterne(c2),true);
+		assertEquals(carre.collisionInterne(c2),false);
 		assertEquals(carre.collisionInterne(c3),true);
 		assertEquals(carre.collisionInterne(c4),true);
 	}

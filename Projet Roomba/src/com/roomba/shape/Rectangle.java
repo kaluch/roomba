@@ -63,9 +63,7 @@ public class Rectangle extends Forme {
 	}
 
 	public boolean collisionInterne(Carre carre) {
-		return ((carre.getPosture().getY() <= getPosture().getY())
-				|| (carre.getPosture().getX() <= getPosture().getX())
-				|| (carre.getPosture().getX() + carre.getCote() >= getPosture()
+		return ((carre.getPosture().getX() + carre.getCote() >= getPosture()
 						.getX() + getLargeur()) || (carre.getPosture().getY()
 				+ carre.getCote() >= getPosture().getY() + getHauteur())) ? true
 				: false;
@@ -109,9 +107,7 @@ public class Rectangle extends Forme {
 	}
 
 	public boolean collisionInterne(Rectangle rectangle) {
-		return ((rectangle.getPosture().getY() <= getPosture().getY())
-				|| (rectangle.getPosture().getX() <= getPosture().getX())
-				|| (rectangle.getPosture().getX() + rectangle.getLargeur() >= getPosture()
+		return ((rectangle.getPosture().getX() + rectangle.getLargeur() >= getPosture()
 						.getX() + getLargeur()) || (rectangle.getPosture()
 				.getY() + rectangle.getHauteur() >= getPosture().getY()
 				+ getHauteur())) ? true : false;
